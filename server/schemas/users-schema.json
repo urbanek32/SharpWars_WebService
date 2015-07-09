@@ -1,0 +1,15 @@
+{
+  "addUser": {
+    "id": "User",
+    "type": "object",
+    "properties": {
+      "username": {"type": "string"},
+      "password": {"type": "string"},
+      "email": {"type": "string"},
+      "name": {"type": "string"},
+      "surname": {"type": "string"}
+    },
+    "required": ["username", "password", "email", "name", "surname"],
+    "maxProperties": 5
+  }
+}
