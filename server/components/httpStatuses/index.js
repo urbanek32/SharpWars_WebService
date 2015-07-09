@@ -12,7 +12,8 @@ var users = {
   //success
   Created: {status: 201, message: "User created"},
   //errors
-  NotCreated: {status: 500, message: "Cannot create user"}
+  NotCreated: {status: 500, message: "Cannot create user"},
+  UserAlreadyExists: {status: 400, message: "User Already Exists"}
 };
 
 module.exports.httpStatuses = {

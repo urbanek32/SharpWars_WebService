@@ -4,11 +4,12 @@
 
 'use strict';
 
-var errors = require('./components/errors');
+var errors = require('./components/httpStatuses');
 
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/users', require('./handlers/users'));
   app.use('/api/tests', require('./handlers/test_path'));
 
   // All undefined asset or api routes should return a 404
