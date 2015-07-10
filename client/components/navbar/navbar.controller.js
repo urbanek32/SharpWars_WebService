@@ -5,6 +5,9 @@ angular.module('sharpWarsWebServiceApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    },{
+      'title': 'Moje konto',
+      'link': '/profile'
     }];
 
     $scope.isCollapsed = true;
