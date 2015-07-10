@@ -6,5 +6,8 @@ angular.module('sharpWarsWebServiceApp')
       .when('/', {
         templateUrl: 'app/views/home.html',
         controller: 'MainCtrl'
+      }).when('/profile', {
+        templateUrl: 'app/views/profile.html',
+        //controller: 'MainCtrl'
       });
   });
