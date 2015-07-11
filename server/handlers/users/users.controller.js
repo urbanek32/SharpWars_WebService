@@ -25,9 +25,13 @@ exports.addUser = function(req, res) {
 exports.activateUser = function(req, res) {
   usersManager.activateUser(req.params, function(err, result) {
     if(!err && result) {
-      res.send(result);
+      setTimeout(function() {
+        res.redirect('/')
+      }, 5000);
     } else {
-      res.send(err);
+      setTimeout(function () {
+        res.redirect('/')
+      }, 5000);
     }
   });
 };
