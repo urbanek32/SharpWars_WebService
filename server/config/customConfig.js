@@ -6,10 +6,10 @@ module.exports = {
     port: '9000'
   },
   emailAccount: {
-    host: 'mail.daruhq.tk',
+    host: "mail.daruhq.tk",
     port: 587,
-    email: "email",
-    password: "pass"
+    email: "jiraya",
+    password: "jiraya1"
   },
   logger: {
     file: "logs/webservice.log",
