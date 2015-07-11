@@ -21,3 +21,15 @@ module.exports.findUserByUsername = function(username, callback) {
     callback(err, result);
   })
 };
+
+module.exports.deleteUserByEmail = function(email, callback) {
+  db.users.remove({email: email}, function(err, result) {
+    callback(err, result);
+  })
+};
+
+module.exports.activateByUsername = function(username, callback) {
+  db.users.update({username: username}, {$set: {activated: true}}, {strict: true}, function(err, result) {
+    callback(err, result);
+  })
+};

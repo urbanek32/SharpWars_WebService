@@ -12,7 +12,7 @@ exports.addUser = function(req, res) {
   if(errors.length === 0) {
     usersManager.addUser(req.body, function(err, result) {
       if(!err && result) {
-        res.send(httpStatuses.Users.Created);
+        res.send(result);
       } else {
         res.send(err);
       }
@@ -20,4 +20,14 @@ exports.addUser = function(req, res) {
   } else {
     res.status(400).send(errors);
   }
+};
+
+exports.activateUser = function(req, res) {
+  usersManager.activateUser(req.params, function(err, result) {
+    if(!err && result) {
+      res.send(result);
+    } else {
+      res.send(err);
+    }
+  });
 };

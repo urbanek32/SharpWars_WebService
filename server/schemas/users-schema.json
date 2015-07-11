@@ -1,6 +1,6 @@
 {
   "addUser": {
-    "id": "User",
+    "id": "AddUser",
     "type": "object",
     "properties": {
       "username": {"type": "string"},
