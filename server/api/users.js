@@ -1,7 +1,8 @@
 'use strict';
 
 var userEntities = require('../entities/users-entities'),
-  httpStatuses = require('../components/httpStatuses').httpStatuses;
+  httpStatuses = require('../components/httpStatuses').httpStatuses,
+  passwordHash = require('password-hash');
 
 
 var addUser = function(newUser, callback) {
@@ -11,6 +12,7 @@ var addUser = function(newUser, callback) {
         userEntities.findUserByUsername(newUser.username, function(err, user) {
           if(!err) {
             if(!user) {
+              newUser.password = passwordHash.generate(newUser.password);
               userEntities.addUser(newUser, function(err, result) {
                 callback(err, result);
               });

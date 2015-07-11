@@ -17,7 +17,8 @@
     "composable-middleware": "^0.3.0",
     "connect-mongo": "^0.4.1",
     "jsonschema": "1.0.1",
-    "mongoskin": "1.4.13"
+    "mongoskin": "1.4.13",
+    "password-hash": "1.2.2"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
