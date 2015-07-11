@@ -10,5 +10,9 @@ module.exports = {
     port: 587,
     email: "email",
     password: "pass"
+  },
+  logger: {
+    file: "logs/webservice.log",
+    level: "debug"
   }
 };
