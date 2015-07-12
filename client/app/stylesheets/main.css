@@ -28,3 +28,13 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
+
+.loginbar {
+  position:relative;
+  padding-bottom:20px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.content {
+  padding-top:40px;
+}
