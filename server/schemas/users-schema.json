@@ -11,5 +11,15 @@
     },
     "required": ["username", "password", "email", "name", "surname"],
     "maxProperties": 5
+  },
+  "loginUser": {
+    "id": "LogInService",
+    "type": "object",
+    "properties": {
+      "username": {"type": "string"},
+      "password": {"type": "string"}
+    },
+    "required": ["username", "password"],
+    "maxProperties": 2
   }
 }
