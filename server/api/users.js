@@ -9,7 +9,7 @@ var userEntities = require('../entities/users-entities'),
 
 var sendActivationEmail = function(newUser, callback) {
   var mailOptions = {
-    from: 'ETI WebService',
+    from: 'jiraya@daruhq.tk',
     to: newUser.email,
     subject: '[WebService] Activation account',
     text: config.webservice.host + ':' +config.webservice.port + '/api/users/' + newUser.username + '/activate/' + newUser.password
