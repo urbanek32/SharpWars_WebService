@@ -14,9 +14,10 @@ var users = {
   Activated: {status: 204, message: "User has been activated."},
   //errors
   NotCreated: {status: 500, message: "Cannot create user"},
-  UserAlreadyExists: {status: 400, message: "User Already Exists"},
-  UserAlreadyActivated: {status: 400, message: "User Already Activated"},
-  UserNotExists: {status: 404, message: "User Not Exists"}
+  AlreadyExists: {status: 400, message: "User Already Exists"},
+  AlreadyActivated: {status: 400, message: "User Already Activated"},
+  NotExists: {status: 404, message: "User Not Exists"},
+  NotActivated: {status: 404, message: "User not activated"}
 };
 
 var auth = {

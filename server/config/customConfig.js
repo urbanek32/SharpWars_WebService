@@ -14,5 +14,9 @@ module.exports = {
   logger: {
     file: "logs/webservice.log",
     level: "debug"
+  },
+  auth: {
+    key: "koksyinzynierki2015",
+    expirationTokenTime: 5*60 //in minutes
   }
 };

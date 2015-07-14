@@ -7,5 +7,6 @@ var router = express.Router();
 
 router.post('/add', controller.addUser);
 router.get('/:username/activate/:password', controller.activateUser);
+router.post('/login', controller.logInUser);
 
 module.exports = router;

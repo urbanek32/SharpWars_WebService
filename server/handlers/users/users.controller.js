@@ -35,3 +35,18 @@ exports.activateUser = function(req, res) {
     }
   });
 };
+
+exports.logInUser = function(req, res) {
+  var errors = schemaValidator.validate(req.body, userSchemas.loginUser).errors;
+  if(errors.length === 0) {
+    usersManager.logInUser(req.body, function(err, result) {
+      if(!err && result) {
+        res.send(result);
+      } else {
+        res.send(err);
+      }
+    })
+  } else {
+    res.status(400).send(errors);
+  }
+};

@@ -5,7 +5,8 @@ var userEntities = require('../entities/users-entities'),
   passwordHash = require('password-hash'),
   mailer = require('../lib/mailer/mailer'),
   config = require('../config/customConfig'),
-  logger = require('../lib/logger/logger').init();
+  logger = require('../lib/logger/logger').init(),
+  jwt = require('jsonwebtoken');
 
 
 var sendActivationEmail = function(newUser, callback) {
@@ -53,7 +54,7 @@ var addUser = function(newUser, callback) {
               });
             } else {
               logger.debug("Cannot add user: username " + newUser.username + " already exists.");
-              callback(httpStatuses.Users.UserAlreadyExists, null);
+              callback(httpStatuses.Users.AlreadyExists, null);
             }
           } else {
             logger.error("Internal Server Error: " + JSON.stringify(err));
@@ -62,7 +63,7 @@ var addUser = function(newUser, callback) {
         })
       } else {
         logger.debug("Cannot add user: email " + newUser.email + " already exists.");
-        callback(httpStatuses.Users.UserAlreadyExists, null);
+        callback(httpStatuses.Users.AlreadyExists, null);
       }
     } else {
       logger.error("Internal Server Error: " + JSON.stringify(err));
@@ -92,20 +93,49 @@ var activateUser = function(options, callback) {
           }
         } else {
           logger.debug("Cannot activate user: User " + options.username + " already activated.");
-          callback(httpStatuses.Users.UserAlreadyActivated, null);
+          callback(httpStatuses.Users.AlreadyActivated, null);
         }
       } else {
         logger.debug("Cannot activate user: User " + options.username + " not exists.");
-        callback(httpStatuses.Users.UserNotExists, null);
+        callback(httpStatuses.Users.NotExists, null);
       }
     } else {
       logger.error("Internal Server Error: " + JSON.stringify(err));
       callback(httpStatuses.Generic.InternalServerError, null)
     }
-  })
+  });
+};
+
+var logInUser = function(options, callback) {
+  userEntities.findUserByUsername(options.username, function(err, user) {
+    if(!err) {
+      if(user) {
+        if(passwordHash.verify(options.password, user.password)) {
+          if(user.activated) {
+            var token = jwt.sign(user, config.auth.key, { expiresInMinutes: config.auth.expirationTokenTime });
+            logger.debug('User authorized: Token send.');
+            callback(null, token);
+          } else {
+            logger.debug("Cannot log in user: User not activated.");
+            callback(httpStatuses.Users.NotActivated, null);
+          }
+        } else {
+          logger.debug("Cannot log in user: Password or login incorrect.");
+          callback(httpStatuses.Auth.Unauthorized, null);
+        }
+      } else {
+        logger.debug("Cannot log in user: User " + options.username + " not exists.");
+        callback(httpStatuses.Users.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null)
+    }
+  });
 };
 
 module.exports = {
   addUser: addUser,
-  activateUser: activateUser
+  activateUser: activateUser,
+  logInUser: logInUser
 };
