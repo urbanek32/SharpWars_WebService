@@ -2,17 +2,17 @@
 
 angular.module('sharpWarsWebServiceApp')
   .controller('FooterCtrl', function ($scope) {
-    $scope.autorzy = [{
-      'imie': 'Andrzej',
-      'nazwisko': 'Joskowski | '
+    $scope.authors = [{
+      'f_name': 'Andrzej',
+      'l_name': 'Joskowski | '
     },{
-      'imie': 'Adrian',
-      'nazwisko': 'Pielech | '
+      'f_name': 'Adrian',
+      'l_name': 'Pielech | '
     },{
-      'imie': 'Patryk',
-      'nazwisko': 'Urban | '
+      'f_name': 'Patryk',
+      'l_name': 'Urban | '
     },{
-      'imie': 'Michał',
-      'nazwisko': 'Żyłowski'
+      'f_name': 'Michał',
+      'l_name': 'Żyłowski'
     }];
   });

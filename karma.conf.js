@@ -18,6 +18,7 @@ module.exports = function(config) {
       'client/bower_components/angular-cookies/angular-cookies.js',
       'client/bower_components/angular-sanitize/angular-sanitize.js',
       'client/bower_components/angular-route/angular-route.js',
+      'client/bower_components/angular-translate/angular-translate.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
       'client/app/app.js',
       'client/app/app.coffee',
