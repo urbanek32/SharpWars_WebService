@@ -1,0 +1,27 @@
+<div class=loginbar ng-controller="LoginCtrl">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div ng-switch on="userLogedIn">
+          <div ng-switch-when="1">
+            <p> Logowanie powiodlo sie.. Tutaj bedzie mozna wyswietlac cos. Albo nic. No i do logowania jeszcze obluga bledow itp ale to jak bedzie API </p>
+          </div>
+          <div ng-switch-default>
+            <form novalidate>
+              Zaloguj się:
+              <input placeholder="Twój Login" type="text" ng-model="user.login">
+              <input placeholder="Twoje hasło" type="password" ng-model="user.password">
+              <button ng-click="logMeIn(user.login,user.password)">Zaloguj!</button>
+              <button ng-click="passwordRestoreRedirection()">Przypomnienie hasła</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div ng-if="userLogedIn==0" class="col-md-3">
+        <form novalidate>
+          <button ng-click="registerRedirection()">Nie mam jeszcze konta. Rejestracja</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

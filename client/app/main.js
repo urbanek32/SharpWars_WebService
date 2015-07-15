@@ -8,6 +8,12 @@ angular.module('sharpWarsWebServiceApp')
         controller: 'MainCtrl'
       }).when('/profile', {
         templateUrl: 'app/views/profile.html',
-        //controller: 'MainCtrl'
+        controller: 'userCtrl'
+      }).when('/register', {
+        templateUrl: 'app/views/register.html',
+        controller: 'userCtrl'
+      }).when('/passwordRecovery', {
+        templateUrl: 'app/views/passwordRecovery.html',
+        controller: 'userCtrl'
       });
   });
