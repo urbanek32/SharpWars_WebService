@@ -8,6 +8,9 @@ angular.module('sharpWarsWebServiceApp')
     },{
       'title': 'Moje konto',
       'link': '/profile'
+    },{
+      'title': 'Pobierz grę',
+      'link': '/download'
     }];
 
     $scope.isCollapsed = true;

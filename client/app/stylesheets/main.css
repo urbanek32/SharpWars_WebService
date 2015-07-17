@@ -38,3 +38,7 @@
 .content {
   padding-top:40px;
 }
+
+.boldText {
+  font-weight: bold;
+}
