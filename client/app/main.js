@@ -15,5 +15,8 @@ angular.module('sharpWarsWebServiceApp')
       }).when('/passwordRecovery', {
         templateUrl: 'app/views/passwordRecovery.html',
         controller: 'userCtrl'
+      }).when('/account_activation', {
+        templateUrl: 'app/views/account_activation.html',
+        controller: 'userCtrl'
       });
   });
