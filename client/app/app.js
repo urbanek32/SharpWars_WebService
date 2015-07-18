@@ -4,7 +4,8 @@ angular.module('sharpWarsWebServiceApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'pascalprecht.translate'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -13,4 +14,12 @@ angular.module('sharpWarsWebServiceApp', [
       });
 
     $locationProvider.html5Mode(true);
+
+  }).config(function($translateProvider) {
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'locale/',
+      suffix: '.json'
+
+    });
+    $translateProvider.preferredLanguage('pl');
   });

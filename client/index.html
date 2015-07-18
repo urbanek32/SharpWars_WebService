@@ -34,8 +34,8 @@
 
     <header class="hero-unit" id="banner">
       <div class="container">
-        <h1>SharpWars</h1>
-        <p class="lead">Tutaj będzie piękne logo. Albo dewiza naszej gry. Albo coś...</p>
+        <h1> {{ 'PROJECT_NAME' | translate }}</h1>
+        <p class="lead">{{ 'PROJECT_SUBTITLE' | translate }}</p>
       </div>
     </header>
 
@@ -67,6 +67,8 @@
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
       <script src="bower_components/angular-route/angular-route.js"></script>
+      <script src="bower_components/angular-translate/angular-translate.js"></script>
+      <script src="bower_components/angular-translate-loader-url/angular-translate-loader-url.min.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <!-- endbower -->
     <!-- endbuild -->

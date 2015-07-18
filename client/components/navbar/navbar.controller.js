@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('sharpWarsWebServiceApp')
-  .controller('NavbarCtrl', function ($scope, $location) {
+  .controller('NavbarCtrl', function ($scope, $location, $translate) {
     $scope.menu = [{
-      'title': 'Home',
+      'title': $translate.instant('SUBPAGE_HOME'),
       'link': '/'
     },{
-      'title': 'Moje konto',
+      'title': $translate.instant('SUBPAGE_PROFILE'),
       'link': '/profile'
     },{
       'title': 'Pobierz grę',
