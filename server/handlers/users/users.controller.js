@@ -14,7 +14,7 @@ exports.addUser = function(req, res) {
       if(!err && result) {
         res.send(result);
       } else {
-        res.send(err);
+        res.status(err[0].status).send(err);
       }
     });
   } else {
@@ -43,7 +43,7 @@ exports.logInUser = function(req, res) {
       if(!err && result) {
         res.send(result);
       } else {
-        res.send(err);
+        res.status(err[0].status).send(err);
       }
     })
   } else {

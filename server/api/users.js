@@ -114,7 +114,7 @@ var logInUser = function(options, callback) {
           if(user.activated) {
             var token = jwt.sign(user, config.auth.key, { expiresInMinutes: config.auth.expirationTokenTime });
             logger.debug('User authorized: Token send.');
-            callback(null, token);
+            callback(null, {token: token});
           } else {
             logger.debug("Cannot log in user: User not activated.");
             callback(httpStatuses.Users.NotActivated, null);

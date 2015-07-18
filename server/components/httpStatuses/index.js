@@ -10,18 +10,18 @@ var generic = {
 
 var users = {
   //success
-  Created: {status: 201, message: "User has been created. Check your mailbox to finish registration process."},
-  Activated: {status: 204, message: "User has been activated."},
+  Created: [{status: 201, message: "User has been created. Check your mailbox to finish registration process."}],
+  Activated: [{status: 204, message: "User has been activated."}],
   //errors
-  NotCreated: {status: 500, message: "Cannot create user"},
-  AlreadyExists: {status: 400, message: "User Already Exists"},
-  AlreadyActivated: {status: 400, message: "User Already Activated"},
-  NotExists: {status: 404, message: "User Not Exists"},
-  NotActivated: {status: 404, message: "User not activated"}
+  NotCreated: [{status: 500, message: "Cannot create user"}],
+  AlreadyExists: [{status: 400, message: "User Already Exists"}],
+  AlreadyActivated: [{status: 400, message: "User Already Activated"}],
+  NotExists: [{status: 404, message: "User Not Exists"}],
+  NotActivated: [{status: 404, message: "User not activated"}]
 };
 
 var auth = {
-  Unauthorized: {status: 401, message: "Unauthorized"}
+  Unauthorized: [{status: 401, message: "Unauthorized"}]
 };
 
 module.exports.httpStatuses = {

@@ -14,3 +14,7 @@ angular.module('sharpWarsWebServiceApp', [
 
     $locationProvider.html5Mode(true);
   });
+
+angular.module('sharpWarsWebServiceApp').config(function ($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor');
+});

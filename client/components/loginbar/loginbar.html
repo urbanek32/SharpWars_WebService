@@ -1,4 +1,4 @@
-<div class=loginbar ng-controller="LoginCtrl">
+<div class=loginbar ng-controller="userCtrl">
   <div class="container">
     <div class="row">
       <div class="col-md-9">
@@ -11,13 +11,19 @@
               Zaloguj się:
               <input placeholder="Twój Login" type="text" ng-model="user.login">
               <input placeholder="Twoje hasło" type="password" ng-model="user.password">
-              <button ng-click="logMeIn(user.login,user.password)">Zaloguj!</button>
+              <button ng-click="logMeIn(user.login, user.password)">Zaloguj!</button>
               <button ng-click="passwordRestoreRedirection()">Przypomnienie hasła</button>
             </form>
+            <div class="alert alert-danger" ng-if="errors">
+              <li ng-repeat="error in errors">
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+                {{error}}
+              </li>
+            </div>
           </div>
         </div>
       </div>
-      <div ng-if="userLogedIn==0" class="col-md-3">
+      <div ng-if="userLogedIn == false" class="col-md-3">
         <form novalidate>
           <button ng-click="registerRedirection()">Nie mam jeszcze konta. Rejestracja</button>
         </form>
