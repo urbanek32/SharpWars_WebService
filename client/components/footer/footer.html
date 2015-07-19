@@ -1,9 +1,11 @@
 <footer class="footer" ng-controller="FooterCtrl">
   <div class="container">
     <p >SharpWars the Game. Autorzy:
-    <span ng-repeat="item in autorzy">
-      {{item.imie}} {{item.nazwisko}}
+    <span ng-repeat="item in authors">
+      {{item.f_name + " " + item.l_name}}
     </span>
     </p>
+    <a ng-controller="MainCtrl" ng-click="changeLanguage('en')"><img ng-src="assets/images/en.png"/></a>
+    <a ng-controller="MainCtrl" ng-click="changeLanguage('pl')"><img ng-src="assets/images/pl.png"/></a>
   </div>
 </footer>

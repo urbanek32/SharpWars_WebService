@@ -10,8 +10,11 @@
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)} ">
-            <a ng-href="{{item.link}}">{{item.title}}</a>
+        <li ng-class="{active: isActive('/')}">
+            <a ng-href="/">{{ 'SUBPAGE_HOME' | translate }}</a>
+        </li>
+        <li ng-class="{active: isActive('/profile')}">
+          <a ng-href="/">{{ 'SUBPAGE_PROFILE' | translate }}</a>
         </li>
       </ul>
     </div>
