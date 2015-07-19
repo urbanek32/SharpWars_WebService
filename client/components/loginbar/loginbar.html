@@ -8,11 +8,11 @@
           </div>
           <div ng-switch-default>
             <form novalidate>
-              Zaloguj się:
-              <input placeholder="Twój Login" type="text" ng-model="user.login">
-              <input placeholder="Twoje hasło" type="password" ng-model="user.password">
-              <button ng-click="logMeIn(user.login, user.password)">Zaloguj!</button>
-              <button ng-click="passwordRestoreRedirection()">Przypomnienie hasła</button>
+              {{ 'LOG_TEXT' | translate }}
+              <input placeholder="{{ 'YOUR_LOGIN' | translate }}" type="text" ng-model="user.login">
+              <input placeholder="{{ 'YOUR_PASSWORD' | translate }}" type="password" ng-model="user.password">
+              <button ng-click="logMeIn(user.login, user.password)">{{ 'LOG_ME_BUTTON' | translate }}</button>
+              <button ng-click="passwordRestoreRedirection()">{{ 'RESTORE_MY_PASSWORD_BUTTON' | translate }}</button>
             </form>
             <div class="alert alert-danger" ng-if="errors">
               <li ng-repeat="error in errors">
@@ -25,7 +25,7 @@
       </div>
       <div ng-if="userLogedIn == false" class="col-md-3">
         <form novalidate>
-          <button ng-click="registerRedirection()">Nie mam jeszcze konta. Rejestracja</button>
+          <button ng-click="registerRedirection()">{{ 'CREATE_ACCOUNT_FOR_ME_BUTTON' | translate }}</button>
         </form>
       </div>
     </div>

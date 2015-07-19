@@ -9,6 +9,7 @@ angular.module('sharpWarsWebServiceApp')
         if(!err && result) {
           $window.sessionStorage.token = result.token;
           $scope.userLogedIn = true;
+          $scope.errors = null;
         } else {
           $scope.errors = errorInterpreter.interpreter(err);
         }
