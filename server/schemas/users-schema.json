@@ -39,5 +39,16 @@
     },
     "required": ["newpassword"],
     "maxProperties": 1
+  },
+  "changePassword": {
+    "id": "ChangePassword",
+    "type": "object",
+    "properties": {
+      "email": {"type": "string"},
+      "oldPassword": {"type": "string"},
+      "newPassword": {"type": "string"}
+    },
+    "required": ["newPassword", "oldPassword", "email"],
+    "maxProperties": 3
   }
 }
