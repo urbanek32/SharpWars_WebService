@@ -1,6 +1,6 @@
-<footer class="footer" ng-controller="FooterCtrl">
+<footer class="footer">
   <div class="container">
-    <p >SharpWars the Game. Autorzy:
+    <p ng-controller="MainCtrl">{{ 'FOOTER_TITLE' | translate }}<br>{{ 'AUTHORS' | translate }}
     <span ng-repeat="item in authors">
       {{item.f_name + " " + item.l_name}}
     </span>

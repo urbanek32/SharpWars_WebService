@@ -4,12 +4,11 @@
       <div class="content">
         <div class="alert alert-warning" role="alert">
           <span class="glyphicon glyphicon-warning-sign"></span>
-          Coś poszło nie tak z aktywacją Twojego konta :(<br>
-          W przypadku dalszych problemów skontaktuj się z administracją.
+          {{ "SOMETHING_GOES_WRONG_IN_ACTIVATION" | translate }}<br>{{ "TRY_TO_CONTACT_WITH_ADMIN_IF_YOU_HAVE_PROBLEMS" | translate }}
         </div>
         <div class="alert alert-info" role="alert">
           <span class="glyphicon glyphicon-info-sign"></span>
-          Za chwilę nastąpi przekierowanie...
+          {{ "REDIRECTION_AFTER_MOMENT" | translate }}
         </div>
         <div data-ng-init="afterActivation()"></div>
       </div>
