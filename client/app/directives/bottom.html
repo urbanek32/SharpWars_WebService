@@ -2,7 +2,7 @@
   <div class="container">
     <p ng-controller="MainCtrl">{{ 'FOOTER_TITLE' | translate }}<br>{{ 'AUTHORS' | translate }}
     <span ng-repeat="item in authors">
-      {{item.f_name + " " + item.l_name}}
+      {{item.fName + " " + item.lName}}
     </span>
     </p>
     <a ng-controller="MainCtrl" ng-click="changeLanguage('en')"><img ng-src="assets/images/en.png"/></a>
