@@ -21,5 +21,23 @@
     },
     "required": ["username", "password"],
     "maxProperties": 2
+  },
+  "forgotPassword": {
+    "id": "ForgotPassword",
+    "type": "object",
+    "properties": {
+      "email": {"type": "string"}
+    },
+    "required": ["email"],
+    "maxProperties": 1
+  },
+  "resetPassword": {
+    "id": "ResetPassword",
+    "type": "object",
+    "properties": {
+      "newpassword": {"type": "string"}
+    },
+    "required": ["newpassword"],
+    "maxProperties": 1
   }
 }

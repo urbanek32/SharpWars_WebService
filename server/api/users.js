@@ -21,6 +21,18 @@ var sendActivationEmail = function(newUser, callback) {
   });
 };
 
+var sendResetPasswordEmail = function(email, oldPasswordHash, callback) {
+  var mailOptions = {
+    from: 'jiraya@daruhq.tk',
+    to: email,
+    subject: '[WebService] Reset password message',
+    text: config.webservice.host + ':' + config.webservice.port + '/users/' + email + '/reset_password/' + oldPasswordHash
+  };
+  mailer.sendMail(mailOptions, function(err, result){
+    callback(err, result);
+  });
+};
+
 var addUser = function(newUser, callback) {
   userEntities.findUserByEmail(newUser.email, function(err, user){
     if(!err) {
@@ -83,7 +95,7 @@ var activateUser = function(options, callback) {
                 logger.debug("User has been activated.");
                 callback(null, httpStatuses.Users.Activated, result);
               } else {
-                logger.error("Internal Serever Error: " + JSON.stringify(err));
+                logger.error("Internal Server Error: " + JSON.stringify(err));
                 callback(httpStatuses.Generic.InternalServerError, null);
               }
             });
@@ -134,8 +146,64 @@ var logInUser = function(options, callback) {
   });
 };
 
+var forgotPassword = function(options, callback) {
+  userEntities.findUserByEmail(options.email, function(err, user) {
+    if(!err) {
+      if(user) {
+        sendResetPasswordEmail(options.email, user.password, function(err, result) {
+          if(!err) {
+            logger.debug("Email with reset password link was sent to " + options.email);
+            callback(null, httpStatuses.Users.ResetPasswordTokenSent);
+          } else {
+            logger.error("Cannot send email: " + JSON.stringify(err));
+            callback(httpStatuses.Generic.InternalServerError, null);
+          }
+        })
+      } else {
+        logger.debug("Cannot generate reset password link for user: User " + options.email + " not exists.");
+        callback(httpStatuses.Users.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null)
+    }
+  })
+};
+
+var resetPassword = function(options, callback) {
+  userEntities.findUserByEmail(options.email, function(err, user) {
+    if(!err) {
+      if(user) {
+        if(options.oldPassword === user.password) {
+          var newPasswordHash = passwordHash.generate(options.newPassword);
+          userEntities.setNewPasswordForEmail(options.email, newPasswordHash, function(err, result) {
+            if (!err && result) {
+              logger.debug("Password changed.");
+              callback(null, httpStatuses.Users.PasswordChanged, result);
+            } else {
+              logger.error("Internal Server Error: " + JSON.stringify(err));
+              callback(httpStatuses.Generic.InternalServerError, null);
+            }
+          });
+        } else {
+          logger.debug("Cannot reset password: Token failed.");
+          callback(httpStatuses.Auth.Unauthorized, null);
+        }
+      } else {
+        logger.debug("Cannot reset password for user: User " + options.email + " not exists.");
+        callback(httpStatuses.Users.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null)
+    }
+  });
+};
+
 module.exports = {
   addUser: addUser,
   activateUser: activateUser,
-  logInUser: logInUser
+  logInUser: logInUser,
+  forgotPassword: forgotPassword,
+  resetPassword: resetPassword
 };

@@ -12,6 +12,8 @@ var users = {
   //success
   Created: [{status: 201, message: "User has been created. Check your mailbox to finish registration process."}],
   Activated: [{status: 204, message: "User has been activated."}],
+  ResetPasswordTokenSent: [{status: 200, message: "Reset password token has been sent."}],
+  PasswordChanged: [{status: 200, message: "Password has been changed."}],
   //errors
   NotCreated: [{status: 500, message: "Cannot create user"}],
   AlreadyExists: [{status: 400, message: "User Already Exists"}],

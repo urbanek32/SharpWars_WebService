@@ -46,3 +46,38 @@ exports.logInUser = function(req, res) {
     res.status(400).send(errors);
   }
 };
+
+exports.forgotPassword = function(req, res) {
+  var errors = schemaValidator.validate(req.body, userSchemas.forgotPassword).errors;
+  if(errors.length === 0) {
+    usersManager.forgotPassword(req.body, function(err, result) {
+      if(!err && result) {
+        res.send(result);
+      } else {
+        res.status(err[0].status).send(err);
+      }
+    })
+  } else {
+    res.status(400).send(errors);
+  }
+};
+
+exports.resetPassword = function(req, res) {
+  var errors = schemaValidator.validate(req.body, userSchemas.resetPassword).errors;
+  if(errors.length === 0) {
+    var options = {
+      email: req.params.email,
+      oldPassword: req.params.password,
+      newPassword: req.body.newpassword
+    };
+    usersManager.resetPassword(options, function(err, result) {
+      if(!err && result) {
+        res.send(result);
+      } else {
+        res.status(err[0].status).send(err);
+      }
+    })
+  } else {
+    res.status(400).send(errors);
+  }
+};
