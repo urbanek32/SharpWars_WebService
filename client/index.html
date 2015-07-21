@@ -42,7 +42,7 @@
     <div ng-include="'components/navbar/navbar.html'"></div>
     <div ng-include="'components/loginbar/loginbar.html'"></div>
     <div ng-view=""></div>
-    <div ng-include="'components/footer/footer.html'"></div>
+    <bottom></bottom>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -79,14 +79,14 @@
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
-          <script src="app/controllers/main.controller.js"></script>
-          <script src="app/controllers/userCtrl.js"></script>
+          <script src="app/js/controllers/main.controller.js"></script>
+          <script src="app/js/controllers/userCtrl.js"></script>
+          <script src="app/js/directives/bottom.js"></script>
           <script src="app/main.js"></script>
           <script src="app/services/authInterceptor/authInterceptor.js"></script>
           <script src="app/services/errorInterpreter/errorInterpreter.js"></script>
           <script src="app/services/loginService/loginService.service.js"></script>
           <script src="app/services/testService/testService.service.js"></script>
-          <script src="components/footer/footer.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->

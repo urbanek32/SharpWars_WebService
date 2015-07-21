@@ -4,11 +4,11 @@
       <div class="content">
         <div class="alert alert-success" role="alert">
           <span class="glyphicon glyphicon-ok"></span>
-          Twoje konto zostało aktywowane<br>Możesz się teraz zalogować w formularzu powyżej.
+          {{ "ACCOUNT_HAS_BEN_ACCTIVATED" | translate }} <br>{{ "YOU_CAN_LOGIN_NOW" | translate }}
         </div>
         <div class="alert alert-info" role="alert">
           <span class="glyphicon glyphicon-info-sign"></span>
-          Za chwilę nastąpi przekierowanie...
+          {{ "REDIRECTION_AFTER_MOMENT" | translate }}
         </div>
         <div data-ng-init="afterActivation()"></div>
       </div>
