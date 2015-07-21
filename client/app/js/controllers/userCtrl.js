@@ -48,4 +48,8 @@ angular.module('sharpWarsWebServiceApp')
       $interval.cancel($scope.activationTimer);
     }
 
+    $scope.registerUserForm = function($newUser) {
+      window.alert($newUser);
+    };
+
   });
