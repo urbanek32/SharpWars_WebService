@@ -42,3 +42,8 @@
 .boldText {
   font-weight: bold;
 }
+
+.requiredStar{
+  color: red;
+  font-weight: bold;
+}
