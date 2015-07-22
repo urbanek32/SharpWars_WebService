@@ -2,13 +2,21 @@
 
 angular.module('sharpWarsWebServiceApp')
   .controller('userCtrl', function ($scope, $location, $window, errorInterpreter, loginService, $interval) {
-    $scope.userLogedIn = false;
+
+    $scope.$watch(function() {
+      return $window.sessionStorage.token;
+    }, function() {
+      if($window.sessionStorage.token) {
+        $scope.userLoggedIn = true;
+      } else {
+        $scope.userLoggedIn = false;
+      }
+    });
 
     $scope.logMeIn = function(login, password) {
       loginService.logIn(login, password, function(err, result) {
         if(!err && result) {
           $window.sessionStorage.token = result.token;
-          $scope.userLogedIn = true;
           $scope.errors = null;
         } else {
           $scope.errors = errorInterpreter.interpreter(err);

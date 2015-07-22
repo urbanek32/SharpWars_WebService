@@ -6,7 +6,7 @@
           <div ng-switch-when="1">
             <p> Logowanie powiodlo sie.. Tutaj bedzie mozna wyswietlac cos. Albo nic. No i do logowania jeszcze obluga bledow itp ale to jak bedzie API </p>
           </div>
-          <div ng-switch-default>
+          <div ng-if="userLoggedIn === false">
             <form novalidate>
               {{ 'LOG_TEXT' | translate }}
               <input placeholder="{{ 'YOUR_LOGIN' | translate }}" type="text" ng-model="user.login">
@@ -21,9 +21,17 @@
               </li>
             </div>
           </div>
+          <div ng-if="userLoggedIn === true">
+            Witaj getUserName (???). Miło Cię znowu widzieć. Jak pobrać nick usera?
+          </div>
         </div>
       </div>
-      <div ng-if="userLogedIn == false" class="col-md-3">
+      <div ng-if="userLoggedIn === true" class="col-md-3">
+        <form novalidate>
+          <button ng-click="logOut()">{{ 'LOGOFF' | translate }}</button>
+        </form>
+      </div>
+      <div ng-if="userLoggedIn === false" class="col-md-3">
         <form novalidate>
           <button ng-click="registerRedirection()">{{ 'CREATE_ACCOUNT_FOR_ME_BUTTON' | translate }}</button>
         </form>
