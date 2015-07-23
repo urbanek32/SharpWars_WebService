@@ -27,6 +27,7 @@ angular.module('sharpWarsWebServiceApp')
     $scope.logOut = function() {
       if($window.sessionStorage.token) {
         delete $window.sessionStorage.token;
+        $location.path('/');
       }
     };
 

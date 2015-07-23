@@ -5,26 +5,41 @@ angular.module('sharpWarsWebServiceApp')
     $routeProvider
       .when('/', {
         templateUrl: 'app/views/home.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        authentication: false
       }).when('/profile', {
         templateUrl: 'app/views/profile.html',
-        controller: 'userCtrl'
+        controller: 'userCtrl',
+        authentication: true
       }).when('/register', {
         templateUrl: 'app/views/register.html',
-        controller: 'userCtrl'
+        controller: 'userCtrl',
+        authentication: false
       }).when('/passwordRecovery', {
         templateUrl: 'app/views/passwordRecovery.html',
-        controller: 'userCtrl'
+        controller: 'userCtrl',
+        authentication: false
       }).when('/download', {
-        templateUrl: 'app/views/download.html'
+        templateUrl: 'app/views/download.html',
+        authentication: false
       }).when('/account_activation_success', {
         templateUrl: 'app/views/account_activation_success.html',
-        controller: 'userCtrl'
+        controller: 'userCtrl',
+        authentication: false
       }).when('/account_activation_error', {
         templateUrl: 'app/views/account_activation_error.html',
-        controller: 'userCtrl'
+        controller: 'userCtrl',
+        authentication: false
       }).when('/users/:email/reset_password/:password', {
         templateUrl: 'app/views/reset_password.html',
-        controller: 'userCtrl'
+        controller: 'userCtrl',
+        authentication: false
+      });
+  })
+  .run(function($rootScope, $window, $location) {
+      $rootScope.$on('$routeChangeStart', function (e, newUrl) {
+        if (newUrl.$$route.authentication && !$window.sessionStorage.token) {
+          $location.path('/');
+        }
       });
   });
