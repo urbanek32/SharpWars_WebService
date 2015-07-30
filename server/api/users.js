@@ -42,6 +42,7 @@ var addUser = function(newUser, callback) {
             if(!user) {
               newUser.password = passwordHash.generate(newUser.password);
               newUser.activated = false;
+              newUser.created = Date.now();
               userEntities.addUser(newUser, function(err, result) {
                 if(!err) {
                   logger.debug("User " + newUser.username + " has been created in database.");
