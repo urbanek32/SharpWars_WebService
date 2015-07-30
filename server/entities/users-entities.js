@@ -34,6 +34,12 @@ module.exports.activateByUsername = function(username, callback) {
   })
 };
 
+module.exports.updateByUsername = function(username, userAttributes, callback) {
+  db.users.update({username: username}, {$set: userAttributes}, {strict: true}, function(err, result) {
+    callback(err, result);
+  })
+};
+
 module.exports.setNewPasswordForEmail = function(email, newPassword, callback) {
   db.users.update({email: email}, {$set: {password: newPassword}}, {strict: true}, function(err, result) {
     callback(err, result);

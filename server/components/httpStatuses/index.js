@@ -14,6 +14,7 @@ var users = {
   Activated: [{status: 204, message: "User has been activated."}],
   ResetPasswordTokenSent: [{status: 200, message: "Reset password token has been sent."}],
   PasswordChanged: [{status: 200, message: "Password has been changed."}],
+  Updated: [{status: 204, message: "User has been updated."}],
   //errors
   NotCreated: [{status: 500, message: "Cannot create user"}],
   AlreadyExists: [{status: 400, message: "User Already Exists"}],

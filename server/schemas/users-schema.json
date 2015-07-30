@@ -50,5 +50,16 @@
     },
     "required": ["newPassword", "oldPassword", "email"],
     "maxProperties": 3
+  },
+  "updateUser": {
+    "id": "UpdateUser",
+    "type": "object",
+    "properties": {
+      "location": {"type": "string"},
+      "email": {"type": "string"},
+      "hobby": {"type": "string"}
+    },
+    "required": ["location", "email", "hobby"],
+    "maxProperties": 3
   }
 }

@@ -61,7 +61,32 @@ var getUserInformations = function(username, callback) {
   })
 };
 
+var updateUserInformations = function(username, userAttributes, callback) {
+  userEntities.findUserByUsername(username, function(err, user) {
+    if(!err) {
+      if(user) {
+        userEntities.updateByUsername(username, userAttributes, function(err, result) {
+          if(!err && result){
+            logger.info("User " + username + " updated.");
+            callback(null, httpStatuses.Users.Updated);
+          } else{
+            logger.error("Internal Server Error: " + JSON.stringify(err));
+            callback(httpStatuses.Generic.InternalServerError, null);
+          }
+        });
+      } else {
+        logger.debug("Cannot update user informations: User " + username + " not exists.");
+        callback(httpStatuses.Users.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null);
+    }
+  })
+};
+
 module.exports = {
   changePassword: changePassword,
-  getUserInformations: getUserInformations
+  getUserInformations: getUserInformations,
+  updateUserInformations: updateUserInformations
 };

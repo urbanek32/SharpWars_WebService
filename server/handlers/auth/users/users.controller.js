@@ -35,3 +35,22 @@ exports.getUserInformations = function(req, res) {
     res.status(401).send(httpStatuses.Auth.Unauthorized[0]);
   }
 };
+
+exports.updateUserInformations = function(req, res) {
+  var errors = schemaValidator.validate(req.body, userSchemas.updateUser).errors;
+  if(errors.length === 0) {
+    if (req.params.username === req.user.username) {
+      usersManager.updateUserInformations(req.params.username, req.body, function (err, result) {
+        if (!err && result) {
+          res.send(result);
+        } else {
+          res.status(err[0].status).send(err);
+        }
+      });
+    } else {
+      res.status(401).send(httpStatuses.Auth.Unauthorized[0]);
+    }
+  } else {
+    res.status(400).send(errors);
+  }
+};
