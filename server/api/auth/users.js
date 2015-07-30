@@ -37,6 +37,31 @@ var changePassword = function(options, callback) {
   });
 };
 
+var removeUserSecretData = function(user) {
+  delete user.password;
+  delete user.activated;
+  delete user._id;
+  return user;
+};
+
+var getUserInformations = function(username, callback) {
+  userEntities.findUserByUsername(username, function(err, user) {
+    if(!err) {
+      if(user) {
+        logger.info("User " + username + " informations sent.");
+        callback(null, removeUserSecretData(user));
+      } else {
+        logger.debug("Cannot get user informations: User " + username + " not exists.");
+        callback(httpStatuses.Users.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null)
+    }
+  })
+};
+
 module.exports = {
-  changePassword: changePassword
+  changePassword: changePassword,
+  getUserInformations: getUserInformations
 };
