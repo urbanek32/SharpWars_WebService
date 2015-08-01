@@ -19,6 +19,9 @@
         <li ng-class="{active: isActive('/download')}">
           <a ng-href="/download">{{ 'SUBPAGE_DOWNLOAD' | translate }}</a>
         </li>
+        <li ng-class="{active: isActive('/createLobby')}" ng-if="userLoggedIn">
+          <a ng-href="/createLobby">{{ 'SUBPAGE_LOBBY' | translate }}</a>
+        </li>
       </ul>
     </div>
   </div>

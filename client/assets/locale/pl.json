@@ -2,6 +2,7 @@
   "SUBPAGE_PROFILE": "Mój profil",
   "SUBPAGE_HOME": "Główna",
   "SUBPAGE_DOWNLOAD": "Pobierz grę",
+  "SUBPAGE_LOBBY": "Utwórz grę",
   "FOOTER_TITLE" : "SharpWars the Game.",
   "AUTHORS": "Autorzy:",
   "REDIRECTION_AFTER_MOMENT" : "Za chwilę nastąpi przekierowanie...",
@@ -18,5 +19,13 @@
   "LOG_ME_BUTTON": "Zaloguj!",
   "RESTORE_MY_PASSWORD_BUTTON": "Przypomnnienie hasła",
   "CREATE_ACCOUNT_FOR_ME_BUTTON": "Nie mam jeszcze konta. Rejestracja.",
-  "LOG_TEXT": "Zaloguj się!"
+  "LOG_TEXT": "Zaloguj się!",
+  "LOBBY_CREATE_TITLE": "Tworzenie nowej gry",
+  "LOBBY_CREATE_COUNT": "Ilość graczy",
+  "LOBBY_CREATE_NAME": "Nazwa gry",
+  "LOBBY_CREATE_BUTTON": "Utwórz grę!",
+  "LOBBY_CREATE_PASS_QUESTION": "Gra chroniona hasłem",
+  "LOBBY_CREATE_PASS": "Hasło",
+  "LOBBY_CREATE_PLAYERS_VALUE_ERROR": "Wartość musi być większa od 0!",
+  "INPUT_IS_REQ": "To pole jest wymagane!"
 }
