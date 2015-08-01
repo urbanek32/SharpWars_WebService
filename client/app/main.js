@@ -34,6 +34,10 @@ angular.module('sharpWarsWebServiceApp')
         templateUrl: 'app/views/reset_password.html',
         controller: 'userCtrl',
         authentication: false
+      }).when('/createLobby', {
+        templateUrl: 'app/views/createLobby.html',
+        controller: 'lobbyCtrl',
+        authentication: true
       });
   })
   .run(function($rootScope, $window, $location) {
