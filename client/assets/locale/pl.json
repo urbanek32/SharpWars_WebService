@@ -18,5 +18,18 @@
   "LOG_ME_BUTTON": "Zaloguj!",
   "RESTORE_MY_PASSWORD_BUTTON": "Przypomnnienie hasła",
   "CREATE_ACCOUNT_FOR_ME_BUTTON": "Nie mam jeszcze konta. Rejestracja.",
-  "LOG_TEXT": "Zaloguj się!"
+  "LOG_TEXT": "Zaloguj się!",
+  "REGISTRATION_TITLE": "Formularz rejestracji",
+  "REGISTRATION_LOGIN_NAME": "Nazwa użytkownika",
+  "REGISTRATION_PASSWORD": "Hasło",
+  "REGISTRATION_PASSWORD_REPEAT": "Powtórz hasło",
+  "REGISTRATION_FIRST_NAME": "Imię",
+  "REGISTRATION_LAST_NAME": "Nazwisko",
+  "REGISTRATION_MAIL": "Adres e-mail",
+  "REGISTRATION_BUTTON": "Zarejestruj mnie!",
+  "REGISTRATION_INPUT_IS_REQ": "Pole jest obowiązkowe!",
+  "REGISTRATION_PASSWORDS_DID_NOT_MATCH": "Podane hasła nie zgadzają się!",
+  "REGISTRATION_USERNAME_TO_SHORT": "Podany login jest za krótki",
+  "REGISTRATION_USERNAME_TO_LONG": "Podany login jest za długi",
+  "REGISTRATION_MAIL_INV": "Podany adres e-mail nie jest prawidłowy!"
 }
