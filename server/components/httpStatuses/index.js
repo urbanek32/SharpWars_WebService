@@ -24,13 +24,22 @@ var users = {
 };
 
 var auth = {
-  Unauthorized: [{status: 401, message: "Unauthorized"}]
+  Unauthorized: [{status: 401, message: "Unauthorized"}],
+  PasswordEmpty: [{status: 400, message: "Password cannot be empty"}]
+};
+
+var lobby = {
+  //success
+  Created: [{status: 201, message: "Lobby has been created."}],
+  //errors
+  AlreadyExists: [{status: 400, message: "Lobby already exists."}]
 };
 
 module.exports.httpStatuses = {
   Generic: generic,
   Users: users,
-  Auth: auth
+  Auth: auth,
+  Lobby: lobby
 };
 
 module.exports[404] = function pageNotFound(req, res) {

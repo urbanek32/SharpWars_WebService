@@ -1,0 +1,15 @@
+{
+  "addNewLobby": {
+    "id": "AddNewLobby",
+    "type": "object",
+    "properties": {
+      "countOfMembers": {"type": "number"},
+      "password": {"type": "string"},
+      "encrypted": {"type": "boolean"},
+      "name": {"type": "string"}
+    },
+    "required": ["countOfMembers", "name", "encrypted"],
+    "minProperties": 3,
+    "maxProperties": 4
+  }
+}
