@@ -27,7 +27,9 @@
   "LOBBY_CREATE_PASS_QUESTION": "Gra chroniona hasłem",
   "LOBBY_CREATE_PASS": "Hasło",
   "LOBBY_CREATE_PLAYERS_VALUE_ERROR": "Wartość musi być większa od 0!",
-  "INPUT_IS_REQ": "To pole jest wymagane!"
+  "INPUT_IS_REQ": "To pole jest wymagane!",
+  "REGISTRATION_WAS_ERRORS": "Wystąpiły następujące problemy podczas procesu rejestracji:",
+  "REGISTRATION_FIX_ERROR_MESSAGE": "Popraw je, a następnie ponownie wyślij formularz.",
   "REGISTRATION_TITLE": "Formularz rejestracji",
   "REGISTRATION_LOGIN_NAME": "Nazwa użytkownika",
   "REGISTRATION_PASSWORD": "Hasło",
@@ -40,5 +42,5 @@
   "REGISTRATION_PASSWORDS_DID_NOT_MATCH": "Podane hasła nie zgadzają się!",
   "REGISTRATION_USERNAME_TO_SHORT": "Podany login jest za krótki",
   "REGISTRATION_USERNAME_TO_LONG": "Podany login jest za długi",
-  "REGISTRATION_MAIL_INV": "Podany adres e-mail nie jest prawidłowy!"
+  "REGISTRATION_MAIL_INVALID": "Podany adres e-mail nie jest prawidłowy!"
 }
