@@ -15,4 +15,17 @@ angular.module('sharpWarsWebServiceApp')
           callback(err, null);
         });
     };
+    this.register = function(login, password, name, surname, email, callback) {
+      var body = {
+        username: login,
+        password: password,
+        name: name,
+        surname: surname,
+        email: email
+      };
+      $http.post('/api/users/add', body)
+        .error(function (err) {
+          callback(err, null);
+        });
+    };
   });

@@ -3,6 +3,23 @@
     <div class="col-lg-12">
       <div class="content">
         <h1 class="page-header">{{ 'REGISTRATION_TITLE' | translate }}</h1>
+        <div class="alert alert-warning" ng-if="errors">
+          <span class="glyphicon glyphicon-warning-sign"></span>
+          {{ 'REGISTRATION_WAS_ERRORS' | translate }}<br>
+          {{ 'REGISTRATION_FIX_ERROR_MESSAGE' | translate }}
+        </div>
+        <div class="alert alert-danger" ng-if="errors">
+          <li ng-repeat="error in errors">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            {{error}}
+          </li>
+        </div>
+        <div ng-show="!errors && registerForm.$submitted">
+          <div class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-ok"></span>
+            {{ 'REGISTRATION_WAS_SUCCESS' | translate }}
+          </div>
+        </div>
         <form name="registerForm" novalidate>
           <div class="form-group">
             <label>{{ 'REGISTRATION_LOGIN_NAME' | translate }}</label>: <span class="requiredStar">*</span><br>
