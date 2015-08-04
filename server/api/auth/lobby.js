@@ -2,6 +2,7 @@
 
 var lobbyEntities = require('../../entities/lobby-entities'),
   httpStatuses = require('../../components/httpStatuses').httpStatuses,
+  lobbyStates = require('../../components/lobbyStates'),
   passwordHash = require('password-hash'),
   logger = require('../../lib/logger/logger').init();
 
@@ -9,6 +10,8 @@ var lobbyEntities = require('../../entities/lobby-entities'),
 var addNewLobby = function(username, options, callback) {
   var newLobby = options;
   newLobby.master = username;
+  newLobby.state = lobbyStates.WAITING;
+
   if(newLobby.encrypted) {
     if(newLobby.password) {
       newLobby.password = passwordHash.generate(newLobby.password);
