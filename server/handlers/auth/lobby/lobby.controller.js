@@ -30,3 +30,18 @@ exports.getListOfLobbies = function(req, res) {
     }
   });
 };
+
+exports.joinToLobby = function(req, res) {
+  var errors = schemaValidator.validate(req.body, lobbySchemas.joinToLobby).errors;
+  if(errors.length === 0) {
+    lobbyManager.joinToLobby(req.user.username, req.params.lobby, req.body, function (err, result) {
+      if (!err && result) {
+        res.send(result);
+      } else {
+        res.status(err[0].status).send(err);
+      }
+    });
+  } else {
+    res.status(400).send(errors);
+  }
+};

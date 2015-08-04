@@ -21,3 +21,9 @@ module.exports.getAllLobbies = function(callback) {
     callback(err, result);
   });
 };
+
+module.exports.addUserToLobby = function(lobbyName, username, callback) {
+  db.lobbies.update({name: lobbyName}, { $push: {players: username}}, function(err, result) {
+    callback(err, result);
+  });
+};

@@ -31,8 +31,12 @@ var auth = {
 var lobby = {
   //success
   Created: [{status: 201, message: "Lobby has been created."}],
+  UserAdded: [{status: 201, message: "User has been added to the lobby."}],
   //errors
-  AlreadyExists: [{status: 400, message: "Lobby already exists."}]
+  AlreadyExists: [{status: 400, message: "Lobby already exists."}],
+  NotExists: [{status: 404, message: "Lobby not exists."}],
+  Full: [{status: 400, message: "No available slots."}],
+  UserExists: [{status: 400, message: "User already joined in lobby."}]
 };
 
 module.exports.httpStatuses = {

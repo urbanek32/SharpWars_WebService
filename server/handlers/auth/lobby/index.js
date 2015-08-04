@@ -7,5 +7,6 @@ var router = express.Router();
 
 router.post('/add', controller.addNewLobby);
 router.get('/list', controller.getListOfLobbies);
+router.put('/join/:lobby', controller.joinToLobby);
 
 module.exports = router;

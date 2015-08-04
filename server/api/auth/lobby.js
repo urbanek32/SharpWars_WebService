@@ -11,6 +11,7 @@ var addNewLobby = function(username, options, callback) {
   var newLobby = options;
   newLobby.master = username;
   newLobby.state = lobbyStates.WAITING;
+  newLobby.players = [];
 
   if(newLobby.encrypted) {
     if(newLobby.password) {
@@ -58,12 +59,65 @@ var getListOfLobbies = function(callback) {
       callback(null, removeLobbySecretData(lobbies));
     } else {
       logger.error("Internal Server Error: " + JSON.stringify(err));
-      callback(httpStatuses.Generic.InternalServerError, null)
+      callback(httpStatuses.Generic.InternalServerError, null);
     }
   })
 };
 
+var isUserAlreadyExistsInLobby = function(username, lobbyPlayers) {
+  for(var user in lobbyPlayers) {
+    if(lobbyPlayers[user].username === username) {
+      return true;
+    }
+  }
+  return false;
+};
+
+var joinToLobby = function(username, lobbyName, options, callback) {
+  lobbyEntities.findLobbyByName(lobbyName, function(err, lobby) {
+    if(!err) {
+      if(lobby) {
+        if(lobby.encrypted) {
+          if(!passwordHash.verify(options.password, lobby.password)) {
+            return callback(httpStatuses.Auth.Unauthorized, null);
+          }
+        }
+        if(lobby.countOfMembers > lobby.players.length) {
+          if(!isUserAlreadyExistsInLobby(username, lobby.players)) {
+            var newUser = {
+              username: username,
+              status: lobbyStates.WAITING
+            };
+            lobbyEntities.addUserToLobby(lobbyName, newUser, function(err, result) {
+              if(!err) {
+                logger.info("User added to lobby " + lobbyName);
+                callback(null, httpStatuses.Lobby.UserAdded);
+              } else {
+                logger.error("Internal Server Error: " + JSON.stringify(err));
+                callback(httpStatuses.Generic.InternalServerError, null);
+              }
+            });
+          } else {
+            logger.debug("Player " + username + " already joined to this lobby.");
+            callback(httpStatuses.Lobby.UserExists, null);
+          }
+        } else {
+          logger.debug("Lobby is full");
+          callback(httpStatuses.Lobby.Full, null);
+        }
+      } else {
+        logger.debug("Lobby " + lobbyName + " not exist");
+        callback(httpStatuses.Lobby.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null);
+    }
+  });
+};
+
 module.exports = {
   addNewLobby: addNewLobby,
-  getListOfLobbies: getListOfLobbies
+  getListOfLobbies: getListOfLobbies,
+  joinToLobby: joinToLobby
 };

@@ -11,5 +11,13 @@
     "required": ["countOfMembers", "name", "encrypted"],
     "minProperties": 3,
     "maxProperties": 4
+  },
+  "joinToLobby": {
+    "id": "JoinToLobby",
+    "type": "object",
+    "properties": {
+      "password": {"type": "string"}
+    },
+    "maxProperties": 1
   }
 }
