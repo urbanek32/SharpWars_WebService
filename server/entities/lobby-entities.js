@@ -13,5 +13,11 @@ module.exports.addNewLobby = function(newLobby, callback) {
 module.exports.findLobbyByName = function(name, callback) {
   db.lobbies.findOne({name: name}, function(err, result) {
     callback(err, result);
-  })
+  });
+};
+
+module.exports.getAllLobbies = function(callback) {
+  db.lobbies.find().toArray(function(err, result) {
+    callback(err, result);
+  });
 };

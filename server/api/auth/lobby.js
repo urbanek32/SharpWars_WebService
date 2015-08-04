@@ -40,6 +40,27 @@ var addNewLobby = function(username, options, callback) {
   });
 };
 
+var removeLobbySecretData = function(lobbies) {
+  for(var lobby in lobbies) {
+    delete lobbies[lobby]._id;
+    delete lobbies[lobby].password;
+  }
+  return lobbies;
+};
+
+var getListOfLobbies = function(callback) {
+  lobbyEntities.getAllLobbies(function(err, lobbies) {
+    if(!err && lobbies) {
+      logger.info("Lobbies array sent.");
+      callback(null, removeLobbySecretData(lobbies));
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null)
+    }
+  })
+};
+
 module.exports = {
-  addNewLobby: addNewLobby
+  addNewLobby: addNewLobby,
+  getListOfLobbies: getListOfLobbies
 };
