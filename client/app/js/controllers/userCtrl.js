@@ -48,8 +48,16 @@ angular.module('sharpWarsWebServiceApp')
       $interval.cancel($scope.activationTimer);
     }
 
-    $scope.registerUserForm = function($newUser) {
-      window.alert($newUser);
+    $scope.registerUserForm = function(newUser) {
+      $scope.errors = null;
+      $scope.registrationSuccess = false;
+      loginService.register(newUser, function(err, result) {
+        if(!err && result) {
+          $scope.registrationSuccess = true;
+          $scope.registrationServerResponse = result[0].message;
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      });
     };
-
   });
