@@ -7,14 +7,15 @@ var lobbyEntities = require('../../entities/lobby-entities'),
   logger = require('../../lib/logger/logger').init();
 
 
-var addNewLobby = function(username, options, callback) {
+var addNewLobby = function(username, userRemoteAddress, options, callback) {
   var newLobby = options;
   newLobby.master = username;
   newLobby.state = lobbyStates.WAITING;
   newLobby.players = [
     {
       username: newLobby.master,
-      state: lobbyStates.WAITING
+      state: lobbyStates.WAITING,
+      remoteAddress: userRemoteAddress
     }
   ];
 
@@ -78,7 +79,7 @@ var isUserAlreadyExistsInLobby = function(username, lobbyPlayers) {
   return false;
 };
 
-var joinToLobby = function(username, lobbyName, options, callback) {
+var joinToLobby = function(username, userRemoteAddress, lobbyName, options, callback) {
   lobbyEntities.findLobbyByName(lobbyName, function(err, lobby) {
     if(!err) {
       if(lobby) {
@@ -91,7 +92,8 @@ var joinToLobby = function(username, lobbyName, options, callback) {
           if(!isUserAlreadyExistsInLobby(username, lobby.players)) {
             var newUser = {
               username: username,
-              status: lobbyStates.WAITING
+              status: lobbyStates.WAITING,
+              remoteAddress: userRemoteAddress
             };
             lobbyEntities.addUserToLobby(lobbyName, newUser, function(err, result) {
               if(!err) {
@@ -121,8 +123,73 @@ var joinToLobby = function(username, lobbyName, options, callback) {
   });
 };
 
+var everybodyReady = function(lobbyPlayers) {
+  for(var user in lobbyPlayers) {
+    if(lobbyPlayers[user].state !== lobbyStates.READY) {
+      return false;
+    }
+  }
+  return true;
+};
+
+var startStatusOfPlayers = function(lobbyPlayers) {
+  for(var user in lobbyPlayers) {
+    lobbyPlayers[user].state = lobbyStates.PLAY;
+  }
+  return lobbyPlayers;
+};
+
+var startLobby = function(username, lobbyName, callback) {
+  lobbyEntities.findLobbyByName(lobbyName, function(err, lobby) {
+    if(!err) {
+      if(lobby) {
+        if(lobby.state !== lobbyStates.PLAY) {
+          if(username === lobby.master) {
+            if(lobby.countOfMembers === lobby.players.length) {
+              if(everybodyReady(lobby.players)) {
+                // ****************************************************************************
+                // placeholder dla wysłania requestu do mastera gry, zablokowane przez GameCore
+                // W callbacku wysłania wrzucić zmianę statusu lobby
+                // ****************************************************************************
+                lobbyEntities.changeLobbyStatus(lobbyName, lobbyStates.PLAY, startStatusOfPlayers(lobby.players), function(err, result) {
+                  if(!err) {
+                    logger.info("Lobby game " + lobbyName + " started.");
+                    callback(null, httpStatuses.Lobby.Started);
+                  } else {
+                    logger.error("Internal Server Error: " + JSON.stringify(err));
+                    callback(httpStatuses.Generic.InternalServerError, null);
+                  }
+                });
+              } else {
+                logger.debug("Lobby could not start game. Not each player is ready.");
+                callback(httpStatuses.Lobby.NotReady, null);
+              }
+            } else {
+              logger.debug("Lobby could not start game. More players is required.");
+              callback(httpStatuses.Lobby.NotFull, null);
+            }
+          } else {
+            logger.debug("Lobby game" + lobbyName + " can be started only by master.");
+            callback(httpStatuses.Auth.Unauthorized, null);
+          }
+        } else {
+          logger.debug("Lobby " + lobbyName + " has been already started.");
+          callback(httpStatuses.Lobby.AlreadyStarted, null);
+        }
+      } else {
+        logger.debug("Lobby " + lobbyName + " not exist");
+        callback(httpStatuses.Lobby.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null);
+    }
+  });
+};
+
 module.exports = {
   addNewLobby: addNewLobby,
   getListOfLobbies: getListOfLobbies,
-  joinToLobby: joinToLobby
+  joinToLobby: joinToLobby,
+  startLobby: startLobby
 };
