@@ -11,7 +11,12 @@ var addNewLobby = function(username, options, callback) {
   var newLobby = options;
   newLobby.master = username;
   newLobby.state = lobbyStates.WAITING;
-  newLobby.players = [];
+  newLobby.players = [
+    {
+      username: newLobby.master,
+      state: lobbyStates.WAITING
+    }
+  ];
 
   if(newLobby.encrypted) {
     if(newLobby.password) {
