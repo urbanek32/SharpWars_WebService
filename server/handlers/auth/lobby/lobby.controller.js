@@ -56,3 +56,13 @@ exports.startLobby = function(req, res) {
     }
   });
 };
+
+exports.changePlayerStatus = function(req, res) {
+  lobbyManager.changePlayerStatus(req.user.username, req.params.lobby, function (err, result) {
+    if (!err && result) {
+      res.send(result);
+    } else {
+      res.status(err[0].status).send(err);
+    }
+  });
+};

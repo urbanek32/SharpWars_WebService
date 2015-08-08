@@ -33,6 +33,7 @@ var lobby = {
   Created: [{status: 201, message: "Lobby has been created."}],
   UserAdded: [{status: 201, message: "User has been added to the lobby."}],
   Started: [{status: 204, message: "Lobby has been started the game."}],
+  PlayerUpdated: [{status: 204, message: "Player status has been updated."}],
   //errors
   AlreadyExists: [{status: 400, message: "Lobby already exists."}],
   NotExists: [{status: 404, message: "Lobby not exists."}],

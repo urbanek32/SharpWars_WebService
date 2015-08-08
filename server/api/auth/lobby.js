@@ -92,7 +92,7 @@ var joinToLobby = function(username, userRemoteAddress, lobbyName, options, call
           if(!isUserAlreadyExistsInLobby(username, lobby.players)) {
             var newUser = {
               username: username,
-              status: lobbyStates.WAITING,
+              state: lobbyStates.WAITING,
               remoteAddress: userRemoteAddress
             };
             lobbyEntities.addUserToLobby(lobbyName, newUser, function(err, result) {
@@ -187,9 +187,53 @@ var startLobby = function(username, lobbyName, callback) {
   });
 };
 
+var updatePlayerStatus = function(username, players) {
+  for(var user in players) {
+    if(players[user].username === username) {
+      if(players[user].state === lobbyStates.WAITING) {
+        players[user].state = lobbyStates.READY;
+      } else if(players[user].state === lobbyStates.READY) {
+        players[user].state = lobbyStates.WAITING;
+      }
+    }
+  }
+  return players;
+};
+
+var changePlayerStatus = function(username, lobbyName, callback) {
+  lobbyEntities.findLobbyByName(lobbyName, function(err, lobby) {
+    if(!err) {
+      if(lobby) {
+        if(lobby.state !== lobbyStates.PLAY) {
+          lobbyEntities.changeLobbyStatus(lobbyName, lobbyStates.WAITING, updatePlayerStatus(username, lobby.players),
+            function(err, result) {
+            if(!err) {
+              logger.info("Player status " + username + " updated.");
+              callback(null, httpStatuses.Lobby.PlayerUpdated);
+            } else {
+              logger.error("Internal Server Error: " + JSON.stringify(err));
+              callback(httpStatuses.Generic.InternalServerError, null);
+            }
+          });
+        } else {
+          logger.debug("Lobby " + lobbyName + " has been already started.");
+          callback(httpStatuses.Lobby.AlreadyStarted, null);
+        }
+      } else {
+        logger.debug("Lobby " + lobbyName + " not exist");
+        callback(httpStatuses.Lobby.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null);
+    }
+  });
+};
+
 module.exports = {
   addNewLobby: addNewLobby,
   getListOfLobbies: getListOfLobbies,
   joinToLobby: joinToLobby,
-  startLobby: startLobby
+  startLobby: startLobby,
+  changePlayerStatus: changePlayerStatus
 };
