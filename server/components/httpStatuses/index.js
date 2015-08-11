@@ -33,6 +33,7 @@ var lobby = {
   Created: [{status: 201, message: "Lobby has been created."}],
   UserAdded: [{status: 201, message: "User has been added to the lobby."}],
   Started: [{status: 204, message: "Lobby has been started the game."}],
+  Stopped: [{status: 204, message: "Lobby has been stopped the game."}],
   PlayerUpdated: [{status: 204, message: "Player status has been updated."}],
   //errors
   AlreadyExists: [{status: 400, message: "Lobby already exists."}],
@@ -42,6 +43,7 @@ var lobby = {
   NotReady: [{status: 400, message: "Not each player is ready."}],
   UserExists: [{status: 400, message: "User already joined in lobby."}],
   AlreadyStarted: [{status: 400, message: "Lobby game has been already started."}],
+  AlreadyStopped: [{status: 400, message: "Lobby game has been already stopped."}]
 };
 
 module.exports.httpStatuses = {

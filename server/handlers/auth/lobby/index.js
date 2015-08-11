@@ -9,6 +9,7 @@ router.post('/add', controller.addNewLobby);
 router.get('/list', controller.getListOfLobbies);
 router.put('/join/:lobby', controller.joinToLobby);
 router.put('/start/:lobby', controller.startLobby);
+router.put('/stop/:lobby', controller.stopLobby);
 router.put('/:lobby/status', controller.changePlayerStatus);
 
 module.exports = router;

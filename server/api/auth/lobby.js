@@ -132,9 +132,9 @@ var everybodyReady = function(lobbyPlayers) {
   return true;
 };
 
-var startStatusOfPlayers = function(lobbyPlayers) {
+var changeStatusOfPlayers = function(lobbyPlayers, status) {
   for(var user in lobbyPlayers) {
-    lobbyPlayers[user].state = lobbyStates.PLAY;
+    lobbyPlayers[user].state = status;
   }
   return lobbyPlayers;
 };
@@ -151,7 +151,7 @@ var startLobby = function(username, lobbyName, callback) {
                 // placeholder dla wysłania requestu do mastera gry, zablokowane przez GameCore
                 // W callbacku wysłania wrzucić zmianę statusu lobby
                 // ****************************************************************************
-                lobbyEntities.changeLobbyStatus(lobbyName, lobbyStates.PLAY, startStatusOfPlayers(lobby.players), function(err, result) {
+                lobbyEntities.changeLobbyStatus(lobbyName, lobbyStates.PLAY, changeStatusOfPlayers(lobby.players, lobbyStates.PLAY), function(err, result) {
                   if(!err) {
                     logger.info("Lobby game " + lobbyName + " started.");
                     callback(null, httpStatuses.Lobby.Started);
@@ -175,6 +175,40 @@ var startLobby = function(username, lobbyName, callback) {
         } else {
           logger.debug("Lobby " + lobbyName + " has been already started.");
           callback(httpStatuses.Lobby.AlreadyStarted, null);
+        }
+      } else {
+        logger.debug("Lobby " + lobbyName + " not exist");
+        callback(httpStatuses.Lobby.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null);
+    }
+  });
+};
+
+var stopLobby = function(username, lobbyName, callback) {
+  lobbyEntities.findLobbyByName(lobbyName, function(err, lobby) {
+    if(!err) {
+      if(lobby) {
+        if(lobby.state === lobbyStates.PLAY) {
+          if(username === lobby.master) {
+            lobbyEntities.changeLobbyStatus(lobbyName, lobbyStates.WAITING, changeStatusOfPlayers(lobby.players, lobbyStates.WAITING), function(err, result) {
+              if(!err) {
+                logger.info("Lobby game " + lobbyName + " stopped.");
+                callback(null, httpStatuses.Lobby.Stopped);
+              } else {
+                logger.error("Internal Server Error: " + JSON.stringify(err));
+                callback(httpStatuses.Generic.InternalServerError, null);
+              }
+            });
+          } else {
+            logger.debug("Lobby game" + lobbyName + " can be stopped only by master.");
+            callback(httpStatuses.Auth.Unauthorized, null);
+          }
+        } else {
+          logger.debug("Lobby " + lobbyName + " has not been started yet.");
+          callback(httpStatuses.Lobby.AlreadyStopped, null);
         }
       } else {
         logger.debug("Lobby " + lobbyName + " not exist");
@@ -235,5 +269,6 @@ module.exports = {
   getListOfLobbies: getListOfLobbies,
   joinToLobby: joinToLobby,
   startLobby: startLobby,
+  stopLobby: stopLobby,
   changePlayerStatus: changePlayerStatus
 };
