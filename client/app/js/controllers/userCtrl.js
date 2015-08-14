@@ -17,6 +17,9 @@ angular.module('sharpWarsWebServiceApp')
       loginService.logIn(login, password, function(err, result) {
         if(!err && result) {
           $window.sessionStorage.token = result.token;
+          $window.sessionStorage.sessionUsername = login;
+          $scope.$parent.user.name = login;
+          $scope.user = null;
           $scope.errors = null;
         } else {
           $scope.errors = errorInterpreter.interpreter(err);
@@ -60,4 +63,35 @@ angular.module('sharpWarsWebServiceApp')
         }
       });
     };
+
+    $scope.getUserInfo = function(username) {
+      loginService.getUserInfo(username, function(err, userData) {
+        if(!err) {
+          $scope.user = userData;
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      });
+    };
+
+    $scope.editMode = false;
+    $scope.editUserData = function() {
+      $scope.editMode = !$scope.editMode;
+    };
+
+    $scope.isShownPasswordForm = false;
+    $scope.showPasswordForm = function() {
+      $scope.isShownPasswordForm = !$scope.isShownPasswordForm;
+    };
+
+    $scope.saveEditedUserData = function() {
+      loginService.updateUserData($scope.user.username, $scope.user, function(err, result){
+        if(!err && result) {
+          $scope.editMode = false;
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      });
+    };
+
   });

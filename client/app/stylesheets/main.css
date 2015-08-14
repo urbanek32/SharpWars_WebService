@@ -30,9 +30,20 @@
 }
 
 .loginbar {
-  position:relative;
-  padding-bottom:20px;
-  border-bottom: 1px solid #E5E5E5;
+  margin-top: 30px;
+  margin-right: 0px;
+  float: right;
+}
+
+.loginbar a {
+  color: #ffffff;
+  font-family: Calibri;
+}
+
+.login-data {
+  margin-right: 10px;
+  margin-top: 4px;
+  text-align: center;
 }
 
 .content {

@@ -1,41 +1,32 @@
-<div class=loginbar ng-controller="userCtrl">
-  <div class="container">
+<div class="col-lg-offset-4 loginbar" ng-controller="userCtrl">
+  <div class="col-lg-12 login-form" ng-show="!userLoggedIn">
+    <form novalidate class="form-inline">
+      <div class="form-group">
+        <label for="login">{{ 'YOUR_LOGIN' | translate }}</label>
+        <input id="login" class="form-control" placeholder="{{ 'YOUR_LOGIN' | translate }}" type="text" ng-model="user.login">
+      </div>
+      <div class="form-group">
+        <label for="password">{{ 'YOUR_PASSWORD' | translate }}</label>
+        <input id="password" class="form-control" placeholder="{{ 'YOUR_PASSWORD' | translate }}" type="password" ng-model="user.password">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" ng-click="logMeIn(user.login, user.password)">{{ 'LOG_ME_BUTTON' | translate }}</button>
+        <button class="btn btn-primary" ng-click="passwordRestoreRedirection()">{{ 'RESTORE_MY_PASSWORD_BUTTON' | translate }}</button>
+      </div>
+    </form>
     <div class="row">
-      <div class="col-md-9">
-        <div ng-switch on="userLogedIn">
-          <div ng-switch-when="1">
-            <p> Logowanie powiodlo sie.. Tutaj bedzie mozna wyswietlac cos. Albo nic. No i do logowania jeszcze obluga bledow itp ale to jak bedzie API </p>
-          </div>
-          <div ng-if="userLoggedIn === false">
-            <form novalidate>
-              {{ 'LOG_TEXT' | translate }}
-              <input placeholder="{{ 'YOUR_LOGIN' | translate }}" type="text" ng-model="user.login">
-              <input placeholder="{{ 'YOUR_PASSWORD' | translate }}" type="password" ng-model="user.password">
-              <button ng-click="logMeIn(user.login, user.password)">{{ 'LOG_ME_BUTTON' | translate }}</button>
-              <button ng-click="passwordRestoreRedirection()">{{ 'RESTORE_MY_PASSWORD_BUTTON' | translate }}</button>
-            </form>
-            <div class="alert alert-danger" ng-if="errors">
-              <li ng-repeat="error in errors">
-                <span class="glyphicon glyphicon-exclamation-sign"></span>
-                {{error}}
-              </li>
-            </div>
-          </div>
-          <div ng-if="userLoggedIn === true">
-            Witaj getUserName (???). Miło Cię znowu widzieć. Jak pobrać nick usera?
-          </div>
-        </div>
-      </div>
-      <div ng-if="userLoggedIn === true" class="col-md-3">
-        <form novalidate>
-          <button ng-click="logOut()">{{ 'LOGOFF' | translate }}</button>
-        </form>
-      </div>
-      <div ng-if="userLoggedIn === false" class="col-md-3">
-        <form novalidate>
-          <button ng-click="registerRedirection()">{{ 'CREATE_ACCOUNT_FOR_ME_BUTTON' | translate }}</button>
-        </form>
+      <div ng-show="errors" class="alert alert-danger col-lg-offset-3 col-lg-5">
+        <li ng-repeat="error in errors">
+          <span class="glyphicon glyphicon-exclamation-sign"></span>
+          {{error}}
+        </li>
       </div>
     </div>
   </div>
+
+  <div class="col-lg-12 login-form form-inline" ng-show="userLoggedIn">
+    <h5>{{ 'WELCOME' | translate }}  {{$parent.user.name}}!</h5>
+    <button class="btn btn-primary" ng-click="logOut()">{{ 'LOGOFF' | translate }}</button>
+  </div>
+
 </div>
