@@ -50,4 +50,20 @@ angular.module('sharpWarsWebServiceApp')
           callback(err, null);
         });
     };
+
+    this.saveUserPassword = function(userData, callback) {
+      var body = {
+        oldPassword: userData.oldPassword,
+        newPassword: userData.newPassword,
+        email: userData.email
+      };
+      $http.post('/auth/api/users/change_password', body)
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
+
   });
