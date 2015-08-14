@@ -5,7 +5,7 @@
         <h1> {{ 'USER_PROFILE' | translate }}</h1>
       </div>
       <div class="content">
-        <form class="form col-lg-5" ng-submit="saveEditedUserData()">
+        <form name="userInfoForm" class="form col-lg-5" ng-submit="saveEditedUserData()">
           <div class="form-group">
             <label for="name">{{ 'NAME' | translate }}:</label>
             <input class="form-control" id="name" ng-model="user.name" ng-disabled="true">
@@ -33,8 +33,7 @@
           <button type="submit" class="btn btn-default btn-success" ng-if="editMode">{{ 'SAVE_BUTTON' | translate }}</button>
           <button type="button" ng-click="editUserData()" class="btn btn-default btn-warning">{{ !editMode ? ('EDIT_BUTTON' | translate) : ('CANCEL_BUTTON' | translate)}}</button>
           <div class="row">
-            {{errors}}
-            <div ng-show="errors" class="alert alert-danger col-lg-offset-3 col-lg-5">
+            <div ng-show="errors && userInfoForm.$submitted" class="alert alert-danger col-lg-offset-3 col-lg-5">
               <li ng-repeat="error in errors">
                 <span class="glyphicon glyphicon-exclamation-sign"></span>
                 {{error}}
@@ -47,10 +46,10 @@
             <label for="password">{{ 'REGISTRATION_PASSWORD' | translate }}:</label>
             <a ng-click="showPasswordForm()" id="password">{{ 'CHANGE_PASSWORD' | translate }}</a>
           </div>
-          <form class="form col-lg-12" ng-show="isShownPasswordForm" ng-submit="changePassword()">
+          <form name="passwordChangeForm" class="form col-lg-12" ng-show="isShownPasswordForm" ng-submit="changePassword()">
             <div class="form-group">
               <label for="oldPassword">{{ 'OLD_PASSWORD' | translate }}:</label>
-              <input class="form-control" id="oldPassword" ng-model="user.oldPassword">
+              <input class="form-control" type="password" id="oldPassword" ng-model="user.oldPassword">
             </div>
             <div class="form-group">
               <label for="newPassword">{{ 'REGISTRATION_PASSWORD' | translate }}:</label>
@@ -64,8 +63,7 @@
             <button type="submit" class="btn btn-default btn-success">{{ 'CHANGE_PASSWORD' | translate }}</button>
             <button type="reset" class="btn btn-default btn-warning">{{ 'RESET_BUTTON' | translate }}</button>
             <div class="row">
-              {{errors}}
-              <div ng-show="errors" class="alert alert-danger col-lg-offset-3 col-lg-5">
+              <div ng-show="errors && passwordChangeForm.$submitted" class="alert alert-danger col-lg-offset-3 col-lg-5">
                 <li ng-repeat="error in errors">
                   <span class="glyphicon glyphicon-exclamation-sign"></span>
                   {{error}}
@@ -73,6 +71,10 @@
               </div>
             </div>
           </form>
+          <div ng-show="!errors && passwordChangeForm.$submitted" class="alert alert-success col-lg-offset-3 col-lg-5">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            {{ serverResponse }}
+          </div>
         </div>
       </div>
     </div>
