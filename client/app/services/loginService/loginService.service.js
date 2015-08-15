@@ -66,4 +66,14 @@ angular.module('sharpWarsWebServiceApp')
         });
     };
 
+    this.forgotPassword = function(user, callback) {
+      $http.post('/api/users/forgot_password', user)
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
+
   });

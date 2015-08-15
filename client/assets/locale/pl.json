@@ -49,5 +49,6 @@
   "EDIT_BUTTON": "Edytuj",
   "CANCEL_BUTTON": "Anuluj",
   "SAVE_BUTTON": "Zapisz",
-  "CHANGE_PASSWORD": "Zmień hasło"
+  "CHANGE_PASSWORD": "Zmień hasło",
+  "RESTORE_MY_PASSWORD" : "Przypomnij hasło"
 }
