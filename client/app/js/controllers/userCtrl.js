@@ -95,9 +95,21 @@ angular.module('sharpWarsWebServiceApp')
     };
 
     $scope.changePassword = function() {
-      loginService.saveUserPassword($scope.user, function(err, result){
+      loginService.saveUserPassword($scope.user, function(err, result) {
         if(!err && result) {
           $scope.isShownPasswordForm = false;
+          $scope.serverResponse = result[0].message;
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      });
+    };
+
+    $scope.resetPasswordByEmail = function() {
+      $scope.errors = null;
+      $scope.serverResponse = null;
+      loginService.forgotPassword($scope.passwordReset, function(err, result) {
+        if(!err && result) {
           $scope.serverResponse = result[0].message;
         } else {
           $scope.errors = errorInterpreter.interpreter(err);
