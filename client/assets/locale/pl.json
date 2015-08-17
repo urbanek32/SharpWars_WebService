@@ -50,5 +50,6 @@
   "CANCEL_BUTTON": "Anuluj",
   "SAVE_BUTTON": "Zapisz",
   "CHANGE_PASSWORD": "Zmień hasło",
-  "RESTORE_MY_PASSWORD" : "Przypomnij hasło"
+  "RESTORE_MY_PASSWORD" : "Przypomnij hasło",
+  "PASSWORD_RESET_TITLE": "Ustawianie nowego hasła"
 }
