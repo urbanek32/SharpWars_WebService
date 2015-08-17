@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sharpWarsWebServiceApp')
-  .controller('userCtrl', function ($scope, $location, $window, errorInterpreter, loginService, $interval) {
+  .controller('userCtrl', function ($scope, $routeParams, $location, $window, errorInterpreter, loginService, $interval) {
 
     $scope.$watch(function() {
       return $window.sessionStorage.token;
@@ -117,4 +117,16 @@ angular.module('sharpWarsWebServiceApp')
       });
     };
 
+    $scope.resetPasswordForUser = function() {
+      $scope.errors = null;
+      $scope.serverResponse = null;
+      loginService.resetPasswordRequest($scope.passwordReset, $routeParams.mail, $routeParams.hash, function(err, result) {
+        if(!err && result) {
+          $scope.serverResponse = result[0].message;
+          $scope.activationTimer = $interval(callAtIntervalAfterActivation, 5000);
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      });
+    };
   });

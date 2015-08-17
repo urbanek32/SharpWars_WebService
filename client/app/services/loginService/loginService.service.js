@@ -76,4 +76,14 @@ angular.module('sharpWarsWebServiceApp')
         });
     };
 
+    this.resetPasswordRequest = function(passwordRestorer, mail, hash, callback) {
+      $http.post('/api/users/reset_password/' + mail + '/' + hash, passwordRestorer)
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
+
   });
