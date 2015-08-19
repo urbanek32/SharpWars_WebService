@@ -26,7 +26,6 @@
   "LOBBY_CREATE_BUTTON": "Utwórz grę!",
   "LOBBY_CREATE_PASS_QUESTION": "Gra chroniona hasłem",
   "LOBBY_CREATE_PASS": "Hasło",
-  "LOBBY_CREATE_PLAYERS_VALUE_ERROR": "Wartość musi być większa od 0!",
   "INPUT_IS_REQ": "To pole jest wymagane!",
   "RESET_BUTTON": "Czyść formularz",
   "REGISTRATION_TITLE": "Formularz rejestracji",
