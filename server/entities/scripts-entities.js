@@ -10,7 +10,7 @@ module.exports.addNewScript = function(newScript, callback) {
   });
 };
 
-module.exports.findLobbyByNameAndOwner = function(name, owner, callback) {
+module.exports.findScriptByNameAndOwner = function(name, owner, callback) {
   db.scripts.findOne({name: name, owner: owner}, function(err, result) {
     callback(err, result);
   });
@@ -20,4 +20,10 @@ module.exports.getAllScripts = function(callback) {
   db.scripts.find().toArray(function(err, result) {
     callback(err, result);
   });
+};
+
+module.exports.updateByNameAndOwner = function(name, owner, updatedScript, callback) {
+  db.scripts.update({name: name, owner: owner}, {$set: updatedScript}, {strict: true}, function(err, result) {
+    callback(err, result);
+  })
 };

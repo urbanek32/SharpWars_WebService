@@ -49,8 +49,10 @@ var lobby = {
 var scripts = {
   //success
   Created: [{status: 201, message: "Script has been created."}],
+  Updated: [{status: 204, message: "Script has been updated."}],
   //errors
   AlreadyExists: [{status: 400, message: "Script already exists."}],
+  NotExists: [{status: 404, message: "Script not exists."}]
 };
 
 module.exports.httpStatuses = {

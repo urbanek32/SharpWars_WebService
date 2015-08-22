@@ -30,3 +30,18 @@ exports.getListOfScripts = function(req, res) {
     }
   });
 };
+
+exports.updateScript = function(req, res) {
+  var errors = schemaValidator.validate(req.body, scriptsSchemas.updateScript).errors;
+  if(errors.length === 0) {
+    scriptsManager.updateScript(req.params.scriptName, req.user.username, req.body, function (err, result) {
+      if (!err && result) {
+        res.send(result);
+      } else {
+        res.status(err[0].status).send(err);
+      }
+    });
+  } else {
+    res.status(400).send(errors);
+  }
+};
