@@ -46,11 +46,19 @@ var lobby = {
   AlreadyStopped: [{status: 400, message: "Lobby game has been already stopped."}]
 };
 
+var scripts = {
+  //success
+  Created: [{status: 201, message: "Script has been created."}],
+  //errors
+  AlreadyExists: [{status: 400, message: "Script already exists."}],
+};
+
 module.exports.httpStatuses = {
   Generic: generic,
   Users: users,
   Auth: auth,
-  Lobby: lobby
+  Lobby: lobby,
+  Scripts: scripts
 };
 
 module.exports[404] = function pageNotFound(req, res) {
