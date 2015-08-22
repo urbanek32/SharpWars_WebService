@@ -101,10 +101,35 @@ var getScript = function(scriptName, username, callback) {
   })
 };
 
+var deleteScript = function(scriptName, username, callback) {
+  scriptsEntities.findScriptByNameAndOwner(scriptName, username, function(err, script) {
+    if(!err) {
+      if(script) {
+        scriptsEntities.deleteByNameAndOwner(scriptName, username, function(err, result) {
+          if(!err && result) {
+            logger.info("Script " + scriptName + " has been deleted.");
+            callback(null, httpStatuses.Scripts.Deleted);
+          } else {
+            logger.error("Internal Server Error: " + JSON.stringify(err));
+            callback(httpStatuses.Generic.InternalServerError, null)
+          }
+        });
+      } else {
+        logger.debug("Cannot update script: script " + scriptName + " not exists.");
+        callback(httpStatuses.Scripts.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null)
+    }
+  })
+};
+
 
 module.exports = {
   addNewScript: addNewScript,
   getListOfScripts: getListOfScripts,
   updateScript: updateScript,
-  getScript: getScript
+  getScript: getScript,
+  deleteScript: deleteScript
 };

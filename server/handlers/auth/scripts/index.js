@@ -9,5 +9,6 @@ router.post('/add', controller.addNewScript);
 router.get('/list', controller.getListOfScripts);
 router.put('/update/:scriptName', controller.updateScript);
 router.get('/:scriptName', controller.getScript);
+router.delete('/:scriptName', controller.deleteScript);
 
 module.exports = router;

@@ -27,3 +27,9 @@ module.exports.updateByNameAndOwner = function(name, owner, updatedScript, callb
     callback(err, result);
   })
 };
+
+module.exports.deleteByNameAndOwner = function(name, owner, callback) {
+  db.scripts.remove({name: name, owner: owner}, function(err, result) {
+    callback(err, result);
+  })
+};
