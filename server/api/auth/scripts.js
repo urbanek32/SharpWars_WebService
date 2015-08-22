@@ -35,7 +35,26 @@ var addNewScript = function(username, options, callback) {
   })
 };
 
+var removeScriptSecretData = function(scripts) {
+  for(var script in scripts) {
+    delete scripts[script].owner;
+  }
+  return scripts;
+};
+
+var getListOfScripts = function(callback) {
+  scriptsEntities.getAllScripts(function(err, scripts) {
+    if(!err && scripts) {
+      logger.info("Scripts array sent.");
+      callback(null, removeScriptSecretData(scripts));
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null);
+    }
+  })
+};
 
 module.exports = {
-  addNewScript: addNewScript
+  addNewScript: addNewScript,
+  getListOfScripts: getListOfScripts
 };

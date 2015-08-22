@@ -15,3 +15,9 @@ module.exports.findLobbyByNameAndOwner = function(name, owner, callback) {
     callback(err, result);
   });
 };
+
+module.exports.getAllScripts = function(callback) {
+  db.scripts.find().toArray(function(err, result) {
+    callback(err, result);
+  });
+};

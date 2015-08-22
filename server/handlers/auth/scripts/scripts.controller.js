@@ -20,3 +20,13 @@ exports.addNewScript = function(req, res) {
     res.status(400).send(errors);
   }
 };
+
+exports.getListOfScripts = function(req, res) {
+  scriptsManager.getListOfScripts(function(err, result) {
+    if(!err && result) {
+      res.send(result);
+    } else {
+      res.status(err[0].status).send(err);
+    }
+  });
+};

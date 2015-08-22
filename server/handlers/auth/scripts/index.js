@@ -6,5 +6,6 @@ var controller = require('./scripts.controller.js');
 var router = express.Router();
 
 router.post('/add', controller.addNewScript);
+router.get('/list', controller.getListOfScripts);
 
 module.exports = router;
