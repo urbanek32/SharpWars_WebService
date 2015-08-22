@@ -83,9 +83,28 @@ var updateScript = function(oldScriptName, username, options, callback) {
   });
 };
 
+var getScript = function(scriptName, username, callback) {
+  scriptsEntities.findScriptByNameAndOwner(scriptName, username, function(err, script) {
+    if(!err) {
+      if(script) {
+        delete script.owner;
+        logger.info("Script " + scriptName + " informations sent.");
+        callback(null, script);
+      } else {
+        logger.debug("Cannot update script: script " + scriptName + " not exists.");
+        callback(httpStatuses.Scripts.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null)
+    }
+  })
+};
+
 
 module.exports = {
   addNewScript: addNewScript,
   getListOfScripts: getListOfScripts,
-  updateScript: updateScript
+  updateScript: updateScript,
+  getScript: getScript
 };

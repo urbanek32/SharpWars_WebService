@@ -45,3 +45,13 @@ exports.updateScript = function(req, res) {
     res.status(400).send(errors);
   }
 };
+
+exports.getScript = function(req, res) {
+  scriptsManager.getScript(req.params.scriptName, req.user.username, function(err, result) {
+    if(!err && result) {
+      res.send(result);
+    } else {
+      res.status(err[0].status).send(err);
+    }
+  });
+};
