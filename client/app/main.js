@@ -38,6 +38,10 @@ angular.module('sharpWarsWebServiceApp')
         templateUrl: 'app/views/createLobby.html',
         controller: 'lobbyCtrl',
         authentication: true
+      }).when('/lobbyList', {
+        templateUrl: 'app/views/lobbyList.html',
+        controller: 'lobbyCtrl',
+        authentication: true
       });
   })
   .run(function($rootScope, $window, $location) {
