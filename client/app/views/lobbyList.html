@@ -1,0 +1,68 @@
+<div class="container" ng-init="getUserInfo($parent.user.name)">
+  <div class="row" ng-init="getLobbyList()">
+    <div class="col-lg-12">
+      <h1 class="page-header">{{ "LOBBY_LIST_TITLE" | translate }}</h1>
+        <div ng-show="lobbyRequired" class="col-lg-10">
+          <form name="lobbyJoinForm" class="form col-lg-5">
+            <div class="form-group">
+              <label for="password">{{ "PASSWORD_FOR_LOBBY" | translate }}: {{lobbyRequired}}</label>
+              <input class="form-control" type="password" id="password" ng-model="lobby.password">
+            </div>
+            <button ng-disabled="!lobby.password" ng-click="lobbyJoin(lobbyRequired, lobby.password)" type="submit" class="btn btn-default btn-success">{{ 'LOBBY_JOIN' | translate }}</button>
+          </form>
+        </div>
+        <div class="row">
+          <div ng-show="errors" class="alert alert-danger">
+            <li ng-repeat="error in errors">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              {{error}}
+            </li>
+          </div>
+          <div ng-show="serverResponse" class="alert alert-success">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            {{ serverResponse }}
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>{{ "LOBBY_TITLE" | translate }}</th>
+            <th>{{ "LOBBY_CREATE_COUNT" | translate }}</th>
+            <th>{{ "LOBBY_CREATE_PASS_QUESTION" | translate }}</th>
+            <th>{{ "LOBBY_OWNER" | translate }}</th>
+            <th>{{ "LOBBY_STATUS" | translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-show="lobby.state === 'waiting' && lobby.players.length!==lobby.countOfMembers"
+              class="success" ng-repeat="lobby in lobbyLists">
+            <td>{{lobby.name}}</td>
+            <td>{{lobby.players.length}}/{{lobby.countOfMembers}}</td>
+            <td ng-if="lobby.encrypted ===true ">TAK</td>
+            <td ng-if="lobby.encrypted !==true ">NIE</td>
+            <td>{{lobby.master}}</td>
+            <td><button type="submit" ng-click="lobbyRequest(lobby.name, lobby.encrypted)" class="btn btn-default btn-success">{{ 'LOBBY_JOIN' | translate }}</button></td>
+          </tr>
+          <tr ng-show="lobby.state === 'play' || lobby.state==='ready'" class="warning" ng-repeat="lobby in lobbyLists">
+            <td>{{lobby.name}}</td>
+            <td>{{lobby.players.length}}/{{lobby.countOfMembers}}</td>
+            <td ng-if="lobby.encrypted === true">TAK</td>
+            <td ng-if="lobby.encrypted !== true">NIE</td>
+            <td>{{lobby.master}}</td>
+            <td>{{ "LOBBY_STATUS_IN_GAME" | translate }}</td>
+          </tr>
+          <tr ng-show="lobby.state==='waiting' && lobby.players.length===lobby.countOfMembers"
+              class="danger" ng-repeat="lobby in lobbyLists">
+            <td>{{lobby.name}}</td>
+            <td>{{lobby.players.length}}/{{lobby.countOfMembers}}</td>
+            <td ng-if="lobby.encrypted === true">TAK</td>
+            <td ng-if="lobby.encrypted !== true">NIE</td>
+            <td>{{lobby.master}}</td>
+            <td>{{ "LOBBY_STATUS_FULL" | translate }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

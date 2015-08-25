@@ -3,6 +3,7 @@
   "SUBPAGE_HOME": "Główna",
   "SUBPAGE_DOWNLOAD": "Pobierz grę",
   "SUBPAGE_LOBBY": "Utwórz grę",
+  "SUBPAGE_ACTIVE_GAMES": "Aktywne gry",
   "FOOTER_TITLE" : "SharpWars the Game.",
   "AUTHORS": "Autorzy:",
   "REDIRECTION_AFTER_MOMENT" : "Za chwilę nastąpi przekierowanie...",
@@ -50,5 +51,13 @@
   "SAVE_BUTTON": "Zapisz",
   "CHANGE_PASSWORD": "Zmień hasło",
   "RESTORE_MY_PASSWORD" : "Przypomnij hasło",
-  "PASSWORD_RESET_TITLE": "Ustawianie nowego hasła"
+  "PASSWORD_RESET_TITLE": "Ustawianie nowego hasła",
+  "LOBBY_LIST_TITLE": "Lista dostępnych gier:",
+  "LOBBY_TITLE": "Nazwa gry",
+  "LOBBY_OWNER": "Właściciel gry",
+  "LOBBY_STATUS": "Stan gry",
+  "LOBBY_STATUS_IN_GAME": "Gra trwa",
+  "LOBBY_STATUS_FULL": "Gra jest pełna",
+  "LOBBY_JOIN": "Dołącz",
+  "PASSWORD_FOR_LOBBY": "Hasło do gry"
 }
