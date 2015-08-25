@@ -1,0 +1,56 @@
+<div class="container" ng-init="getUserInfo($parent.user.name)">
+  <div class="row" ng-init="getLobbyList()">
+    <div class="col-lg-12">
+      <h1 class="page-header">{{ "LOBBY_LIST_TITLE" | translate }}</h1>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>{{ "LOBBY_TITLE" | translate }}</th>
+              <th>{{ "LOBBY_CREATE_COUNT" | translate }}</th>
+              <th><span class="glyphicon glyphicon-lock"></span></th>
+              <th>{{ "LOBBY_OWNER" | translate }}</th>
+              <th>{{ "LOBBY_STATUS" | translate }}</th>
+              <th>{{ "LOBBY_ACTIONS" | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-class="lobby.state !== 'play' ? 'success' : 'warning';
+                          lobby.countOfMembers === lobby.players.length ? 'info' : ''"
+                ng-repeat="lobby in lobbyLists">
+              <td>{{lobby.name}}</td>
+              <td>{{lobby.players.length}}/{{lobby.countOfMembers}}</td>
+              <td><span ng-class="lobby.encrypted ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-minus'"></span></td>
+              <td>{{lobby.master}}</td>
+              <td>{{lobby.state.toUpperCase()}}</td>
+              <td>
+                <span ng-click="joinToLobby($index, lobby)" ng-hide="lobby.master === user.name" title="{{ 'LOBBY_JOIN' | translate }}"
+                      class="glyphicon glyphicon-plus btn btn-success btn-sm"></span>
+                <span ng-click="deleteLobby(lobby)" ng-show="lobby.master === user.name" title="{{ 'DELETE' | translate }}"
+                      class="glyphicon glyphicon-trash btn btn-warning btn-sm"></span>
+              </td>
+              <td>
+                <form ng-show="showPasswordPopUp[$index]" ng-submit="joinToLobby($index, lobby, password)">
+                  <label for="password">{{ "PASSWORD" | translate }}</label>
+                  <input id="password" type="password" ng-model="password">
+                  <button type="submit" class="btn btn-success btn-sm">{{ 'LOBBY_JOIN' | translate }}</button>
+                  <button type="button" class="btn btn-warning btn-sm" ng-click="showPasswordPopUp[$index] = false">
+                    {{ 'CANCEL_BUTTON' | translate }}</button>
+                </form>
+              </td>
+            </tr>
+            <div ng-show="serverResponse" class="alert alert-success">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              {{ serverResponse }}
+            </div>
+            <div ng-show="errors" class="alert alert-danger">
+              <li ng-repeat="error in errors">
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+                {{error}}
+              </li>
+            </div>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

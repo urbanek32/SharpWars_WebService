@@ -14,6 +14,9 @@
         <li ng-class="{active: isActive('/createLobby')}" ng-if="userLoggedIn">
           <a ng-href="/createLobby">{{ 'SUBPAGE_LOBBY' | translate }}</a>
         </li>
+        <li ng-class="{active: isActive('/lobbyList')}" ng-if="userLoggedIn">
+          <a ng-href="/lobbyList">{{ 'SUBPAGE_ACTIVE_GAMES' | translate }}</a>
+        </li>
         <li ng-class="{active: isActive('/register')}" ng-if="!userLoggedIn">
           <a ng-href="/register">{{ 'CREATE_ACCOUNT_FOR_ME_BUTTON' | translate }}</a>
         </li>
