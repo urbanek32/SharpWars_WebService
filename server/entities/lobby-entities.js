@@ -39,3 +39,9 @@ module.exports.changeLobbyStatus = function(lobbyName, status, players, callback
     callback(err, result);
   })
 };
+
+module.exports.getActiveLobby = function(username, callback) {
+  db.lobbies.find({ players: { $elemMatch: { username: username } } }).toArray(function(err, result) {
+    callback(err, result);
+  })
+};

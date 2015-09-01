@@ -12,5 +12,6 @@ router.put('/leave/:lobby', controller.leaveLobby);
 router.put('/start/:lobby', controller.startLobby);
 router.put('/stop/:lobby', controller.stopLobby);
 router.put('/:lobby/status', controller.changePlayerStatus);
+router.get('/active', controller.getActiveLobbyForUser);
 
 module.exports = router;

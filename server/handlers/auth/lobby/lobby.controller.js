@@ -32,6 +32,17 @@ exports.getListOfLobbies = function(req, res) {
   });
 };
 
+exports.getActiveLobbyForUser = function(req, res) {
+  lobbyManager.getActiveLobbyForUser(req.user.username, function(err, result) {
+    if(!err && result) {
+      console.log("aaaaaa");
+      res.send(result);
+    } else {
+      res.status(err[0].status).send(err);
+    }
+  });
+};
+
 exports.joinToLobby = function(req, res) {
   var errors = schemaValidator.validate(req.body, lobbySchemas.joinToLobby).errors;
   if(errors.length === 0) {

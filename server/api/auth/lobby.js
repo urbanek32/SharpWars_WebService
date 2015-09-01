@@ -70,6 +70,18 @@ var getListOfLobbies = function(callback) {
   })
 };
 
+var getActiveLobbyForUser = function(username, callback) {
+  lobbyEntities.getActiveLobby(username, function(err, lobbies) {
+    if(!err && lobbies) {
+      logger.info("Lobbies array sent.");
+      callback(null, removeLobbySecretData(lobbies));
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null);
+    }
+  })
+};
+
 var isUserAlreadyExistsInLobby = function(username, lobbyPlayers) {
   for(var user in lobbyPlayers) {
     if(lobbyPlayers[user].username === username) {
@@ -316,5 +328,6 @@ module.exports = {
   leaveLobby: leaveLobby,
   startLobby: startLobby,
   stopLobby: stopLobby,
-  changePlayerStatus: changePlayerStatus
+  changePlayerStatus: changePlayerStatus,
+  getActiveLobbyForUser: getActiveLobbyForUser
 };
