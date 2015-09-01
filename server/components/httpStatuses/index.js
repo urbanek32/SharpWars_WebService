@@ -36,7 +36,9 @@ var lobby = {
   Stopped: [{status: 204, message: "Lobby has been stopped the game."}],
   PlayerRemoved: [{status: 204, message: "Player has been removed from the game."}],
   PlayerUpdated: [{status: 204, message: "Player status has been updated."}],
+  Deleted: [{status: 204, message: "Lobby has been successfully deleted."}],
   //errors
+  Unauthorized: [{status: 401, message: "Lobby can be deleted only by owner."}],
   AlreadyExists: [{status: 400, message: "Lobby already exists."}],
   AlreadyCreated: [{status: 400, message: "User has already created lobby."}],
   NotExists: [{status: 404, message: "Lobby not exists."}],

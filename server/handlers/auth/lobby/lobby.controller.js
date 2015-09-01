@@ -96,3 +96,13 @@ exports.stopLobby = function(req, res) {
     }
   });
 };
+
+exports.deleteLobby = function(req, res) {
+  lobbyManager.deleteLobby(req.params.lobby, req.user.username, function(err, result) {
+    if(!err && result) {
+      res.send(result);
+    } else {
+      res.status(err[0].status).send(err);
+    }
+  });
+};

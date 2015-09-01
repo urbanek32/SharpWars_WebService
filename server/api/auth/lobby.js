@@ -345,6 +345,35 @@ var changePlayerStatus = function(username, lobbyName, callback) {
   });
 };
 
+var deleteLobby = function(lobbyName, username, callback) {
+  lobbyEntities.findLobbyByName(lobbyName, function(err, lobby) {
+    if(!err) {
+      if(lobby) {
+        if(lobby.master === username) {
+          lobbyEntities.deleteByName(lobbyName, function(err, result) {
+            if(!err && result) {
+              logger.info("Lobby " + lobbyName + " has been deleted.");
+              callback(null, httpStatuses.Lobby.Deleted);
+            } else {
+              logger.error("Internal Server Error: " + JSON.stringify(err));
+              callback(httpStatuses.Generic.InternalServerError, null)
+            }
+          });
+        } else {
+          logger.debug("Lobby " + lobbyName + " can be removed only by master.");
+          callback(httpStatuses.Lobby.Unauthorized, null);
+        }
+      } else {
+        logger.debug("Cannot delete lobby: lobby " + lobbyName + " not exists.");
+        callback(httpStatuses.Lobby.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null)
+    }
+  })
+};
+
 module.exports = {
   addNewLobby: addNewLobby,
   getListOfLobbies: getListOfLobbies,
@@ -353,5 +382,6 @@ module.exports = {
   startLobby: startLobby,
   stopLobby: stopLobby,
   changePlayerStatus: changePlayerStatus,
-  getActiveLobbyForUser: getActiveLobbyForUser
+  getActiveLobbyForUser: getActiveLobbyForUser,
+  deleteLobby: deleteLobby
 };

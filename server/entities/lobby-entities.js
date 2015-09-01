@@ -45,3 +45,9 @@ module.exports.getActiveLobby = function(username, callback) {
     callback(err, result);
   })
 };
+
+module.exports.deleteByName = function(name, callback) {
+  db.lobbies.remove({name: name}, function(err, result) {
+    callback(err, result);
+  })
+};
