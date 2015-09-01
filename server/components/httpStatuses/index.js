@@ -38,6 +38,7 @@ var lobby = {
   PlayerUpdated: [{status: 204, message: "Player status has been updated."}],
   //errors
   AlreadyExists: [{status: 400, message: "Lobby already exists."}],
+  AlreadyCreated: [{status: 400, message: "User has already created lobby."}],
   NotExists: [{status: 404, message: "Lobby not exists."}],
   Full: [{status: 400, message: "No available slots."}],
   NotFull: [{status: 400, message: "More players required."}],

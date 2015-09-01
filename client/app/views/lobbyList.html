@@ -1,5 +1,16 @@
 <div class="container" ng-init="getUserInfo($parent.user.name)">
   <div class="row" ng-init="getLobbyList()">
+    <div class="col-lg-5">
+      <div class="panel panel-default" ng-show="activeLobby">
+        <div class="panel-heading"><h1>{{ "LOBBY_ACTIVE" | translate }}</h1></div>
+        <div class="panel-body">
+          <p>{{ "LOBBY_TITLE" | translate }}: {{ activeLobby.name }}</p>
+          <p>{{ "LOBBY_OWNER" | translate }}: {{ activeLobby.master }}</p>
+          <p>{{ "LOBBY_STATUS" | translate }}: {{ activeLobby.state }}</p>
+          <button ng-disabled="user.name === activeLobby.master" type="button" class="btn btn-info" ng-click="leaveLobby(activeLobby.name)">{{ "LOBBY_LEAVE" | translate }}</button>
+        </div>
+      </div>
+    </div>
     <div class="col-lg-12">
       <h1 class="page-header">{{ "LOBBY_LIST_TITLE" | translate }}</h1>
         <table class="table">

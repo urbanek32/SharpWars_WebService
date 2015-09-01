@@ -36,5 +36,25 @@ angular.module('sharpWarsWebServiceApp')
         });
     };
 
+    this.getActiveLobbyForUser = function (username, callback) {
+      $http.get('/auth/api/users/' + username + '/lobby/active')
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
+
+    this.leaveLobby = function (username, lobbyName, callback) {
+      $http.put('/auth/api/users/' + username + '/lobby/leave/' + lobbyName)
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
+
   });
 

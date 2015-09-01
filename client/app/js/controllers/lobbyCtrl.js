@@ -43,6 +43,7 @@ angular.module('sharpWarsWebServiceApp')
           if(!err && result) {
             $scope.showPasswordPopUp[index] = false;
             $scope.serverResponse = result[0].message;
+            $scope.getActiveLobby();
             $scope.getLobbyList();
           } else {
             $scope.errors = errorInterpreter.interpreter(err);
@@ -51,9 +52,33 @@ angular.module('sharpWarsWebServiceApp')
       }
     };
 
-  $scope.deleteLobby = function(lobby) {
-    console.log(lobby);
-  };
+    $scope.getActiveLobby = function() {
+      lobbyService.getActiveLobbyForUser($scope.user.name, function(err, result) {
+        if(!err && result) {
+          $scope.activeLobby = result[0];
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      });
+    };
+
+    $scope.getActiveLobby();
+
+    $scope.leaveLobby = function(lobbyName) {
+      lobbyService.leaveLobby($scope.user.name, lobbyName, function (err, result) {
+        if (!err && result) {
+          $scope.activeLobby = null;
+          $scope.serverResponse = result[0].message;
+          $scope.getLobbyList();
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      });
+    };
+
+    $scope.deleteLobby = function(lobby) {
+      console.log(lobby);
+    };
 
 });
 

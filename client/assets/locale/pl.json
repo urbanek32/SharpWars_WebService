@@ -55,11 +55,13 @@
   "PASSWORD_RESET_TITLE": "Ustawianie nowego hasła",
   "LOBBY_LIST_TITLE": "Lista dostępnych gier:",
   "LOBBY_TITLE": "Nazwa gry",
+  "LOBBY_ACTIVE": "Aktywne lobby",
   "LOBBY_OWNER": "Właściciel",
   "LOBBY_STATUS": "Stan gry",
   "LOBBY_STATUS_IN_GAME": "Gra trwa",
   "LOBBY_STATUS_FULL": "Gra jest pełna",
   "LOBBY_JOIN": "Dołącz",
+  "LOBBY_LEAVE": "Opuść",
   "PASSWORD_FOR_LOBBY": "Hasło do gry",
   "LOBBY_ACTIONS": "Akcja",
   "DELETE": "Usuń"
