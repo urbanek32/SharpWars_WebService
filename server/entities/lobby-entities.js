@@ -28,6 +28,12 @@ module.exports.addUserToLobby = function(lobbyName, username, callback) {
   });
 };
 
+module.exports.updatePlayersInLobby = function(lobbyName, users, callback) {
+  db.lobbies.update({name: lobbyName}, { $set: {players: users}}, function(err, result) {
+    callback(err, result);
+  });
+};
+
 module.exports.changeLobbyStatus = function(lobbyName, status, players, callback) {
   db.lobbies.update({name: lobbyName}, {$set: {state: status, players: players}}, function(err, result) {
     callback(err, result);

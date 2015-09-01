@@ -47,6 +47,16 @@ exports.joinToLobby = function(req, res) {
   }
 };
 
+exports.leaveLobby = function(req, res) {
+  lobbyManager.leaveLobby(req.user.username, req.params.lobby, function (err, result) {
+    if (!err && result) {
+      res.send(result);
+    } else {
+      res.status(err[0].status).send(err);
+    }
+  });
+};
+
 exports.startLobby = function(req, res) {
   lobbyManager.startLobby(req.user.username, req.params.lobby, function (err, result) {
     if (!err && result) {

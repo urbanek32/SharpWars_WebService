@@ -34,6 +34,7 @@ var lobby = {
   UserAdded: [{status: 201, message: "User has been added to the lobby."}],
   Started: [{status: 204, message: "Lobby has been started the game."}],
   Stopped: [{status: 204, message: "Lobby has been stopped the game."}],
+  PlayerRemoved: [{status: 204, message: "Player has been removed from the game."}],
   PlayerUpdated: [{status: 204, message: "Player status has been updated."}],
   //errors
   AlreadyExists: [{status: 400, message: "Lobby already exists."}],
@@ -42,6 +43,8 @@ var lobby = {
   NotFull: [{status: 400, message: "More players required."}],
   NotReady: [{status: 400, message: "Not each player is ready."}],
   UserExists: [{status: 400, message: "User already joined in lobby."}],
+  UserNotExists: [{status: 400, message: "User not exists in lobby."}],
+  MasterLeave: [{status: 400, message: "Owner of lobby cannot leave his lobby."}],
   AlreadyStarted: [{status: 400, message: "Lobby game has been already started."}],
   AlreadyStopped: [{status: 400, message: "Lobby game has been already stopped."}]
 };

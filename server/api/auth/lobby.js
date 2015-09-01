@@ -123,6 +123,51 @@ var joinToLobby = function(username, userRemoteAddress, lobbyName, options, call
   });
 };
 
+var removePlayerFromArray = function(username, players) {
+  var cleanedPlayers = [];
+  for(var player in players) {
+    if(players[player].username !== username) {
+      cleanedPlayers.push(players[player]);
+    }
+  }
+  return cleanedPlayers;
+};
+
+var leaveLobby = function(username, lobbyName, callback) {
+  lobbyEntities.findLobbyByName(lobbyName, function(err, lobby) {
+    if(!err) {
+      if(lobby) {
+          if(isUserAlreadyExistsInLobby(username, lobby.players)) {
+            if(username !== lobby.master) {
+              var updatedUsers = removePlayerFromArray(username, lobby.players);
+              lobbyEntities.updatePlayersInLobby(lobbyName, removePlayerFromArray(username, lobby.players), function(err, result) {
+                if(!err) {
+                  logger.info("Player has been removed from lobby " + lobbyName);
+                  callback(null, httpStatuses.Lobby.PlayerRemoved);
+                } else {
+                  logger.error("Internal Server Error: " + JSON.stringify(err));
+                  callback(httpStatuses.Generic.InternalServerError, null);
+                }
+              });
+            } else {
+              logger.debug("Owner of lobby cannot leave the lobby.");
+              callback(httpStatuses.Lobby.MasterLeave, null);
+            }
+          } else {
+            logger.debug("Player " + username + " has not join to this lobby yet.");
+            callback(httpStatuses.Lobby.UserNotExists, null);
+          }
+      } else {
+        logger.debug("Lobby " + lobbyName + " not exist");
+        callback(httpStatuses.Lobby.NotExists, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null);
+    }
+  });
+};
+
 var everybodyReady = function(lobbyPlayers) {
   for(var user in lobbyPlayers) {
     if(lobbyPlayers[user].state !== lobbyStates.READY) {
@@ -268,6 +313,7 @@ module.exports = {
   addNewLobby: addNewLobby,
   getListOfLobbies: getListOfLobbies,
   joinToLobby: joinToLobby,
+  leaveLobby: leaveLobby,
   startLobby: startLobby,
   stopLobby: stopLobby,
   changePlayerStatus: changePlayerStatus
