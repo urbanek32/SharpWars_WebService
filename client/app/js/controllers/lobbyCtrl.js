@@ -76,8 +76,16 @@ angular.module('sharpWarsWebServiceApp')
       });
     };
 
-    $scope.deleteLobby = function(lobby) {
-      console.log(lobby);
+    $scope.deleteLobby = function(lobbyName) {
+      lobbyService.deleteLobby($scope.user.name, lobbyName, function (err, result) {
+        if (!err && result) {
+          $scope.activeLobby = null;
+          $scope.serverResponse = result[0].message;
+          $scope.getLobbyList();
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      });
     };
 
 });

@@ -56,5 +56,15 @@ angular.module('sharpWarsWebServiceApp')
         });
     };
 
+    this.deleteLobby = function (username, lobbyName, callback) {
+      $http.delete('/auth/api/users/' + username + '/lobby/delete/' + lobbyName)
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
+
   });
 

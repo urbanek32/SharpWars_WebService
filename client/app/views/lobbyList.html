@@ -36,7 +36,7 @@
               <td>
                 <span ng-click="joinToLobby($index, lobby)" ng-hide="lobby.master === user.name" title="{{ 'LOBBY_JOIN' | translate }}"
                       class="glyphicon glyphicon-plus btn btn-success btn-sm"></span>
-                <span ng-click="deleteLobby(lobby)" ng-show="lobby.master === user.name" title="{{ 'DELETE' | translate }}"
+                <span ng-click="deleteLobby(lobby.name)" ng-show="lobby.master === user.name" title="{{ 'DELETE' | translate }}"
                       class="glyphicon glyphicon-trash btn btn-warning btn-sm"></span>
               </td>
               <td>
