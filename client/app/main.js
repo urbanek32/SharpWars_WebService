@@ -42,6 +42,14 @@ angular.module('sharpWarsWebServiceApp')
         templateUrl: 'app/views/lobbyList.html',
         controller: 'lobbyCtrl',
         authentication: true
+      }).when('/scripts', {
+        templateUrl: 'app/views/scripts.html',
+        controller: 'scriptsCtrl',
+        authentication: true
+      }).when('/scriptsSpec', {
+        templateUrl: 'app/views/scriptsSpec.html',
+        controller: 'scriptsCtrl',
+        authentication: true
       });
   })
   .run(function($rootScope, $window, $location) {

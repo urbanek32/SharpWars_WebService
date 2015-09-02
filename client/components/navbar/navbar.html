@@ -20,6 +20,9 @@
         <li ng-class="{active: isActive('/register')}" ng-if="!userLoggedIn">
           <a ng-href="/register">{{ 'CREATE_ACCOUNT_FOR_ME_BUTTON' | translate }}</a>
         </li>
+        <li ng-class="{active: isActive('/scripts')}" ng-if="userLoggedIn">
+          <a ng-href="/scripts">{{ 'SUBPGAGE_SCRIPTS' | translate }}</a>
+        </li>
       </ul>
     </div>
   </div>
