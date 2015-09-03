@@ -9,9 +9,25 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var express = require('express');
 var config = require('./config/environment');
+var fs = require('fs');
+
 // Setup server
 var app = express();
-var server = require('http').createServer(app);
+var server = null;
+
+if(process.env.NODE_ENV === 'production') {
+  var ssl = {
+    key: fs.readFileSync('./ssl/server.key'),
+    cert: fs.readFileSync('./ssl/server.crt'),
+    ca: fs.readFileSync('./ssl/ca.crt'),
+    requestCert: true,
+    rejectUnauthorized: false
+  };
+  server = require('https').createServer(ssl, app);
+} else {
+  server = require('http').createServer(app);
+}
+
 require('./config/express')(app);
 require('./routes')(app);
 
