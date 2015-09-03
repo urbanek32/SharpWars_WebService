@@ -12,7 +12,7 @@ var addNewScript = function(username, options, callback) {
     code: options.code,
     owner: username
   };
-  scriptsEntities.findLobbyByNameAndOwner(newScript.name, username, function(err, script) {
+  scriptsEntities.findScriptByNameAndOwner(newScript.name, username, function(err, script) {
     if(!err) {
       if(!script) {
         scriptsEntities.addNewScript(newScript, function(err, result) {
