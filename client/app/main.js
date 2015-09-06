@@ -22,16 +22,16 @@ angular.module('sharpWarsWebServiceApp')
       }).when('/download', {
         templateUrl: 'app/views/download.html',
         authentication: false
-      }).when('/account_activation_success', {
-        templateUrl: 'app/views/account_activation_success.html',
+      }).when('/accountActivationSuccess', {
+        templateUrl: 'app/views/accountActivationSuccess.html',
         controller: 'userCtrl',
         authentication: false
-      }).when('/account_activation_error', {
-        templateUrl: 'app/views/account_activation_error.html',
+      }).when('/accountActivationError', {
+        templateUrl: 'app/views/accountActivationError.html',
         controller: 'userCtrl',
         authentication: false
-      }).when('/users/:mail/reset_password/:hash', {
-        templateUrl: 'app/views/reset_password.html',
+      }).when('/users/:mail/resetPassword/:hash', {
+        templateUrl: 'app/views/resetPassword.html',
         controller: 'userCtrl',
         authentication: false
       }).when('/createLobby', {

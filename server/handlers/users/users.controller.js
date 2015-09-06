@@ -25,9 +25,9 @@ exports.addUser = function(req, res) {
 exports.activateUser = function(req, res) {
   usersManager.activateUser(req.params, function(err, result) {
     if(!err && result) {
-      res.redirect('/account_activation_success');
+      res.redirect('/accountActivationSuccess');
     } else {
-      res.redirect('/account_activation_error');
+      res.redirect('/accountActivationError');
     }
   });
 };
