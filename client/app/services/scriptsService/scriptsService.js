@@ -18,7 +18,7 @@ angular.module('sharpWarsWebServiceApp')
         });
     };
 
-    this.getScriptsList = function (username, callback){
+    this.getScriptsList = function (username, callback) {
       $http.get('/auth/api/users/' + username + '/scripts/list')
         .success(function(data) {
           callback(null, data);
@@ -28,5 +28,29 @@ angular.module('sharpWarsWebServiceApp')
         });
     };
 
+    this.getOneScript = function (username, scriptName, callback) {
+      $http.get('/auth/api/users/' + username + '/scripts/' + scriptName)
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
+
+    this.editScript = function (username, oldScriptName, script, callback) {
+      var body = {
+        name: script.name,
+        description: script.description,
+        code: script.code
+      };
+      $http.put('/auth/api/users/' + username + '/scripts/update/' + oldScriptName, body)
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
   });
 

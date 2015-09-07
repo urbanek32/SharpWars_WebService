@@ -71,5 +71,7 @@
   "SCRIPTS_DESCRIPTION": "Opis skryptu",
   "SCRIPTS_ADDING_NEW_ONE": "Dodawanie nowego skryptu",
   "SCRIPTS_CREATE_NEW": "Utwórz nowy skrypt",
-  "SCRIPTS_CODE": "Kod"
+  "SCRIPTS_CODE": "Kod",
+  "SCRIPT_EDIT": "Edycja skryptu",
+  "BACK_TO_SCRIPTS": "Powrót do listy moich skryptów..."
 }
