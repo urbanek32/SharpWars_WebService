@@ -28,6 +28,16 @@ angular.module('sharpWarsWebServiceApp')
         });
     };
 
+    this.deleteScript = function (username, scriptName, callback) {
+      $http.delete('/auth/api/users/' + username + '/scripts/' + scriptName)
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
+
     this.getOneScript = function (username, scriptName, callback) {
       $http.get('/auth/api/users/' + username + '/scripts/' + scriptName)
         .success(function(data) {

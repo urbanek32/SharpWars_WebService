@@ -41,7 +41,16 @@ angular.module('sharpWarsWebServiceApp')
     };
 
     $scope.deleteScript = function(scriptName) {
-      $window.alert(scriptName); //placeholder
+      $scope.serverResponse = null;
+      $scope.errors = null;
+      scriptsService.deleteScript($scope.user.name, scriptName, function(err, result) {
+        if(!err && result) {
+          $scope.serverResponse = result[0].message;
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      });
+      $scope.getScriptsList();
     };
 
     $scope.editScript = function(scriptInfo) {
