@@ -18,5 +18,15 @@ angular.module('sharpWarsWebServiceApp')
         });
     };
 
+    this.getScriptsList = function (username, callback){
+      $http.get('/auth/api/users/' + username + '/scripts/list')
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
+
   });
 
