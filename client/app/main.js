@@ -50,6 +50,10 @@ angular.module('sharpWarsWebServiceApp')
         templateUrl: 'app/views/scriptsSpec.html',
         controller: 'scriptsCtrl',
         authentication: true
+      }).when('/scriptsSpec/:scriptName', {
+        templateUrl: 'app/views/scriptsSpec.html',
+        controller: 'scriptsCtrl',
+        authentication: true
       });
   })
   .run(function($rootScope, $window, $location) {

@@ -1,33 +1,43 @@
 <div class="container" ng-init="getUserInfo($parent.user.name)">
-  <div class="row">
+  <div class="row" ng-init="editModeInit()">
     <div class="col-lg-12">
-      <h1 class="page-header">{{ "SCRIPTS_ADDING_NEW_ONE" | translate }}:</h1>
-      <form name="specScriptForm" class="form col-lg-5" ng-submit="saveScript()">
-        <div class="form-group">
-          <label for="name">{{ 'SCRIPTS_NAME' | translate }}:</label>
-          <input class="form-control" id="name" ng-model="script.name" required>
-        </div>
-        <div class="form-group">
-          <label for="description">{{ 'SCRIPTS_DESCRIPTION' | translate }}:</label>
-          <textarea class="form-control" type="text" id="description" ng-model="script.description" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="code">{{ 'SCRIPTS_CODE' | translate }}:</label>
-          <textarea class="form-control" type="text" id="code" ng-model="script.code" required ></textarea>
-        </div>
-        <button type="submit" class="btn btn-default btn-success">{{ 'SAVE_BUTTON' | translate }}</button>
-        <button type="reset" class="btn btn-default btn-warning">{{ 'RESET_BUTTON' | translate }}</button>
-        <div ng-show="serverResponse" class="alert alert-success">
+      <h1 ng-if="!editMode" class="page-header">{{ "SCRIPTS_ADDING_NEW_ONE" | translate }}:</h1>
+      <h1 ng-if="editMode" class="page-header">{{ "SCRIPT_EDIT" | translate }}:</h1>
+      <div ng-show="editResult">
+        <div class="alert alert-success">
           <span class="glyphicon glyphicon-exclamation-sign"></span>
-          {{ serverResponse }}
+          {{ editResult }}
         </div>
-        <div ng-show="errors" class="alert alert-danger">
-          <li ng-repeat="error in errors">
+        <a ng-href="/scripts" class="btn btn-success btn-sm">{{ 'BACK_TO_SCRIPTS' | translate }}</a>
+      </div>
+      <div ng-show="!editResult">
+        <form name="specScriptForm" class="form col-lg-5" ng-submit="saveScript()">
+          <div class="form-group">
+            <label for="name">{{ 'SCRIPTS_NAME' | translate }}:</label>
+            <input class="form-control" id="name" ng-model="script.name" required>
+          </div>
+          <div class="form-group">
+            <label for="description">{{ 'SCRIPTS_DESCRIPTION' | translate }}:</label>
+            <textarea class="form-control" type="text" id="description" ng-model="script.description" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="code">{{ 'SCRIPTS_CODE' | translate }}:</label>
+            <textarea class="form-control" type="text" id="code" ng-model="script.code" required ></textarea>
+          </div>
+          <button type="submit" class="btn btn-default btn-success">{{ 'SAVE_BUTTON' | translate }}</button>
+          <button type="reset" class="btn btn-default btn-warning">{{ 'RESET_BUTTON' | translate }}</button>
+          <div ng-show="serverResponse" class="alert alert-success">
             <span class="glyphicon glyphicon-exclamation-sign"></span>
-            {{ error }}
-          </li>
-        </div>
-      </form>
+            {{ serverResponse }}
+          </div>
+          <div ng-show="errors" class="alert alert-danger">
+            <li ng-repeat="error in errors">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>
+              {{ error }}
+            </li>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
