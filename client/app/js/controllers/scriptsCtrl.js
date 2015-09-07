@@ -17,4 +17,24 @@ angular.module('sharpWarsWebServiceApp')
         }
       });
     };
+
+    $scope.getScriptsList = function() {
+      $scope.serverResponse = null;
+      $scope.errors = null;
+      scriptsService.getScriptsList($scope.user.name, function(err, result) {
+        if(!err && result) {
+          $scope.scriptLists = result;
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      });
+    };
+
+    $scope.deleteScript = function(scriptName) {
+      $window.alert(scriptName); //placeholder
+    };
+
+    $scope.editScript = function(scriptName) {
+      $window.alert(scriptName); //placeholder
+    };
   });
