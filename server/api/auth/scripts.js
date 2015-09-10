@@ -58,15 +58,28 @@ var updateScript = function(oldScriptName, username, options, callback) {
   scriptsEntities.findScriptByNameAndOwner(oldScriptName, username, function(err, script) {
     if(!err) {
       if(script) {
-        var updatedScript = {
-          name: options.name,
-          description: options.description,
-          code: options.code
-        };
-        scriptsEntities.updateByNameAndOwner(oldScriptName, username, updatedScript, function(err, result) {
-          if(!err && result) {
-            logger.info("Script " + oldScriptName + " updated.");
-            callback(null, httpStatuses.Scripts.Updated);
+        scriptsEntities.findScriptByNameAndOwner(options.name, username, function(err, script) {
+          if (!err) {
+            if (!script || options.name === oldScriptName) {
+              var updatedScript = {
+                name: options.name,
+                description: options.description,
+                code: options.code
+              };
+              scriptsEntities.updateByNameAndOwner(oldScriptName, username, updatedScript, function(err, result) {
+                if(!err && result) {
+                  logger.info("Script " + oldScriptName + " updated.");
+                  callback(null, httpStatuses.Scripts.Updated);
+                } else {
+                  logger.error("Internal Server Error: " + JSON.stringify(err));
+                  callback(httpStatuses.Generic.InternalServerError, null);
+                }
+              });
+            }
+            else {
+              logger.debug("Cannot update script: name " + options.name + " is already used.");
+              callback(httpStatuses.Scripts.NameAlreadyExists, null);
+            }
           } else {
             logger.error("Internal Server Error: " + JSON.stringify(err));
             callback(httpStatuses.Generic.InternalServerError, null);

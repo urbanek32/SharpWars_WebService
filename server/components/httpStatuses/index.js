@@ -59,6 +59,7 @@ var scripts = {
   Deleted: [{status: 204, message: "Script has been successfully deleted."}],
   //errors
   AlreadyExists: [{status: 400, message: "Script already exists."}],
+  NameAlreadyExists: [{status: 400, message: "Name already in use."}],
   NotExists: [{status: 404, message: "Script not exists."}]
 };
 
