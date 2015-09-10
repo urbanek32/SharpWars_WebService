@@ -7,6 +7,7 @@ module.exports = {
   },
   emailAccount: {
     host: "mail.daruhq.tk",
+    from: "ETI SharpWars_Webservice <jiraya@daruhq.tk>",
     port: 587,
     email: "jiraya",
     password: "jiraya1"
