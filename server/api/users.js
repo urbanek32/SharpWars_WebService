@@ -11,7 +11,7 @@ var userEntities = require('../entities/users-entities'),
 
 var sendActivationEmail = function(newUser, callback) {
   var mailOptions = {
-    from: 'jiraya@daruhq.tk',
+    from: config.emailAccount.from,
     to: newUser.email,
     subject: '[WebService] Activation account',
     text: config.webservice.host + ':' + config.webservice.port + '/api/users/' + newUser.username + '/activate/' + newUser.password
@@ -23,7 +23,7 @@ var sendActivationEmail = function(newUser, callback) {
 
 var sendResetPasswordEmail = function(email, oldPasswordHash, callback) {
   var mailOptions = {
-    from: 'jiraya@daruhq.tk',
+    from: config.emailAccount.from,
     to: email,
     subject: '[WebService] Reset password message',
     text: config.webservice.host + ':' + config.webservice.port + '/users/' + email + '/reset_password/' + oldPasswordHash
