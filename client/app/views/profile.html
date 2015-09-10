@@ -28,7 +28,7 @@
           </div>
           <div class="form-group">
             <label for="hobby">{{ 'HOBBY' | translate }}:</label>
-            <textarea class="form-control" type="text" id="hobby" ng-model="user.hobby" ng-disabled="!editMode"/>
+            <textarea class="form-control" type="text" id="hobby" ng-model="user.hobby" ng-disabled="!editMode"></textarea>
           </div>
           <button type="submit" class="btn btn-default btn-success" ng-if="editMode">{{ 'SAVE_BUTTON' | translate }}</button>
           <button type="button" ng-click="editUserData()" class="btn btn-default btn-warning">{{ !editMode ? ('EDIT_BUTTON' | translate) : ('CANCEL_BUTTON' | translate)}}</button>
