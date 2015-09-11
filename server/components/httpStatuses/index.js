@@ -25,7 +25,8 @@ var users = {
 
 var auth = {
   Unauthorized: [{status: 401, message: "Unauthorized"}],
-  PasswordEmpty: [{status: 400, message: "Password cannot be empty"}]
+  PasswordEmpty: [{status: 400, message: "Password cannot be empty"}],
+  InvalidToken: [{status: 401, message: "Invalid token."}]
 };
 
 var lobby = {

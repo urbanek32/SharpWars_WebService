@@ -66,8 +66,8 @@ exports.resetPassword = function(req, res) {
   var errors = schemaValidator.validate(req.body, userSchemas.resetPassword).errors;
   if(errors.length === 0) {
     var options = {
-      email: req.params.email,
-      oldPassword: req.params.password,
+      username: req.params.username,
+      token: req.params.token,
       newPassword: req.body.newpassword
     };
     usersManager.resetPassword(options, function(err, result) {

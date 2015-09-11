@@ -40,8 +40,8 @@ module.exports.updateByUsername = function(username, userAttributes, callback) {
   })
 };
 
-module.exports.setNewPasswordForEmail = function(email, newPassword, callback) {
-  db.users.update({email: email}, {$set: {password: newPassword}}, {strict: true}, function(err, result) {
+module.exports.setNewPasswordForUsername = function(username, newPassword, callback) {
+  db.users.update({username: username}, {$set: {password: newPassword}}, {strict: true}, function(err, result) {
     callback(err, result);
   })
 };

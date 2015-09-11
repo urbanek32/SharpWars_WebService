@@ -120,7 +120,7 @@ angular.module('sharpWarsWebServiceApp')
     $scope.resetPasswordForUser = function() {
       $scope.errors = null;
       $scope.serverResponse = null;
-      loginService.resetPasswordRequest($scope.passwordReset, $routeParams.mail, $routeParams.hash, function(err, result) {
+      loginService.resetPasswordRequest($scope.passwordReset, $routeParams.username, $routeParams.token, function(err, result) {
         if(!err && result) {
           $scope.serverResponse = result[0].message;
           $scope.activationTimer = $interval(callAtIntervalAfterActivation, 5000);
