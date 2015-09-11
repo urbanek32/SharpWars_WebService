@@ -1,6 +1,7 @@
 'use strict';
 
 var userEntities = require('../entities/users-entities'),
+  tokenEntities = require('../entities/token-entities'),
   httpStatuses = require('../components/httpStatuses').httpStatuses,
   passwordHash = require('password-hash'),
   mailer = require('../lib/mailer/mailer'),
@@ -9,24 +10,24 @@ var userEntities = require('../entities/users-entities'),
   jwt = require('jsonwebtoken');
 
 
-var sendActivationEmail = function(newUser, callback) {
+var sendActivationEmail = function(newUser, token, callback) {
   var mailOptions = {
     from: config.emailAccount.from,
     to: newUser.email,
     subject: '[WebService] Activation account',
-    text: config.webservice.host + ':' + config.webservice.port + '/api/users/' + newUser.username + '/activate/' + newUser.password
+    text: config.webservice.host + ':' + config.webservice.port + '/api/users/' + newUser.username + '/activate/' + token
   };
   mailer.sendMail(mailOptions, function(err, result){
     callback(err, result);
   });
 };
 
-var sendResetPasswordEmail = function(email, oldPasswordHash, callback) {
+var sendResetPasswordEmail = function(email, username, token, callback) {
   var mailOptions = {
     from: config.emailAccount.from,
     to: email,
     subject: '[WebService] Reset password message',
-    text: config.webservice.host + ':' + config.webservice.port + '/users/' + email + '/reset_password/' + oldPasswordHash
+    text: config.webservice.host + ':' + config.webservice.port + '/users/' + username + '/resetPassword/' + token
   };
   mailer.sendMail(mailOptions, function(err, result){
     callback(err, result);
@@ -46,20 +47,33 @@ var addUser = function(newUser, callback) {
               userEntities.addUser(newUser, function(err, result) {
                 if(!err) {
                   logger.debug("User " + newUser.username + " has been created in database.");
-                  sendActivationEmail(newUser, function(err, result) {
+                  var activationToken = jwt.sign(newUser, config.auth.key, { expiresInMinutes: config.auth.expirationTokenTime });
+                  tokenEntities.addToken(newUser.username, activationToken, 'activation', function(err, result) {
                     if(!err) {
-                      logger.debug("Email with activation link was sent to " + newUser.email);
-                      callback(null, httpStatuses.Users.Created);
+                      sendActivationEmail(newUser, activationToken, function(err, result) {
+                        if(!err) {
+                          logger.debug("Email with activation link was sent to " + newUser.email);
+                          callback(null, httpStatuses.Users.Created);
+                        } else {
+                          userEntities.deleteUserByEmail(newUser.email, function(err, result){
+                            if(err && !result) {
+                              callback(err, null);
+                            }
+                          });
+                          logger.error("Cannot send email: " + JSON.stringify(err));
+                          callback(httpStatuses.Generic.InternalServerError, null);
+                        }
+                      });
                     } else {
+                      logger.error("Internal Server Error: " + JSON.stringify(err));
                       userEntities.deleteUserByEmail(newUser.email, function(err, result){
                         if(err && !result) {
                           callback(err, null);
                         }
                       });
-                      logger.error("Cannot send email: " + JSON.stringify(err));
-                      callback(httpStatuses.Generic.InternalServerError, null);
+                      callback(err, null);
                     }
-                  })
+                  });
                 } else {
                   logger.error("Internal Server Error: " + JSON.stringify(err));
                   callback(err, null);
@@ -90,20 +104,34 @@ var activateUser = function(options, callback) {
     if(!err) {
       if(user) {
         if(!user.activated) {
-          if (options.password === user.password) {
-            userEntities.activateByUsername(options.username, function (err, result) {
-              if (!err && result) {
-                logger.debug("User has been activated.");
-                callback(null, httpStatuses.Users.Activated, result);
+          tokenEntities.findTokenByUsernameAndType(options.username, 'activation', function(err, result) {
+            if(!err) {
+              if (result && options.token === result.token) {
+                userEntities.activateByUsername(options.username, function (err, result) {
+                  if (!err && result) {
+                    tokenEntities.deleteByUsernameAndType(options.username, 'activation', function(err, result) {
+                      if(!err) {
+                        logger.debug("User has been activated.");
+                        callback(null, httpStatuses.Users.Activated, result);
+                      } else {
+                        logger.error("Internal Server Error: " + JSON.stringify(err));
+                        callback(httpStatuses.Generic.InternalServerError, null);
+                      }
+                    });
+                  } else {
+                    logger.error("Internal Server Error: " + JSON.stringify(err));
+                    callback(httpStatuses.Generic.InternalServerError, null);
+                  }
+                });
               } else {
-                logger.error("Internal Server Error: " + JSON.stringify(err));
-                callback(httpStatuses.Generic.InternalServerError, null);
+                logger.debug("Cannot activate user: Invalid token.");
+                callback(httpStatuses.Auth.InvalidToken, null);
               }
-            });
-          } else {
-            logger.debug("Cannot activate user: Passwords don't match.");
-            callback(httpStatuses.Auth.Unauthorized, null);
-          }
+            } else {
+              logger.error("Internal Server Error: " + JSON.stringify(err));
+              callback(httpStatuses.Generic.InternalServerError, null);
+            }
+          });
         } else {
           logger.debug("Cannot activate user: User " + options.username + " already activated.");
           callback(httpStatuses.Users.AlreadyActivated, null);
@@ -151,52 +179,74 @@ var forgotPassword = function(options, callback) {
   userEntities.findUserByEmail(options.email, function(err, user) {
     if(!err) {
       if(user) {
-        sendResetPasswordEmail(options.email, user.password, function(err, result) {
+        var resetPasswordToken = jwt.sign(options, config.auth.key, { expiresInMinutes: config.auth.expirationTokenTime });
+        tokenEntities.addToken(user.username, resetPasswordToken, 'reset_password', function(err, result) {
           if(!err) {
-            logger.debug("Email with reset password link was sent to " + options.email);
-            callback(null, httpStatuses.Users.ResetPasswordTokenSent);
+            sendResetPasswordEmail(options.email, user.username, resetPasswordToken, function(err, result) {
+              if(!err) {
+                logger.debug("Email with reset password link was sent to " + options.email);
+                callback(null, httpStatuses.Users.ResetPasswordTokenSent);
+              } else {
+                logger.error("Cannot send email: " + JSON.stringify(err));
+                callback(httpStatuses.Generic.InternalServerError, null);
+              }
+            });
           } else {
-            logger.error("Cannot send email: " + JSON.stringify(err));
+            logger.error("Internal Server Error: " + JSON.stringify(err));
             callback(httpStatuses.Generic.InternalServerError, null);
           }
-        })
+        });
       } else {
         logger.debug("Cannot generate reset password link for user: User " + options.email + " not exists.");
         callback(httpStatuses.Users.NotExists, null);
       }
     } else {
       logger.error("Internal Server Error: " + JSON.stringify(err));
-      callback(httpStatuses.Generic.InternalServerError, null)
+      callback(httpStatuses.Generic.InternalServerError, null);
     }
   })
 };
 
 var resetPassword = function(options, callback) {
-  userEntities.findUserByEmail(options.email, function(err, user) {
+  userEntities.findUserByUsername(options.username, function(err, user) {
     if(!err) {
       if(user) {
-        if(options.oldPassword === user.password) {
-          var newPasswordHash = passwordHash.generate(options.newPassword);
-          userEntities.setNewPasswordForEmail(options.email, newPasswordHash, function(err, result) {
-            if (!err && result) {
-              logger.debug("Password changed.");
-              callback(null, httpStatuses.Users.PasswordChanged, result);
+        tokenEntities.findTokenByUsernameAndType(options.username, 'reset_password', function(err, result) {
+          if(!err) {
+            if(result && result.token === options.token) {
+              var newPasswordHash = passwordHash.generate(options.newPassword);
+              userEntities.setNewPasswordForUsername(options.username, newPasswordHash, function(err, result) {
+                if (!err && result) {
+                  tokenEntities.deleteByUsernameAndType(options.username, 'reset_password', function(err, result) {
+                    if(!err) {
+                      logger.debug("Password changed.");
+                      callback(null, httpStatuses.Users.PasswordChanged, result);
+                    } else {
+                      logger.error("Internal Server Error: " + JSON.stringify(err));
+                      callback(httpStatuses.Generic.InternalServerError, null);
+                    }
+                  });
+                } else {
+                  logger.error("Internal Server Error: " + JSON.stringify(err));
+                  callback(httpStatuses.Generic.InternalServerError, null);
+                }
+              });
             } else {
-              logger.error("Internal Server Error: " + JSON.stringify(err));
-              callback(httpStatuses.Generic.InternalServerError, null);
+              logger.debug("Cannot activate user: Invalid token.");
+              callback(httpStatuses.Auth.InvalidToken, null);
             }
-          });
-        } else {
-          logger.debug("Cannot reset password: Token failed.");
-          callback(httpStatuses.Auth.Unauthorized, null);
-        }
+          } else {
+            logger.error("Internal Server Error: " + JSON.stringify(err));
+            callback(httpStatuses.Generic.InternalServerError, null);
+          }
+        });
       } else {
-        logger.debug("Cannot reset password for user: User " + options.email + " not exists.");
+        logger.debug("Cannot reset password for user: User " + options.username + " not exists.");
         callback(httpStatuses.Users.NotExists, null);
       }
     } else {
       logger.error("Internal Server Error: " + JSON.stringify(err));
-      callback(httpStatuses.Generic.InternalServerError, null)
+      callback(httpStatuses.Generic.InternalServerError, null);
     }
   });
 };

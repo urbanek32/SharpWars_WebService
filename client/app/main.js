@@ -30,7 +30,7 @@ angular.module('sharpWarsWebServiceApp')
         templateUrl: 'app/views/accountActivationError.html',
         controller: 'userCtrl',
         authentication: false
-      }).when('/users/:mail/resetPassword/:hash', {
+      }).when('/users/:username/resetPassword/:token', {
         templateUrl: 'app/views/resetPassword.html',
         controller: 'userCtrl',
         authentication: false
