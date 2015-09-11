@@ -7,7 +7,18 @@
           <p>{{ "LOBBY_TITLE" | translate }}: {{ activeLobby.name }}</p>
           <p>{{ "LOBBY_OWNER" | translate }}: {{ activeLobby.master }}</p>
           <p>{{ "LOBBY_STATUS" | translate }}: {{ activeLobby.state }}</p>
-          <button ng-disabled="user.name === activeLobby.master" type="button" class="btn btn-info" ng-click="leaveLobby(activeLobby.name)">{{ "LOBBY_LEAVE" | translate }}</button>
+          <p>{{ "LOBBY_PLAYERS" | translate }}:
+          <ul ng-repeat="player in activeLobby.players">
+            <li>
+              {{player.username}}
+              <span ng-class="(player.state === 'ready' || player.state === 'play') ? 'glyphicon glyphicon-ok-sign text-success' : 'glyphicon glyphicon-remove-sign text-danger'"
+                title="{{player.state === 'ready' ? 'ready' : 'waiting'}}"></span>
+            </li>
+          </ul>
+          <button ng-show="user.name === activeLobby.master" type="button" class="btn btn-success" ng-click="startLobby(activeLobby.name)">{{ "LOBBY_START" | translate }}</button>
+          <button type="button" class="btn btn-success" ng-click="changeMyStatus(activeLobby.name)">{{ "CHANGE_STATUS" | translate }}</button>
+          <button ng-hide="user.name === activeLobby.master" type="button" class="btn btn-info" ng-click="leaveLobby(activeLobby.name)">{{ "LOBBY_LEAVE" | translate }}</button>
+          <button ng-show="user.name === activeLobby.master" type="button" class="btn btn-danger" ng-click="deleteLobby(activeLobby.name)">{{ "LOBBY_DELETE" | translate }}</button>
         </div>
       </div>
     </div>

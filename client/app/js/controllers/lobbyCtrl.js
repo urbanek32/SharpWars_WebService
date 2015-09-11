@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sharpWarsWebServiceApp')
-  .controller('lobbyCtrl', function ($scope, $window, lobbyService, errorInterpreter) {
+  .controller('lobbyCtrl', function ($scope, $window, lobbyService, errorInterpreter, $interval) {
 
     $scope.createLobby = function() {
       $scope.errors = null;
@@ -63,6 +63,7 @@ angular.module('sharpWarsWebServiceApp')
     };
 
     $scope.getActiveLobby();
+    $interval($scope.getActiveLobby, 3000);
 
     $scope.leaveLobby = function(lobbyName) {
       lobbyService.leaveLobby($scope.user.name, lobbyName, function (err, result) {
@@ -87,6 +88,45 @@ angular.module('sharpWarsWebServiceApp')
         }
       });
     };
+
+    $scope.startLobby = function(lobbyName) {
+      lobbyService.startLobby($scope.user.name, lobbyName, function(err, result) {
+        if (!err && result) {
+          $scope.serverResponse = result[0].message;
+          $scope.getActiveLobby();
+          $scope.getLobbyList();
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      })
+    };
+
+    $scope.changeMyStatus = function(lobbyName) {
+      lobbyService.changePlayerStatus($scope.user.name, lobbyName, function(err, result) {
+        if (!err && result) {
+          $scope.serverResponse = result[0].message;
+          $scope.getActiveLobby();
+          $scope.getLobbyList();
+        } else {
+          $scope.errors = errorInterpreter.interpreter(err);
+        }
+      })
+    };
+
+
+    $scope.gameStarted = false;
+    $scope.$watch('activeLobby', function() {
+      console.log($scope.activeLobby);
+      console.log($scope.gameStarted);
+      if($scope.activeLobby.state === 'play') {
+        if(!$scope.gameStarted) {
+          $scope.gameStarted = true;
+          alert("No to startuj grę");
+        }
+      } else {
+        $scope.gameStarted = false;
+      }
+    });
 
 });
 
