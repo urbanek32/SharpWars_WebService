@@ -2,7 +2,6 @@
   "SUBPAGE_PROFILE": "Mój profil",
   "SUBPAGE_HOME": "Główna",
   "SUBPAGE_DOWNLOAD": "Pobierz grę",
-  "SUBPAGE_LOBBY": "Utwórz grę",
   "SUBPAGE_ACTIVE_GAMES": "Aktywne gry",
   "SUBPGAGE_SCRIPTS": "Zarządzanie skryptami",
   "FOOTER_TITLE" : "SharpWars the Game.",
@@ -63,6 +62,7 @@
   "LOBBY_STATUS_FULL": "Gra jest pełna",
   "LOBBY_JOIN": "Dołącz",
   "LOBBY_LEAVE": "Opuść",
+  "LOBBY_CREATE": "Utwórz grę",
   "PASSWORD_FOR_LOBBY": "Hasło do gry",
   "LOBBY_ACTIONS": "Akcja",
   "DELETE": "Usuń",
@@ -73,5 +73,6 @@
   "SCRIPTS_CREATE_NEW": "Utwórz nowy skrypt",
   "SCRIPTS_CODE": "Kod",
   "SCRIPT_EDIT": "Edycja skryptu",
-  "BACK_TO_SCRIPTS": "Powrót do listy moich skryptów..."
+  "BACK_TO_SCRIPTS": "Powrót do listy moich skryptów...",
+  "EMPTY_LIST": "Lista jest pusta."
 }
