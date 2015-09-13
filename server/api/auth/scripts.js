@@ -42,8 +42,8 @@ var removeScriptSecretData = function(scripts) {
   return scripts;
 };
 
-var getListOfScripts = function(callback) {
-  scriptsEntities.getAllScripts(function(err, scripts) {
+var getListOfScriptsForUser = function(username, callback) {
+  scriptsEntities.getAllScriptsForUser(username, function(err, scripts) {
     if(!err && scripts) {
       logger.info("Scripts array sent.");
       callback(null, removeScriptSecretData(scripts));
@@ -141,7 +141,7 @@ var deleteScript = function(scriptName, username, callback) {
 
 module.exports = {
   addNewScript: addNewScript,
-  getListOfScripts: getListOfScripts,
+  getListOfScriptsForUser: getListOfScriptsForUser,
   updateScript: updateScript,
   getScript: getScript,
   deleteScript: deleteScript

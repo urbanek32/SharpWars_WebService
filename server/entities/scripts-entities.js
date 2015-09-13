@@ -16,8 +16,8 @@ module.exports.findScriptByNameAndOwner = function(name, owner, callback) {
   });
 };
 
-module.exports.getAllScripts = function(callback) {
-  db.scripts.find().toArray(function(err, result) {
+module.exports.getAllScriptsForUser = function(username, callback) {
+  db.scripts.find({owner: username}).toArray(function(err, result) {
     callback(err, result);
   });
 };
