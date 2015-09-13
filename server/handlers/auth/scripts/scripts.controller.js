@@ -21,8 +21,8 @@ exports.addNewScript = function(req, res) {
   }
 };
 
-exports.getListOfScripts = function(req, res) {
-  scriptsManager.getListOfScripts(function(err, result) {
+exports.getListOfScriptsForUser = function(req, res) {
+  scriptsManager.getListOfScriptsForUser(req.user.username, function(err, result) {
     if(!err && result) {
       res.send(result);
     } else {
