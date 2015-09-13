@@ -13,7 +13,7 @@
     </div>
     <div class="col-lg-12">
       <h1 class="page-header">{{ "LOBBY_LIST_TITLE" | translate }}</h1>
-        <table class="table">
+        <table class="table" ng-show="lobbyLists.length">
           <thead>
             <tr>
               <th>{{ "LOBBY_TITLE" | translate }}</th>
@@ -61,6 +61,12 @@
             </div>
           </tbody>
         </table>
+        <div ng-hide="lobbyLists.length">
+          <p>{{ "EMPTY_LIST" | translate }}</p>
+        </div>
+        <div class="col-lg-12">
+          <a ng-href="/createLobby"><button class="btn btn-success btn-sm">{{ 'LOBBY_CREATE' | translate }}</button></a>
+        </div>
       </div>
     </div>
   </div>
