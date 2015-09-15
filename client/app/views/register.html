@@ -30,7 +30,6 @@
             <input id="surname" type="text" ng-model="newUser.surname" class="form-control" required>
           </div>
           <button type="submit" class="btn btn-default btn-success">{{ 'REGISTRATION_BUTTON' | translate }}</button>
-          <button type="reset" class="btn btn-default btn-warning">{{ 'RESET_BUTTON' | translate }}</button>
           <div ng-if="errors" class="alert alert-danger">
             <li ng-repeat="error in errors">
                <span class="glyphicon glyphicon-exclamation-sign"></span>
