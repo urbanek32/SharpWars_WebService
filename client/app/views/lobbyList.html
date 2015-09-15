@@ -76,7 +76,9 @@
           <p>{{ "EMPTY_LIST" | translate }}</p>
         </div>
         <div class="col-lg-12">
-          <a ng-href="/createLobby"><button class="btn btn-success btn-sm">{{ 'LOBBY_CREATE' | translate }}</button></a>
+          <a ng-href="/createLobby">
+            <button ng-disabled="activeLobby" class="btn btn-success btn-sm">{{ 'LOBBY_CREATE' | translate }}</button>
+          </a>
         </div>
       </div>
     </div>
