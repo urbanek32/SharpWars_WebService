@@ -5,7 +5,7 @@ angular.module('sharpWarsWebServiceApp')
     this.interpreter = function(errors) {
       var errorMessages = [];
       for(var err in errors) {
-        errorMessages.push(errors[err].message);
+        errorMessages.push(errors[err].stack || errors[err].message);
       }
       return errorMessages;
     };
