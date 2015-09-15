@@ -3,7 +3,11 @@
     "id": "AddNewLobby",
     "type": "object",
     "properties": {
-      "countOfMembers": {"type": "number"},
+      "countOfMembers": {
+        "type": "number",
+        "minimum": 2,
+        "maximum": 5
+      },
       "password": {"type": "string"},
       "encrypted": {"type": "boolean"},
       "name": {"type": "string"}
