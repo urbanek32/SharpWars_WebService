@@ -66,5 +66,25 @@ angular.module('sharpWarsWebServiceApp')
         });
     };
 
+    this.startLobby = function(username, lobbyName, callback) {
+      $http.put('/auth/api/users/' + username + '/lobby/start/' + lobbyName)
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
+
+    this.changePlayerStatus = function(username, lobbyName, callback) {
+      $http.put('/auth/api/users/' + username + '/lobby/' + lobbyName + '/status')
+        .success(function(data) {
+          callback(null, data);
+        })
+        .error(function(err) {
+          callback(err, null);
+        });
+    };
+
   });
 
