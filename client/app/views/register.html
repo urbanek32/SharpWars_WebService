@@ -5,28 +5,28 @@
         <h1 class="page-header">{{ 'REGISTRATION_TITLE' | translate }}</h1>
         <form role="form" class="col-lg-4" ng-if="!registrationSuccess" ng-submit="registerUserForm(newUser)">
           <div class="form-group">
-            <label for="username">{{ 'REGISTRATION_LOGIN_NAME' | translate }}</label>
+            <label for="username">{{ 'REGISTRATION_LOGIN_NAME' | translate }}*:</label>
             <input id="username" type="text" ng-model="newUser.username" class="form-control" required>
           </div>
           <div class="form-group">
-            <label for="password">{{ 'REGISTRATION_PASSWORD' | translate }}</label>
+            <label for="password">{{ 'REGISTRATION_PASSWORD' | translate }}*:</label>
             <input id="password" type="password" minlength="6" ng-model="newUser.password" class="form-control" onchange="confirmPassword.setCustomValidity(this.value !== confirmPassword.value ? 'Password not match' : '')" required>
           </div>
           <div class="form-group">
-            <label for="confirmPassword">{{ 'REGISTRATION_PASSWORD_REPEAT' | translate }}</label>
+            <label for="confirmPassword">{{ 'REGISTRATION_PASSWORD_REPEAT' | translate }}*:</label>
             <input id="confirmPassword" type="password" class="form-control"
                    onchange="this.setCustomValidity(this.value !== password.value ? 'Password not match' : '')" required>
           </div>
           <div class="form-group">
-            <label for="email">{{ 'REGISTRATION_MAIL' | translate }}</label>
+            <label for="email">{{ 'REGISTRATION_MAIL' | translate }}*:</label>
             <input id="email" type="email" ng-model="newUser.email" class="form-control" required>
           </div>
           <div class="form-group">
-            <label for="Name">{{ 'REGISTRATION_FIRST_NAME' | translate }}</label>
+            <label for="Name">{{ 'REGISTRATION_FIRST_NAME' | translate }}*:</label>
             <input id="name" type="text" ng-model="newUser.name" class="form-control" required>
           </div>
           <div class="form-group">
-            <label for="surname">{{ 'REGISTRATION_LAST_NAME' | translate }}</label>
+            <label for="surname">{{ 'REGISTRATION_LAST_NAME' | translate }}*:</label>
             <input id="surname" type="text" ng-model="newUser.surname" class="form-control" required>
           </div>
           <button type="submit" class="btn btn-default btn-success">{{ 'REGISTRATION_BUTTON' | translate }}</button>
