@@ -20,7 +20,6 @@
           <input class="form-control" type="password" id="password" ng-model="lobby.password">
         </div>
         <button ng-disabled="lobby.encrypted && !lobby.password" type="submit" class="btn btn-default btn-success">{{ 'SAVE_BUTTON' | translate }}</button>
-        <button type="reset" class="btn btn-default btn-warning">{{ 'RESET_BUTTON' | translate }}</button>
         <div class="row">
           <div ng-show="errors" class="alert alert-danger">
             <li ng-repeat="error in errors">
