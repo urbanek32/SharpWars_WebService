@@ -42,10 +42,6 @@ angular.module('sharpWarsWebServiceApp')
       $location.path('/passwordRecovery');
     };
 
-    $scope.afterActivation = function() {
-      $scope.activationTimer = $interval(callAtIntervalAfterActivation, 5000);
-    };
-
     function callAtIntervalAfterActivation() {
       $location.path('/home');
       $interval.cancel($scope.activationTimer);
