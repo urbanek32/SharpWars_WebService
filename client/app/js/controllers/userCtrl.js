@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('sharpWarsWebServiceApp')
-  .controller('userCtrl', function ($scope, $routeParams, $location, $window, errorInterpreter, loginService, $interval) {
+  .controller('userCtrl', function ($scope, $routeParams, $location, $window, responseInterpreter,
+                                    loginService, $interval, $translate) {
 
     $scope.$watch(function() {
       return $window.sessionStorage.token;
@@ -22,7 +23,7 @@ angular.module('sharpWarsWebServiceApp')
           $scope.user = null;
           $scope.errors = null;
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -53,9 +54,9 @@ angular.module('sharpWarsWebServiceApp')
       loginService.register(newUser, function(err, result) {
         if(!err && result) {
           $scope.registrationSuccess = true;
-          $scope.registrationServerResponse = result[0].message;
+          $scope.registrationServerResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -65,7 +66,7 @@ angular.module('sharpWarsWebServiceApp')
         if(!err) {
           $scope.user = userData;
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -85,7 +86,7 @@ angular.module('sharpWarsWebServiceApp')
         if(!err && result) {
           $scope.editMode = false;
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -94,9 +95,9 @@ angular.module('sharpWarsWebServiceApp')
       loginService.saveUserPassword($scope.user, function(err, result) {
         if(!err && result) {
           $scope.isShownPasswordForm = false;
-          $scope.serverResponse = result[0].message;
+          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -106,9 +107,9 @@ angular.module('sharpWarsWebServiceApp')
       $scope.serverResponse = null;
       loginService.forgotPassword($scope.passwordReset, function(err, result) {
         if(!err && result) {
-          $scope.serverResponse = result[0].message;
+          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -118,10 +119,10 @@ angular.module('sharpWarsWebServiceApp')
       $scope.serverResponse = null;
       loginService.resetPasswordRequest($scope.passwordReset, $routeParams.username, $routeParams.token, function(err, result) {
         if(!err && result) {
-          $scope.serverResponse = result[0].message;
+          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
           $scope.activationTimer = $interval(callAtIntervalAfterActivation, 5000);
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
