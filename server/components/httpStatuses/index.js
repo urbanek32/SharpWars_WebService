@@ -5,63 +5,63 @@
 'use strict';
 
 var generic = {
-  InternalServerError: {status: 500, message: "Internal Server Error"}
+  InternalServerError: {status: 500, group: 'Generic', ID: 'InternalServerError'}
 };
 
 var users = {
   //success
-  Created: [{status: 201, message: "User has been created. Check your mailbox to finish registration process."}],
-  Activated: [{status: 204, message: "User has been activated."}],
-  ResetPasswordTokenSent: [{status: 200, message: "Reset password token has been sent."}],
-  PasswordChanged: [{status: 200, message: "Password has been changed."}],
-  Updated: [{status: 204, message: "User has been updated."}],
+  Created: {status: 201, group: 'Users', ID: "Created"},
+  Activated: {status: 204, group: 'Users', ID: 'Activated'},
+  ResetPasswordTokenSent: {status: 200, group: 'Users', ID: 'ResetPasswordTokenSent'},
+  PasswordChanged: {status: 200, group: 'Users', ID: 'PasswordChanged'},
+  Updated: {status: 204, group: 'Users', ID: 'Updated'},
   //errors
-  NotCreated: [{status: 500, message: "Cannot create user"}],
-  AlreadyExists: [{status: 400, message: "User Already Exists"}],
-  AlreadyActivated: [{status: 400, message: "User Already Activated"}],
-  NotExists: [{status: 404, message: "User Not Exists"}],
-  NotActivated: [{status: 404, message: "User not activated"}]
+  AlreadyExists: {status: 409, group: 'Users', ID: 'AlreadyExists'},
+  AlreadyActivated: {status: 404, group: 'Users', ID: 'AlreadyActivated'},
+  NotExists: {status: 404, group: 'Users', ID: 'NotExists'},
+  NotActivated: {status: 404, group: 'Users', message: 'NotActivated'}
 };
 
 var auth = {
-  Unauthorized: [{status: 401, message: "Unauthorized"}],
-  PasswordEmpty: [{status: 400, message: "Password cannot be empty"}],
-  InvalidToken: [{status: 401, message: "Invalid token."}]
+  //errors
+  Unauthorized: {status: 401, group: "Auth", ID: "Unauthorized"},
+  PasswordEmpty: {status: 400, group: 'Auth', ID: "PasswordEmpty"},
+  InvalidToken: {status: 401, group: 'Auth', ID: "InvalidToken."}
 };
 
 var lobby = {
   //success
-  Created: [{status: 201, message: "Lobby has been created."}],
-  UserAdded: [{status: 201, message: "User has been added to the lobby."}],
-  Started: [{status: 204, message: "Lobby has been started the game."}],
-  Stopped: [{status: 204, message: "Lobby has been stopped the game."}],
-  PlayerRemoved: [{status: 204, message: "Player has been removed from the game."}],
-  PlayerUpdated: [{status: 204, message: "Player status has been updated."}],
-  Deleted: [{status: 204, message: "Lobby has been successfully deleted."}],
+  Created: {status: 201, group: 'Lobby', ID: 'Created'},
+  UserAdded: {status: 201, group: 'Lobby', ID: 'UserAdded'},
+  Started: {status: 204, group: 'Lobby', ID: 'Started'},
+  Stopped: {status: 204, group: 'Lobby', ID: 'Stopped'},
+  PlayerRemoved: {status: 204, group: 'Lobby', ID: 'PlayerRemoved'},
+  PlayerUpdated: {status: 204, group: 'Lobby', ID: 'PlayerUpdated'},
+  Deleted: {status: 204, group: 'Lobby', ID: 'Deleted'},
   //errors
-  Unauthorized: [{status: 401, message: "Lobby can be deleted only by owner."}],
-  AlreadyExists: [{status: 400, message: "Lobby already exists."}],
-  AlreadyCreated: [{status: 400, message: "User has already created lobby."}],
-  NotExists: [{status: 404, message: "Lobby not exists."}],
-  Full: [{status: 400, message: "No available slots."}],
-  NotFull: [{status: 400, message: "More players required."}],
-  NotReady: [{status: 400, message: "Not each player is ready."}],
-  UserExists: [{status: 400, message: "User already joined in lobby."}],
-  UserNotExists: [{status: 400, message: "User not exists in lobby."}],
-  MasterLeave: [{status: 400, message: "Owner of lobby cannot leave his lobby."}],
-  AlreadyStarted: [{status: 400, message: "Lobby game has been already started."}],
-  AlreadyStopped: [{status: 400, message: "Lobby game has been already stopped."}]
+  Unauthorized: {status: 401, group: 'Lobby', ID: 'Unauthorized'},
+  AlreadyExists: {status: 409, group: 'Lobby', ID: 'AlreadyExists'},
+  AlreadyCreated: {status: 400, group: 'Lobby', ID: 'AlreadyCreated'},
+  NotExists: {status: 404, group: 'Lobby', ID: 'NotExists'},
+  Full: {status: 409, group: 'Lobby', ID: 'Full'},
+  NotFull: {status: 409, group: 'Lobby', ID: 'NotFull'},
+  NotReady: {status: 409, group: 'Lobby', ID: 'NotReady'},
+  UserExists: {status: 409, group: 'Lobby', ID: 'UserExists'},
+  UserNotExists: {status: 404, group: 'Lobby', ID: 'UserNotExists'},
+  MasterLeave: {status: 400, group:' Lobby', ID: 'MasterLeave'},
+  AlreadyStarted: {status: 400, group: 'Lobby', ID: 'AlreadyStarted'},
+  AlreadyStopped: {status: 400, group: 'Lobby', ID: 'AlreadyStopped'}
 };
 
 var scripts = {
   //success
-  Created: [{status: 201, message: "Script has been created."}],
-  Updated: [{status: 204, message: "Script has been updated."}],
-  Deleted: [{status: 204, message: "Script has been successfully deleted."}],
+  Created: {status: 201, group: 'Scripts', ID: 'Created'},
+  Updated: {status: 204, group: 'Scripts', ID: 'Updated'},
+  Deleted: {status: 204, group: 'Scripts', ID: 'Deleted'},
   //errors
-  AlreadyExists: [{status: 400, message: "Script already exists."}],
-  NameAlreadyExists: [{status: 400, message: "Name already in use."}],
-  NotExists: [{status: 404, message: "Script not exists."}]
+  AlreadyExists: {status: 409, group: 'Scripts', ID: 'AlreadyExists'},
+  NameAlreadyExists: {status: 409, group: 'Scripts', ID: 'NameAlreadyExists'},
+  NotExists: {status: 404, group: 'Scripts', ID: 'NotExists'}
 };
 
 module.exports.httpStatuses = {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sharpWarsWebServiceApp')
-  .controller('lobbyCtrl', function ($scope, $window, lobbyService, errorInterpreter, $interval) {
+  .controller('lobbyCtrl', function ($scope, $window, lobbyService, responseInterpreter, $interval, $translate) {
 
     $scope.createLobby = function() {
       $scope.errors = null;
@@ -11,9 +11,9 @@ angular.module('sharpWarsWebServiceApp')
       }
       lobbyService.creteLobby($scope.user.name, $scope.lobby, function(err, result) {
         if(!err && result) {
-          $scope.serverResponse = result[0].message;
+          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -23,7 +23,7 @@ angular.module('sharpWarsWebServiceApp')
         if(!err && result) {
           $scope.lobbyLists = result;
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -42,11 +42,11 @@ angular.module('sharpWarsWebServiceApp')
         lobbyService.joinUserToLobby($scope.user.name, lobby.name, password, function(err, result) {
           if(!err && result) {
             $scope.showPasswordPopUp[index] = false;
-            $scope.serverResponse = result[0].message;
+            $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
             $scope.getActiveLobby();
             $scope.getLobbyList();
           } else {
-            $scope.errors = errorInterpreter.interpreter(err);
+            $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
           }
         });
       }
@@ -57,7 +57,7 @@ angular.module('sharpWarsWebServiceApp')
         if(!err && result) {
           $scope.activeLobby = result[0];
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -69,10 +69,10 @@ angular.module('sharpWarsWebServiceApp')
       lobbyService.leaveLobby($scope.user.name, lobbyName, function (err, result) {
         if (!err && result) {
           $scope.activeLobby = null;
-          $scope.serverResponse = result[0].message;
+          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
           $scope.getLobbyList();
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -81,10 +81,10 @@ angular.module('sharpWarsWebServiceApp')
       lobbyService.deleteLobby($scope.user.name, lobbyName, function (err, result) {
         if (!err && result) {
           $scope.activeLobby = null;
-          $scope.serverResponse = result[0].message;
+          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
           $scope.getLobbyList();
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -92,11 +92,11 @@ angular.module('sharpWarsWebServiceApp')
     $scope.startLobby = function(lobbyName) {
       lobbyService.startLobby($scope.user.name, lobbyName, function(err, result) {
         if (!err && result) {
-          $scope.serverResponse = result[0].message;
+          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
           $scope.getActiveLobby();
           $scope.getLobbyList();
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -104,11 +104,11 @@ angular.module('sharpWarsWebServiceApp')
     $scope.changeMyStatus = function(lobbyName) {
       lobbyService.changePlayerStatus($scope.user.name, lobbyName, function(err, result) {
         if (!err && result) {
-          $scope.serverResponse = result[0].message;
+          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
           $scope.getActiveLobby();
           $scope.getLobbyList();
         } else {
-          $scope.errors = errorInterpreter.interpreter(err);
+          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
         }
       });
     };
@@ -116,8 +116,6 @@ angular.module('sharpWarsWebServiceApp')
 
     $scope.gameStarted = false;
     $scope.$watch('activeLobby', function() {
-      console.log($scope.activeLobby);
-      console.log($scope.gameStarted);
       if($scope.activeLobby.state === 'play') {
         if(!$scope.gameStarted) {
           $scope.gameStarted = true;

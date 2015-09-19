@@ -1,0 +1,140 @@
+{
+  "Generic": {
+    "error": {
+      "pl": {
+        "InternalServerError": "Wewnętrzny błąd serwera"
+      },
+      "en": {
+        "InternalServerError": "Internal server error"
+      }
+    }
+  },
+
+  "Auth": {
+    "error": {
+      "pl": {
+        "Unauthorized": "Błąd autoryzacji",
+        "PasswordEmpty": "Podane hasło nie może być puste",
+        "InvalidToken": "Nieprawidłowy token"
+      },
+      "en": {
+        "Unauthorized": "Unauthorized",
+        "PasswordEmpty": "Password cannot be empty",
+        "InvalidToken": "Token is invalid"
+      }
+    }
+  },
+
+  "Users": {
+    "success": {
+      "pl": {
+        "Created": "Użytkownik został utworzony. Sprawdź skrzynkę pocztową w celu potwierdzenia procesu rejestracji.",
+        "Activated": "Konto zostało aktywowane.",
+        "ResetPasswordTokenSent": "Wiadomość z tokenem resetującym hasło została wysłana na email.",
+        "PasswordChanged": "Hasło zostało zmienione.",
+        "Updated": "Dane zostały zaktualizowane."
+      },
+      "en": {
+        "Created": "User has been created. Check your mailbox to finish registration process.",
+        "Activated": "User has been activated.",
+        "ResetPasswordTokenSent": "Reset password token has been sent.",
+        "PasswordChanged": "Password has been changed.",
+        "Updated": "User has been updated."
+      }
+    },
+    "error": {
+      "pl": {
+        "AlreadyExists": "Taki użytkownik już istnieje w systemie.",
+        "AlreadyActivated": "Konto już zostało aktywowane.",
+        "NotExists": "Użytkownik nie istnieje w systemie.",
+        "NotActivated": "Błąd aktywacji."
+      },
+      "en": {
+        "AlreadyExists": "User is already exists.",
+        "AlreadyActivated": "User Already Activated.",
+        "NotExists": "User Not Exists.",
+        "NotActivated": "User not activated"
+      }
+    }
+  },
+
+  "Lobby": {
+    "success": {
+      "pl": {
+        "Created": "Lobby zostało utworzone.",
+        "UserAdded": "Użytkownik został dodany do lobby.",
+        "Started": "Gra została wystartowana.",
+        "Stopped": "Gra została zatrzymana.",
+        "PlayerRemoved": "Gracz został pomyślnie usuniety z lobby.",
+        "PlayerUpdated": "Status gracza został zmieniony.",
+        "Deleted": "Lobby zostało pomyślnie usunięte."
+      },
+      "en": {
+        "Created": "Lobby has been created.",
+        "UserAdded": "User has been added to the lobby.",
+        "Started": "Lobby has been started the game.",
+        "Stopped": "Lobby has been stopped the game.",
+        "PlayerRemoved": "Player has been removed from the game.",
+        "PlayerUpdated": "Player status has been updated.",
+        "Deleted": "Lobby has been successfully deleted."
+      }
+    },
+    "error": {
+      "pl": {
+        "Unauthorized": "Lobby może zostać usuniete tylko przez właściciela.",
+        "AlreadyExists": "Lobby o podanej nazwie już istnieje.",
+        "AlreadyCreated": "Użytkownik ma już utworzone lobby.",
+        "NotExists": "Lobby o tej nazwie nie istnieje",
+        "Full": "Brak wolnych miejsc.",
+        "NotFull": "Wymagana jest większa ilość graczy.",
+        "NotReady": "Nie wszyscy gracze zgłosili gotowość do gry.",
+        "UserExists": "Użytkownik jest już przypisany do lobby.",
+        "UserNotExists": "Nie ma takiego użytkownika przypisanego do lobby.",
+        "MasterLeave": "Właściciel nie może opuścić swojego lobby.",
+        "AlreadyStarted": "Gra już wystartowała.",
+        "AlreadyStopped": "Gra już jest zakończona."
+      },
+      "en": {
+        "Unauthorized": "Lobby can be deleted only by owner.",
+        "AlreadyExists": "Lobby already exists.",
+        "AlreadyCreated": "User has already created lobby.",
+        "NotExists": "Lobby not exists.",
+        "Full": "No available slots.",
+        "NotFull": "More players required.",
+        "NotReady": "Not each player is ready.",
+        "UserExists":"User already joined in lobby.",
+        "UserNotExists": "User not exists in lobby.",
+        "MasterLeave": "Owner of lobby cannot leave his lobby.",
+        "AlreadyStarted": "Lobby game has been already started.",
+        "AlreadyStopped": "Lobby game has been already stopped."
+      }
+    }
+  },
+
+  "Scripts": {
+    "success": {
+      "pl": {
+        "Created": "Skrypt został pomyślnie utworzony.",
+        "Updated": "Skrypt został zaktualizowany",
+        "Deleted": "Skrypt został pomyślnie usunięty."
+      },
+      "en": {
+        "Created": "Script has been created.",
+        "Updated": "Script has been updated.",
+        "Deleted": "Script has been successfully deleted."
+      }
+    },
+    "error": {
+      "pl": {
+        "AlreadyExists": "Skrypt o podanej nazwie już istnieje",
+        "NameAlreadyExists": "Podana nazwa jest już zajęta.",
+        "NotExists": "Skrypt o podanej nazwie nie istnieje."
+      },
+      "en": {
+        "AlreadyExists": "Script already exists.",
+        "NameAlreadyExists": "Name already in use.",
+        "NotExists": "Script not exists."
+      }
+    }
+  }
+}
