@@ -14,7 +14,7 @@ exports.addUser = function(req, res) {
       if(!err && result) {
         res.send(result);
       } else {
-        res.status(err[0].status).send(err);
+        res.status(err.status).send(err);
       }
     });
   } else {
@@ -39,7 +39,7 @@ exports.logInUser = function(req, res) {
       if(!err && result) {
         res.send(result);
       } else {
-        res.status(err[0].status).send(err);
+        res.status(err.status).send(err);
       }
     })
   } else {
@@ -54,7 +54,7 @@ exports.forgotPassword = function(req, res) {
       if(!err && result) {
         res.send(result);
       } else {
-        res.status(err[0].status).send(err);
+        res.status(err.status).send(err);
       }
     })
   } else {
@@ -74,7 +74,7 @@ exports.resetPassword = function(req, res) {
       if(!err && result) {
         res.send(result);
       } else {
-        res.status(err[0].status).send(err);
+        res.status(err.status).send(err);
       }
     })
   } else {

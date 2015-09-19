@@ -14,7 +14,7 @@ exports.addNewLobby = function(req, res) {
       if(!err && result) {
         res.send(result);
       } else {
-        res.status(err[0].status).send(err);
+        res.status(err.status).send(err);
       }
     });
   } else {
@@ -27,7 +27,7 @@ exports.getListOfLobbies = function(req, res) {
     if(!err && result) {
       res.send(result);
     } else {
-      res.status(err[0].status).send(err);
+      res.status(err.status).send(err);
     }
   });
 };
@@ -37,7 +37,7 @@ exports.getActiveLobbyForUser = function(req, res) {
     if(!err && result) {
       res.send(result);
     } else {
-      res.status(err[0].status).send(err);
+      res.status(err.status).send(err);
     }
   });
 };
@@ -49,7 +49,7 @@ exports.joinToLobby = function(req, res) {
       if (!err && result) {
         res.send(result);
       } else {
-        res.status(err[0].status).send(err);
+        res.status(err.status).send(err);
       }
     });
   } else {
@@ -62,7 +62,7 @@ exports.leaveLobby = function(req, res) {
     if (!err && result) {
       res.send(result);
     } else {
-      res.status(err[0].status).send(err);
+      res.status(err.status).send(err);
     }
   });
 };
@@ -72,7 +72,7 @@ exports.startLobby = function(req, res) {
     if (!err && result) {
       res.send(result);
     } else {
-      res.status(err[0].status).send(err);
+      res.status(err.status).send(err);
     }
   });
 };
@@ -82,7 +82,7 @@ exports.changePlayerStatus = function(req, res) {
     if (!err && result) {
       res.send(result);
     } else {
-      res.status(err[0].status).send(err);
+      res.status(err.status).send(err);
     }
   });
 };
@@ -92,7 +92,7 @@ exports.stopLobby = function(req, res) {
     if (!err && result) {
       res.send(result);
     } else {
-      res.status(err[0].status).send(err);
+      res.status(err.status).send(err);
     }
   });
 };
@@ -102,7 +102,7 @@ exports.deleteLobby = function(req, res) {
     if(!err && result) {
       res.send(result);
     } else {
-      res.status(err[0].status).send(err);
+      res.status(err.status).send(err);
     }
   });
 };

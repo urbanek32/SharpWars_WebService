@@ -13,7 +13,7 @@ exports.addNewScript = function(req, res) {
       if(!err && result) {
         res.send(result);
       } else {
-        res.status(err[0].status).send(err);
+        res.status(err.status).send(err);
       }
     });
   } else {
@@ -26,7 +26,7 @@ exports.getListOfScriptsForUser = function(req, res) {
     if(!err && result) {
       res.send(result);
     } else {
-      res.status(err[0].status).send(err);
+      res.status(err.status).send(err);
     }
   });
 };
@@ -38,7 +38,7 @@ exports.updateScript = function(req, res) {
       if (!err && result) {
         res.send(result);
       } else {
-        res.status(err[0].status).send(err);
+        res.status(err.status).send(err);
       }
     });
   } else {
@@ -51,7 +51,7 @@ exports.getScript = function(req, res) {
     if(!err && result) {
       res.send(result);
     } else {
-      res.status(err[0].status).send(err);
+      res.status(err.status).send(err);
     }
   });
 };
@@ -61,7 +61,7 @@ exports.deleteScript = function(req, res) {
     if(!err && result) {
       res.send(result);
     } else {
-      res.status(err[0].status).send(err);
+      res.status(err.status).send(err);
     }
   });
 };

@@ -16,7 +16,7 @@ angular.module('sharpWarsWebServiceApp', [
     $locationProvider.html5Mode(true);
 
     $translateProvider.useStaticFilesLoader({
-      prefix: 'assets/locale/',
+      prefix: 'assets/locale/client/',
       suffix: '.json'
     });
     $translateProvider.preferredLanguage('pl');

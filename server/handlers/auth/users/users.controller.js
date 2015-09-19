@@ -14,7 +14,7 @@ exports.changePasswordUsingCurrentPwd = function(req, res) {
       if(!err && result) {
         res.send(result);
       } else {
-        res.status(err[0].status).send(err);
+        res.status(err.status).send(err);
       }
     });
   } else {
@@ -28,11 +28,11 @@ exports.getUserInformations = function(req, res) {
       if(!err && result) {
         res.send(result);
       } else {
-        res.status(err[0].status).send(err);
+        res.status(err.status).send(err);
       }
     });
   } else {
-    res.status(401).send(httpStatuses.Auth.Unauthorized[0]);
+    res.status(401).send(httpStatuses.Auth.Unauthorized);
   }
 };
 
@@ -44,11 +44,11 @@ exports.updateUserInformations = function(req, res) {
         if (!err && result) {
           res.send(result);
         } else {
-          res.status(err[0].status).send(err);
+          res.status(err.status).send(err);
         }
       });
     } else {
-      res.status(401).send(httpStatuses.Auth.Unauthorized[0]);
+      res.status(401).send(httpStatuses.Auth.Unauthorized);
     }
   } else {
     res.status(400).send(errors);
