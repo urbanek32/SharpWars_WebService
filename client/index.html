@@ -14,7 +14,6 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-      <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -32,20 +31,28 @@
 
     <!-- Add your site or application content here -->
 
-    <header class="hero-unit" id="banner">
-      <div class="container">
-        <div class="row">
-          <h1> {{ 'PROJECT_NAME' | translate }}</h1>
-          <p class="lead">{{ 'PROJECT_SUBTITLE' | translate }}</p>
-        </div>
-        <div class="row" ng-include="'components/loginbar/loginbar.html'"></div>
+    <header class="row header">
+      <div class="col-lg-3">
+        <h2>{{ 'PROJECT_NAME' | translate }}</h2>
+      </div>
+      <div class="col-lg-7 col-lg-offset-1">
+        <div class="row loginbar" ng-include="'components/loginbar/loginbar.html'"></div>
       </div>
     </header>
 
-    <div ng-include="'components/navbar/navbar.html'"></div>
+    <div class="row" ng-include="'components/errorbar/errorbar.html'"></div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div ng-include="'components/navbar/navbar.html'"></div>
+      </div>
+    </div>
+
+
 
     <div ng-view=""></div>
-    <bottom></bottom>
+
+    <bottom class="row"></bottom>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>

@@ -65,7 +65,7 @@
         "UserAdded": "Użytkownik został dodany do lobby.",
         "Started": "Gra została wystartowana.",
         "Stopped": "Gra została zatrzymana.",
-        "PlayerRemoved": "Gracz został pomyślnie usuniety z lobby.",
+        "PlayerRemoved": "Gracz został pomyślnie usunięty z lobby.",
         "PlayerUpdated": "Status gracza został zmieniony.",
         "Deleted": "Lobby zostało pomyślnie usunięte."
       },

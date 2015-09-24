@@ -6,9 +6,9 @@ angular.module('sharpWarsWebServiceApp')
       $translate.use(language);
     };
     $scope.authors = [
-      {'fName': 'Andrzej', 'lName': 'Joskowski | '},
-      {'fName': 'Adrian', 'lName': 'Pielech | '},
-      {'fName': 'Patryk', 'lName': 'Urban | '},
-      {'fName': 'Michał', 'lName': 'Żyłowski'  }
+      {'fName': 'Patryk', 'lName': 'Urban'},
+      {'fName': 'Andrzej', 'lName': 'Joskowski'},
+      {'fName': 'Michał', 'lName': 'Żyłowski'},
+      {'fName': 'Adrian', 'lName': 'Pielech'}
     ];
   });

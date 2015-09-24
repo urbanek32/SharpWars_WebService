@@ -9,4 +9,18 @@ angular.module('sharpWarsWebServiceApp')
     utilsService.readJsonFile('/assets/locale/server/responses.json', function(json) {
       $scope.serverResponsesTemplates = json;
     });
+
+    $scope.showErrorBanner = false;
+    $scope.errors = null;
+
+    $scope.setMessage = function(isError, errors) {
+      $scope.showBanner = true;
+      $scope.isError = isError;
+      $scope.errors = errors;
+    };
+
+    $scope.hideBanner = function() {
+      $scope.errors = null;
+      $scope.showBanner = false;
+    };
   });

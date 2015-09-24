@@ -1,10 +1,12 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
-  <div class="container">
-    <div collapse="isCollapsed" class="navbar-collapse collapse">
+<nav ng-controller="userCtrl" class="navbar navbar-inverse menu">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <span class="glyphicon glyphicon-home"></span>
+      </a>
+    </div>
+    <div>
       <ul class="nav navbar-nav">
-        <li ng-class="{active: isActive('/')}">
-            <a ng-href="/">{{ 'SUBPAGE_HOME' | translate }}</a>
-        </li>
         <li ng-class="{active: isActive('/profile')}" ng-if="userLoggedIn">
           <a ng-href="/profile">{{ 'SUBPAGE_PROFILE' | translate }}</a>
         </li>
@@ -18,9 +20,9 @@
           <a ng-href="/register">{{ 'CREATE_ACCOUNT_FOR_ME_BUTTON' | translate }}</a>
         </li>
         <li ng-class="{active: isActive('/scripts')}" ng-if="userLoggedIn">
-          <a ng-href="/scripts">{{ 'SUBPGAGE_SCRIPTS' | translate }}</a>
+          <a ng-href="/scripts">{{ 'SUBPAGE_SCRIPTS' | translate }}</a>
         </li>
       </ul>
     </div>
   </div>
-</div>
+</nav>
