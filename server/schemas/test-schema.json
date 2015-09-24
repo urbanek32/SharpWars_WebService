@@ -1,0 +1,21 @@
+{
+  "testString": {
+    "id": "testString",
+    "type": "object",
+    "properties": {
+      "word": {"type": "string"}
+    },
+    "required": ["word"],
+    "maxProperties": 1
+  },
+  "multipleTest": {
+    "id": "multipleTest",
+    "type": "object",
+    "properties": {
+      "word": {"type": "string"},
+      "number": {"type": "number"}
+    },
+    "required": ["word", "number"],
+    "maxProperties": 2
+  }
+}
