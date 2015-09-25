@@ -46,12 +46,12 @@ angular.module('sharpWarsWebServiceApp')
         templateUrl: 'app/views/scripts.html',
         controller: 'scriptsCtrl',
         authentication: true
-      }).when('/scriptsSpec', {
-        templateUrl: 'app/views/scriptsSpec.html',
+      }).when('/createScript', {
+        templateUrl: 'app/views/createScript.html',
         controller: 'scriptsCtrl',
         authentication: true
-      }).when('/scriptsSpec/:scriptName', {
-        templateUrl: 'app/views/scriptsSpec.html',
+      }).when('/scriptsDetails/:scriptName', {
+        templateUrl: 'app/views/createScript.html',
         controller: 'scriptsCtrl',
         authentication: true
       });

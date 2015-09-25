@@ -1,11 +1,20 @@
-<footer class="footer">
-  <div class="container">
-    <p ng-controller="MainCtrl">{{ 'FOOTER_TITLE' | translate }}<br>{{ 'AUTHORS' | translate }}
-    <span ng-repeat="item in authors">
-      {{item.fName + " " + item.lName}}
-    </span>
-    </p>
-    <a ng-controller="MainCtrl" ng-click="changeLanguage('en')"><img ng-src="assets/images/en.png"/></a>
-    <a ng-controller="MainCtrl" ng-click="changeLanguage('pl')"><img ng-src="assets/images/pl.png"/></a>
-  </div>
-</footer>
+<div ng-controller="MainCtrl">
+  <footer class="footer">
+    <div class="col-lg-3 left-side-footer">
+      <h6>{{ "AUTHORS" | translate }}:</h6>
+      <ul ng-repeat="item in authors">
+        <li>
+          {{item.fName + " " + item.lName}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-6 middle-footer">
+      <h2>{{ 'FOOTER_TITLE' | translate }}</h2>
+      <a ng-click="changeLanguage('en')"><img src="assets/images/en.png"/></a>
+      <a ng-click="changeLanguage('pl')"><img src="assets/images/pl.png"/></a>
+    </div>
+    <div class="col-lg-3">
+      <img class="img-rounded logo" src="assets/images/logo.png">
+    </div>
+  </footer>
+</div>
