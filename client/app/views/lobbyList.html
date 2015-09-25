@@ -60,16 +60,6 @@
                 </form>
               </td>
             </tr>
-            <div ng-show="serverResponse" class="alert alert-success">
-              <span class="glyphicon glyphicon-exclamation-sign"></span>
-              {{ serverResponse }}
-            </div>
-            <div ng-show="errors" class="alert alert-danger">
-              <li ng-repeat="error in errors">
-                <span class="glyphicon glyphicon-exclamation-sign"></span>
-                {{error}}
-              </li>
-            </div>
           </tbody>
         </table>
         <div ng-hide="lobbyLists.length">

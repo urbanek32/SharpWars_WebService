@@ -1,19 +1,18 @@
 'use strict';
 
 angular.module('sharpWarsWebServiceApp')
-  .controller('lobbyCtrl', function ($scope, $window, lobbyService, responseInterpreter, $interval, $translate) {
+  .controller('lobbyCtrl', function ($scope, $window, lobbyService, responseInterpreter, $interval, $translate, $location) {
 
     $scope.createLobby = function() {
-      $scope.errors = null;
-      $scope.serverResponse = null;
       if (!$scope.lobby.encrypted) {
         $scope.lobby.encrypted = false;
       }
       lobbyService.creteLobby($scope.user.name, $scope.lobby, function(err, result) {
         if(!err && result) {
-          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
+          $location.path('/lobbyList');
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
@@ -23,7 +22,7 @@ angular.module('sharpWarsWebServiceApp')
         if(!err && result) {
           $scope.lobbyLists = result;
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
@@ -34,19 +33,17 @@ angular.module('sharpWarsWebServiceApp')
     }
 
     $scope.joinToLobby = function(index, lobby, password) {
-      $scope.errors = null;
-      $scope.serverResponse = null;
       if(lobby.encrypted && !password) {
         $scope.showPasswordPopUp[index] = true;
       } else {
         lobbyService.joinUserToLobby($scope.user.name, lobby.name, password, function(err, result) {
           if(!err && result) {
             $scope.showPasswordPopUp[index] = false;
-            $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
+            $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
             $scope.getActiveLobby();
             $scope.getLobbyList();
           } else {
-            $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+            $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
           }
         });
       }
@@ -57,7 +54,7 @@ angular.module('sharpWarsWebServiceApp')
         if(!err && result) {
           $scope.activeLobby = result[0];
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
@@ -69,10 +66,10 @@ angular.module('sharpWarsWebServiceApp')
       lobbyService.leaveLobby($scope.user.name, lobbyName, function (err, result) {
         if (!err && result) {
           $scope.activeLobby = null;
-          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
           $scope.getLobbyList();
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
@@ -81,10 +78,10 @@ angular.module('sharpWarsWebServiceApp')
       lobbyService.deleteLobby($scope.user.name, lobbyName, function (err, result) {
         if (!err && result) {
           $scope.activeLobby = null;
-          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
           $scope.getLobbyList();
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
@@ -92,11 +89,11 @@ angular.module('sharpWarsWebServiceApp')
     $scope.startLobby = function(lobbyName) {
       lobbyService.startLobby($scope.user.name, lobbyName, function(err, result) {
         if (!err && result) {
-          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
           $scope.getActiveLobby();
           $scope.getLobbyList();
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
@@ -104,11 +101,11 @@ angular.module('sharpWarsWebServiceApp')
     $scope.changeMyStatus = function(lobbyName) {
       lobbyService.changePlayerStatus($scope.user.name, lobbyName, function(err, result) {
         if (!err && result) {
-          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
           $scope.getActiveLobby();
           $scope.getLobbyList();
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };

@@ -18,7 +18,9 @@ angular.module('sharpWarsWebServiceApp')
         var currentLanguage = $translateProvider.use();
 
         if(Math.floor(serverResponse.status / 100) === 2) {
-          return dialogTemplates[serverResponse.group]['success'][currentLanguage][serverResponse.ID];
+          console.log(serverResponse);
+          console.log(dialogTemplates[serverResponse.group]['success'][currentLanguage][serverResponse.ID]);
+          return [dialogTemplates[serverResponse.group]['success'][currentLanguage][serverResponse.ID]];
         } else {
           return [dialogTemplates[serverResponse.group]['error'][currentLanguage][serverResponse.ID] || 'Unknown platform error' ];
         }

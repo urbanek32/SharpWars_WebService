@@ -21,9 +21,8 @@ angular.module('sharpWarsWebServiceApp')
           $window.sessionStorage.sessionUsername = login;
           $scope.$parent.user.name = login;
           $scope.user = null;
-          $scope.errors = null;
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
@@ -49,14 +48,12 @@ angular.module('sharpWarsWebServiceApp')
     }
 
     $scope.registerUserForm = function(newUser) {
-      $scope.errors = null;
-      $scope.registrationSuccess = false;
       loginService.register(newUser, function(err, result) {
         if(!err && result) {
-          $scope.registrationSuccess = true;
-          $scope.registrationServerResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
+          $location.path('/');
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
@@ -66,7 +63,7 @@ angular.module('sharpWarsWebServiceApp')
         if(!err) {
           $scope.user = userData;
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
@@ -85,8 +82,9 @@ angular.module('sharpWarsWebServiceApp')
       loginService.updateUserData($scope.user.username, $scope.user, function(err, result){
         if(!err && result) {
           $scope.editMode = false;
+          $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
@@ -95,34 +93,30 @@ angular.module('sharpWarsWebServiceApp')
       loginService.saveUserPassword($scope.user, function(err, result) {
         if(!err && result) {
           $scope.isShownPasswordForm = false;
-          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
 
     $scope.resetPasswordByEmail = function() {
-      $scope.errors = null;
-      $scope.serverResponse = null;
       loginService.forgotPassword($scope.passwordReset, function(err, result) {
         if(!err && result) {
-          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };
 
     $scope.resetPasswordForUser = function() {
-      $scope.errors = null;
-      $scope.serverResponse = null;
       loginService.resetPasswordRequest($scope.passwordReset, $routeParams.username, $routeParams.token, function(err, result) {
         if(!err && result) {
-          $scope.serverResponse = responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
           $scope.activationTimer = $interval(callAtIntervalAfterActivation, 5000);
         } else {
-          $scope.errors = responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate);
+          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }
       });
     };

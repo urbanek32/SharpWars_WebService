@@ -1,0 +1,14 @@
+<div>
+  <div ng-show="showBanner" class="col-lg-12 banner" ng-class="isError ? 'error-banner' : 'success-banner'">
+    <div class="col-lg-1">
+      <span ng-click='hideBanner()' id="hideBanner" class="glyphicon glyphicon-remove"></span>
+    </div>
+    <div class="col-lg-11">
+      <li ng-repeat="error in errors">
+        <span class="glyphicon glyphicon-exclamation-sign"></span>
+        {{error}}
+      </li>
+    </div>
+  </div>
+</div>
+
