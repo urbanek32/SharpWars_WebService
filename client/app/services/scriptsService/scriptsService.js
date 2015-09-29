@@ -54,7 +54,7 @@ angular.module('sharpWarsWebServiceApp')
         description: script.description,
         code: script.code
       };
-      $http.put('/auth/api/users/' + username + '/scripts/update/' + oldScriptName, body)
+      $http.post('/auth/api/users/' + username + '/scripts/update/' + oldScriptName, body)
         .success(function(data) {
           callback(null, data);
         })

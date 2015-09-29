@@ -27,7 +27,7 @@ angular.module('sharpWarsWebServiceApp')
       var body = {
         password: password
       };
-      $http.put('/auth/api/users/' + username + '/lobby/join/' + lobbyName, body)
+      $http.post('/auth/api/users/' + username + '/lobby/join/' + lobbyName, body)
         .success(function(data) {
           callback(null, data);
         })
@@ -47,7 +47,7 @@ angular.module('sharpWarsWebServiceApp')
     };
 
     this.leaveLobby = function (username, lobbyName, callback) {
-      $http.put('/auth/api/users/' + username + '/lobby/leave/' + lobbyName)
+      $http.post('/auth/api/users/' + username + '/lobby/leave/' + lobbyName)
         .success(function(data) {
           callback(null, data);
         })
@@ -67,7 +67,7 @@ angular.module('sharpWarsWebServiceApp')
     };
 
     this.startLobby = function(username, lobbyName, callback) {
-      $http.put('/auth/api/users/' + username + '/lobby/start/' + lobbyName)
+      $http.post('/auth/api/users/' + username + '/lobby/start/' + lobbyName)
         .success(function(data) {
           callback(null, data);
         })
@@ -77,7 +77,7 @@ angular.module('sharpWarsWebServiceApp')
     };
 
     this.changePlayerStatus = function(username, lobbyName, callback) {
-      $http.put('/auth/api/users/' + username + '/lobby/' + lobbyName + '/status')
+      $http.post('/auth/api/users/' + username + '/lobby/' + lobbyName + '/status')
         .success(function(data) {
           callback(null, data);
         })
