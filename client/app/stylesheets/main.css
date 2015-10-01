@@ -14,9 +14,9 @@
 }
 
 .header {
-  background-color: #004020;
+  background-color: #be5f00;
   color: #ffffff;
-  height: 150px;
+  min-height: 150px;
 }
 
 .header h2 {
@@ -80,8 +80,8 @@
 
 .footer {
   margin-top: 100px;
-  height: 150px;
-  background-color: #004020;
+  min-height: 150px;
+  background-color: #be5f00;
   color: #ffffff;
   width: 100%;
 }
