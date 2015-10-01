@@ -3,8 +3,12 @@
 angular.module('sharpWarsWebServiceApp')
   .service('lobbyService', function ($http) {
 
-    this.creteLobby = function(username, lobby, callback) {
-      $http.post('/auth/api/users/' + username + '/lobby/add', lobby)
+    this.createLobby = function(username, ip, lobby, callback) {
+      var body = {
+        lobby: lobby,
+        masterPublicIP: ip
+      };
+      $http.post('/auth/api/users/' + username + '/lobby/add', body)
         .success(function(data) {
           callback(null, data);
         })
@@ -23,9 +27,10 @@ angular.module('sharpWarsWebServiceApp')
         });
     };
 
-    this.joinUserToLobby = function (username, lobbyName, password, callback){
+    this.joinUserToLobby = function (username, lobbyName, ip, password, callback){
       var body = {
-        password: password
+        password: password,
+        publicIP: ip
       };
       $http.post('/auth/api/users/' + username + '/lobby/join/' + lobbyName, body)
         .success(function(data) {

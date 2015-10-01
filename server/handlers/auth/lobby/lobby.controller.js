@@ -4,13 +4,12 @@ var _ = require('lodash'),
   lobbyManager = require('../../../api/auth/lobby'),
   schemaValidator = require('../../../lib/schema-validator/schemaValidator'),
   lobbySchemas = require('../../../schemas/lobby-schema.json'),
-  httpStatuses = require('../../../components/httpStatuses/index').httpStatuses,
-  remoteAddressExtractor = require('../../../lib/remoteAddressExtractor/remoteAddressExtractor');
+  httpStatuses = require('../../../components/httpStatuses/index').httpStatuses;
 
 exports.addNewLobby = function(req, res) {
   var errors = schemaValidator.validate(req.body, lobbySchemas.addNewLobby).errors;
   if(errors.length === 0) {
-    lobbyManager.addNewLobby(req.user.username, remoteAddressExtractor(req), req.body, function(err, result) {
+    lobbyManager.addNewLobby(req.user.username, req.body, function(err, result) {
       if(!err && result) {
         res.send(result);
       } else {
@@ -45,7 +44,7 @@ exports.getActiveLobbyForUser = function(req, res) {
 exports.joinToLobby = function(req, res) {
   var errors = schemaValidator.validate(req.body, lobbySchemas.joinToLobby).errors;
   if(errors.length === 0) {
-    lobbyManager.joinToLobby(req.user.username, remoteAddressExtractor(req), req.params.lobby, req.body, function (err, result) {
+    lobbyManager.joinToLobby(req.user.username, req.params.lobby, req.body, function (err, result) {
       if (!err && result) {
         res.send(result);
       } else {
