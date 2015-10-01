@@ -104,6 +104,7 @@ angular.module('sharpWarsWebServiceApp')
       loginService.forgotPassword($scope.passwordReset, function(err, result) {
         if(!err && result) {
           $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
+          $location.path('/');
         } else {
           $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
         }

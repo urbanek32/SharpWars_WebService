@@ -78,5 +78,6 @@
   "SCRIPTS_CODE": "Kod",
   "SCRIPT_EDIT": "Edycja skryptu",
   "BACK_TO_SCRIPTS": "Powrót do listy moich skryptów...",
-  "EMPTY_LIST": "Lista jest pusta."
+  "EMPTY_LIST": "Lista jest pusta.",
+  "NAME_FORMAT": "Nazwa nie może zawierać spacji."
 }
