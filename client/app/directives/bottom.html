@@ -1,6 +1,6 @@
 <div ng-controller="MainCtrl">
-  <footer class="footer">
-    <div class="col-lg-3 left-side-footer">
+  <footer class="footer col-lg-12 col-md-12 col-sm-12">
+    <div class="col-lg-3 col-md-3 col-sm-3 left-side-footer">
       <h6>{{ "AUTHORS" | translate }}:</h6>
       <ul ng-repeat="item in authors">
         <li>
@@ -8,12 +8,12 @@
         </li>
       </ul>
     </div>
-    <div class="col-lg-6 middle-footer">
+    <div class="col-lg-6 col-md-6 col-sm-6 middle-footer">
       <h2>{{ 'FOOTER_TITLE' | translate }}</h2>
       <a ng-click="changeLanguage('en')"><img src="assets/images/en.png"/></a>
       <a ng-click="changeLanguage('pl')"><img src="assets/images/pl.png"/></a>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-md-3 col-sm-3">
       <img class="img-rounded logo" src="assets/images/logo.png">
     </div>
   </footer>
