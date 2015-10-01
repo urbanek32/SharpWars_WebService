@@ -33,8 +33,7 @@
               </td>
               <td>
                 <form ng-show="showPasswordPopUp[$index]" ng-submit="joinToLobby($index, lobby, password)">
-                  <label for="password">{{ "PASSWORD" | translate }}</label>
-                  <input id="password" type="password" ng-model="password">
+                  <input id="password" type="password" placeholder='{{ "PASSWORD" | translate }}' ng-model="password">
                   <button type="submit" class="btn btn-success btn-sm">{{ 'LOBBY_JOIN' | translate }}</button>
                   <button type="button" class="btn btn-warning btn-sm" ng-click="showPasswordPopUp[$index] = false">
                     {{ 'CANCEL_BUTTON' | translate }}</button>
