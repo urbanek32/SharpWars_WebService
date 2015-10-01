@@ -5,11 +5,12 @@
       <form name="lobbyCreateForm" class="form col-lg-5" ng-submit="createLobby()">
         <div class="form-group">
           <label for="name">{{ 'LOBBY_CREATE_NAME' | translate }}*:</label>
-          <input class="form-control" id="name" ng-model="lobby.name" required>
+          <input class="form-control" id="name" ng-model="lobby.name"
+                 title="{{ 'NAME_FORMAT' | translate }}" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]+" required>
         </div>
         <div class="form-group">
           <label for="countOfMembers">{{ 'LOBBY_CREATE_COUNT' | translate }}*:</label>
-          <input class="form-control" type="number" min="2" max="5" id="countOfMembers" ng-model="lobby.countOfMembers" required>
+          <input class="form-control" type="number" min="1" max="5" id="countOfMembers" ng-model="lobby.countOfMembers" required>
         </div>
         <div class="form-group">
           <label for="encrypted">{{ 'PASSWORD' | translate }}:</label>

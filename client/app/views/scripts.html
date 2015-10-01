@@ -1,32 +1,32 @@
-<div class="container" ng-init="getUserInfo($parent.user.name)">
-  <div class="row" ng-init="getScriptsList()">
-    <div class="col-lg-12">
-      <h1 class="page-header">{{ "YOUR_SCRIPTS_LIST" | translate }}:</h1>
-      <table class="table" ng-show="scriptLists.length">
-        <thead>
-          <tr>
-            <th>{{ "SCRIPTS_NAME" | translate }}</th>
-            <th>{{ "SCRIPTS_DESCRIPTION" | translate }}</th>
-            <th>{{ "LOBBY_ACTIONS" | translate }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="script in scriptLists">
-            <td>{{ script.name }}</td>
-            <td>{{ script.description }}</td>
-            <td><span ng-click="deleteScript(script.name)" title="{{ 'DELETE' | translate }}"
-                      class="glyphicon glyphicon-trash btn btn-warning btn-sm"></span>
+<div class="panel" ng-init="getUserInfo($parent.user.name)">
+  <div class="panel-heading">
+    <h2>{{ "YOUR_SCRIPTS_LIST" | translate }}</h2>
+  </div>
+  <div class="panel-body" ng-init="getScriptsList()">
+    <table class="table" ng-show="scriptLists.length">
+      <thead>
+      <tr>
+        <th>{{ "SCRIPTS_NAME" | translate }}</th>
+        <th>{{ "SCRIPTS_DESCRIPTION" | translate }}</th>
+        <th>{{ "LOBBY_ACTIONS" | translate }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="script in scriptLists">
+        <td>{{ script.name }}</td>
+        <td>{{ script.description }}</td>
+        <td><span ng-click="deleteScript(script.name)" title="{{ 'DELETE' | translate }}"
+                  class="glyphicon glyphicon-trash btn btn-warning btn-sm"></span>
             <span ng-click="editScript(script)" title="{{ 'EDIT_BUTTON' | translate }}"
-                      class="glyphicon glyphicon-pencil btn btn-info btn-sm"></span></td>
-          </tr>
-        </tbody>
-      </table>
-      <div ng-hide="scriptLists.length">
-        <p>{{ "EMPTY_LIST" | translate }}</p>
-      </div>
+                  class="glyphicon glyphicon-pencil btn btn-info btn-sm"></span></td>
+      </tr>
+      </tbody>
+    </table>
+    <div ng-hide="scriptLists.length">
+      <p>{{ "EMPTY_LIST" | translate }}</p>
     </div>
-    <div class="col-lg-12">
-      <a ng-href="/createScript"><button class="btn btn-success btn-sm">{{ 'SCRIPTS_CREATE_NEW' | translate }}</button></a>
-    </div>
+  </div>
+  <div class="col-lg-12">
+    <a ng-href="/createScript"><button class="btn btn-success btn-sm">{{ 'SCRIPTS_CREATE_NEW' | translate }}</button></a>
   </div>
 </div>

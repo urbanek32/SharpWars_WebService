@@ -1,61 +1,67 @@
-<div class="container" ng-init="getUserInfo($parent.user.name)">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <h1> {{ 'USER_PROFILE' | translate }}</h1>
-      </div>
-      <div class="content">
-        <form name="userInfoForm" class="form col-lg-5" ng-submit="saveEditedUserData()">
-          <div class="form-group">
-            <label for="name">{{ 'NAME' | translate }}:</label>
-            <input class="form-control" id="name" ng-model="user.name" ng-disabled="true">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>{{ 'USER_PROFILE' | translate }}</h2>
+  </div>
+  <div class="panel-body" ng-init="getUserInfo($parent.user.name)">
+    <div>
+      <form name="userInfoForm" class="form col-lg-5" ng-submit="saveEditedUserData()">
+        <div class="form-group">
+          <label for="name">{{ 'NAME' | translate }}:</label>
+          <input class="form-control" id="name" ng-model="user.name" ng-disabled="true">
+        </div>
+        <div class="form-group">
+          <label for="surname">{{ 'SURNAME' | translate }}:</label>
+          <input class="form-control" id="surname" ng-model="user.surname" ng-disabled="true">
+        </div>
+        <div class="form-group">
+          <label for="email">{{ 'REGISTRATION_MAIL' | translate }}*:</label>
+          <input class="form-control" type="email" id="email" ng-model="user.email" ng-disabled="!editMode" required>
+        </div>
+        <div class="form-group">
+          <label for="registrationDate">{{ 'REGISTRATION_DATE' | translate }}:</label>
+          <textarea class="form-control" id="registrationDate" ng-disabled="true">{{user.created | date:'medium'}}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="location">{{ 'LOCATION' | translate }}:</label>
+          <input class="form-control" type="text" id="location" ng-model="user.location" ng-disabled="!editMode">
+        </div>
+        <div class="form-group">
+          <label for="hobby">{{ 'HOBBY' | translate }}:</label>
+          <textarea class="form-control" type="text" id="hobby" ng-model="user.hobby" ng-disabled="!editMode"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default btn-success" ng-if="editMode">
+          {{ 'SAVE_BUTTON' | translate }}
+        </button>
+        <button type="button" ng-click="editUserData()" class="btn btn-default btn-warning">
+          {{ !editMode ? ('EDIT_BUTTON' | translate) : ('CANCEL_BUTTON' | translate)}}
+        </button>
+      </form>
+      <div class="col-lg-offset-1 col-lg-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <label>{{ 'REGISTRATION_PASSWORD' | translate }}:</label>
           </div>
-          <div class="form-group">
-            <label for="surname">{{ 'SURNAME' | translate }}:</label>
-            <input class="form-control" id="surname" ng-model="user.surname" ng-disabled="true">
+          <div class="panel-body">
+            <form name="passwordChangeForm" class="form col-lg-12" ng-submit="changePassword()">
+              <div class="form-group">
+                <label for="oldPassword">{{ 'OLD_PASSWORD' | translate }}*:</label>
+                <input class="form-control" type="password" id="oldPassword" ng-model="user.oldPassword" required>
+              </div>
+              <div class="form-group">
+                <label for="newPassword">{{ 'REGISTRATION_PASSWORD' | translate }}*:</label>
+                <input id="newPassword" type="password" minlength="6" ng-model="user.newPassword" class="form-control" onchange="confirmPassword.setCustomValidity(this.value !== confirmPassword.value ? 'Password not match' : '')" required>
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">{{ 'REGISTRATION_PASSWORD_REPEAT' | translate }}*:</label>
+                <input id="confirmPassword" type="password" class="form-control"
+                       onchange="this.setCustomValidity(this.value !== newPassword.value ? 'Password not match' : '')" required>
+              </div>
+              <button type="submit" class="btn btn-default btn-success">{{ 'CHANGE_PASSWORD' | translate }}</button>
+            </form>
           </div>
-          <div class="form-group">
-            <label for="email">{{ 'REGISTRATION_MAIL' | translate }}*:</label>
-            <input class="form-control" type="email" id="email" ng-model="user.email" ng-disabled="!editMode" required>
-          </div>
-          <div class="form-group">
-            <label for="registrationDate">{{ 'REGISTRATION_DATE' | translate }}:</label>
-            <textarea class="form-control" id="registrationDate" ng-disabled="true">{{user.created | date:'medium'}}</textarea>
-          </div>
-          <div class="form-group">
-            <label for="location">{{ 'LOCATION' | translate }}:</label>
-            <input class="form-control" type="text" id="location" ng-model="user.location" ng-disabled="!editMode">
-          </div>
-          <div class="form-group">
-            <label for="hobby">{{ 'HOBBY' | translate }}:</label>
-            <textarea class="form-control" type="text" id="hobby" ng-model="user.hobby" ng-disabled="!editMode"></textarea>
-          </div>
-          <button type="submit" class="btn btn-default btn-success" ng-if="editMode">{{ 'SAVE_BUTTON' | translate }}</button>
-          <button type="button" ng-click="editUserData()" class="btn btn-default btn-warning">{{ !editMode ? ('EDIT_BUTTON' | translate) : ('CANCEL_BUTTON' | translate)}}</button>
-        </form>
-        <div class="col-lg-offset-1 col-lg-4">
-          <div class="form-group">
-            <label for="password">{{ 'REGISTRATION_PASSWORD' | translate }}:</label>
-            <a ng-click="showPasswordForm()" id="password">{{ 'CHANGE_PASSWORD' | translate }}</a>
-          </div>
-          <form name="passwordChangeForm" class="form col-lg-12" ng-show="isShownPasswordForm" ng-submit="changePassword()">
-            <div class="form-group">
-              <label for="oldPassword">{{ 'OLD_PASSWORD' | translate }}*:</label>
-              <input class="form-control" type="password" id="oldPassword" ng-model="user.oldPassword" required>
-            </div>
-            <div class="form-group">
-              <label for="newPassword">{{ 'REGISTRATION_PASSWORD' | translate }}*:</label>
-              <input id="newPassword" type="password" minlength="6" ng-model="user.newPassword" class="form-control" onchange="confirmPassword.setCustomValidity(this.value !== confirmPassword.value ? 'Password not match' : '')" required>
-            </div>
-            <div class="form-group">
-              <label for="confirmPassword">{{ 'REGISTRATION_PASSWORD_REPEAT' | translate }}*:</label>
-              <input id="confirmPassword" type="password" class="form-control"
-                     onchange="this.setCustomValidity(this.value !== newPassword.value ? 'Password not match' : '')" required>
-            </div>
-            <button type="submit" class="btn btn-default btn-success">{{ 'CHANGE_PASSWORD' | translate }}</button>
-          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+
