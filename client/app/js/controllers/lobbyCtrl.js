@@ -1,18 +1,23 @@
 'use strict';
 
 angular.module('sharpWarsWebServiceApp')
-  .controller('lobbyCtrl', function ($scope, $window, lobbyService, responseInterpreter, $interval, $translate, $location) {
+  .controller('lobbyCtrl', function ($scope, $window, lobbyService, responseInterpreter, utilsService,
+                                     $interval, $translate, $location) {
 
     $scope.createLobby = function() {
       if (!$scope.lobby.encrypted) {
         $scope.lobby.encrypted = false;
       }
-      lobbyService.creteLobby($scope.user.name, $scope.lobby, function(err, result) {
-        if(!err && result) {
-          $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
-          $location.path('/lobbyList');
-        } else {
-          $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
+      utilsService.getMyPublicIp(function(ip) {
+        if (ip) {
+          lobbyService.createLobby($scope.user.name, ip, $scope.lobby, function (err, result) {
+            if (!err && result) {
+              $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
+              $location.path('/lobbyList');
+            } else {
+              $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
+            }
+          });
         }
       });
     };
@@ -36,16 +41,21 @@ angular.module('sharpWarsWebServiceApp')
       if(lobby.encrypted && !password) {
         $scope.showPasswordPopUp[index] = true;
       } else {
-        lobbyService.joinUserToLobby($scope.user.name, lobby.name, password, function(err, result) {
-          if(!err && result) {
-            $scope.showPasswordPopUp[index] = false;
-            $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
-            $scope.getActiveLobby();
-            $scope.getLobbyList();
-          } else {
-            $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
+        utilsService.getMyPublicIp(function(ip) {
+          if(ip) {
+            lobbyService.joinUserToLobby($scope.user.name, lobby.name, ip, password, function(err, result) {
+              if(!err && result) {
+                $scope.showPasswordPopUp[index] = false;
+                $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
+                $scope.getActiveLobby();
+                $scope.getLobbyList();
+              } else {
+                $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
+              }
+            });
           }
         });
+
       }
     };
 

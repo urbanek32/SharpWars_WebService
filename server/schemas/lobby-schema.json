@@ -3,25 +3,33 @@
     "id": "AddNewLobby",
     "type": "object",
     "properties": {
-      "countOfMembers": {
-        "type": "number",
-        "minimum": 2,
-        "maximum": 5
+      "lobby": {
+        "type": "object",
+        "properties": {
+          "countOfMembers": {
+            "type": "number",
+            "minimum": 2,
+            "maximum": 5
+          },
+          "password": {"type": "string"},
+          "encrypted": {"type": "boolean"},
+          "name": {"type": "string"}
+        }
       },
-      "password": {"type": "string"},
-      "encrypted": {"type": "boolean"},
-      "name": {"type": "string"}
+      "masterPublicIP": {"type": "string"}
     },
-    "required": ["countOfMembers", "name", "encrypted"],
-    "minProperties": 3,
-    "maxProperties": 4
+    "required": ["masterPublicIP", "lobby"],
+    "minProperties": 2,
+    "maxProperties": 2
   },
   "joinToLobby": {
     "id": "JoinToLobby",
     "type": "object",
     "properties": {
-      "password": {"type": "string"}
+      "password": {"type": "string"},
+      "publicIP": {"type": "string"}
     },
-    "maxProperties": 1
+    "required": ["publicIP"],
+    "maxProperties": 2
   }
 }

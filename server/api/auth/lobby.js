@@ -7,18 +7,18 @@ var lobbyEntities = require('../../entities/lobby-entities'),
   logger = require('../../lib/logger/logger').init();
 
 
-var addNewLobby = function(username, userRemoteAddress, options, callback) {
+var addNewLobby = function(username, options, callback) {
   lobbyEntities.getActiveLobby(username, function(err, lobbies) {
     if(!err && lobbies) {
       if(lobbies.length === 0) {
-        var newLobby = options;
+        var newLobby = options.lobby;
         newLobby.master = username;
         newLobby.state = lobbyStates.WAITING;
         newLobby.players = [
           {
             username: newLobby.master,
             state: lobbyStates.WAITING,
-            remoteAddress: userRemoteAddress
+            publicIP: options.masterPublicIP
           }
         ];
 
@@ -103,7 +103,7 @@ var isUserAlreadyExistsInLobby = function(username, lobbyPlayers) {
   return false;
 };
 
-var joinToLobby = function(username, userRemoteAddress, lobbyName, options, callback) {
+var joinToLobby = function(username, lobbyName, options, callback) {
   lobbyEntities.getActiveLobby(username, function (err, lobbies) {
     if (!err && lobbies) {
       if (lobbies.length === 0) {
@@ -120,7 +120,7 @@ var joinToLobby = function(username, userRemoteAddress, lobbyName, options, call
                   var newUser = {
                     username: username,
                     state: lobbyStates.WAITING,
-                    remoteAddress: userRemoteAddress
+                    publicIP: options.publicIP
                   };
                   lobbyEntities.addUserToLobby(lobbyName, newUser, function (err, result) {
                     if (!err) {

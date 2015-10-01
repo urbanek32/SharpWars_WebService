@@ -7,4 +7,10 @@ angular.module('sharpWarsWebServiceApp')
         callback(data.data);
       });
     };
+
+    this.getMyPublicIp = function(callback) {
+      $http.get('http://ipinfo.io').then(function(data) {
+        callback(data.data.ip);
+      });
+    };
   });
