@@ -1,3 +1,12 @@
 {
-  
+  "finishOnePlayer": {
+    "id": "FinishOnePlayer",
+    "type": "object",
+    "properties": {
+      "score": {"type": "number"},
+      "gameTime": {"type": "number"}
+    },
+    "required": ["score", "gameTime"],
+    "maxProperties": 2
+  }
 }

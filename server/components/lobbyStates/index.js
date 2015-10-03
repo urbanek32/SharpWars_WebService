@@ -3,7 +3,8 @@
 var states = {
   WAITING: "waiting",
   READY: "ready",
-  PLAY: "play"
+  PLAY: "play",
+  FINISHED: "finished"
 };
 
 module.exports = states;
