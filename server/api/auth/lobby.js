@@ -319,7 +319,7 @@ var changePlayerStatus = function(username, lobbyName, callback) {
   lobbyEntities.findLobbyByName(lobbyName, function(err, lobby) {
     if(!err) {
       if(lobby) {
-        if(lobby.state !== lobbyStates.PLAY) {
+        if(lobby.state !== lobbyStates.PLAY && lobby.state !== lobbyStates.FINISHED) {
           lobbyEntities.changeLobbyStatus(lobbyName, lobbyStates.WAITING, updatePlayerStatus(username, lobby.players),
             function(err, result) {
             if(!err) {

@@ -4,8 +4,10 @@ var mongo = require('mongoskin'),
 
 db.bind('scores');
 
-module.exports.addNewLobby = function(newLobby, callback) {
-  db.scores.find(function(err, result) {
+module.exports.setScore = function(username, lastGameScore, lastGameTime, callback) {
+  db.scores.update({username: username}, {$set: {lastGameScore: lastGameScore, lastGameTime: lastGameTime},
+                                      $inc: {summaryGameScore: lastGameScore, summaryGameTime: lastGameTime}},
+                  {upsert: true}, function(err, result) {
     callback(err, result);
   });
 };

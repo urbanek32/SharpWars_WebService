@@ -50,7 +50,9 @@ var lobby = {
   UserNotExists: {status: 404, group: 'Lobby', ID: 'UserNotExists'},
   MasterLeave: {status: 400, group:' Lobby', ID: 'MasterLeave'},
   AlreadyStarted: {status: 400, group: 'Lobby', ID: 'AlreadyStarted'},
-  AlreadyStopped: {status: 400, group: 'Lobby', ID: 'AlreadyStopped'}
+  AlreadyStopped: {status: 400, group: 'Lobby', ID: 'AlreadyStopped'},
+  NotAssignedToAnyLobby: {status: 404, group: 'Lobby', ID: 'NotAssignedToAnyLobby'},
+  PlayerNotStartedYetOrFinished: {status: 409, group: 'Lobby', ID: 'PlayerNotStartedYetOrFinished'}
 };
 
 var scripts = {
@@ -64,12 +66,18 @@ var scripts = {
   NotExists: {status: 404, group: 'Scripts', ID: 'NotExists'}
 };
 
+var scores = {
+  //success
+  Added: {status: 201, group: 'Scores', ID: 'Added'}
+};
+
 module.exports.httpStatuses = {
   Generic: generic,
   Users: users,
   Auth: auth,
   Lobby: lobby,
-  Scripts: scripts
+  Scripts: scripts,
+  Scores: scores
 };
 
 module.exports[404] = function pageNotFound(req, res) {
