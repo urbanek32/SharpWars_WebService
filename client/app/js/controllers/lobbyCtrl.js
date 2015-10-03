@@ -120,10 +120,17 @@ angular.module('sharpWarsWebServiceApp')
       });
     };
 
+    var findMeInArray = function(players) {
+      for(var i in players) {
+        if(players[i].username === $scope.user.name) {
+          return players[i];
+        }
+      }
+    };
 
     $scope.gameStarted = false;
     $scope.$watch('activeLobby', function() {
-      if($scope.activeLobby.state === 'play') {
+      if($scope.activeLobby.state === 'play' && findMeInArray($scope.activeLobby.players).state !== 'finished') {
         if(!$scope.gameStarted) {
           $scope.gameStarted = true;
           $window.alert('No to startuj grę');
