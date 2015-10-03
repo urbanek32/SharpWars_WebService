@@ -17,3 +17,11 @@ module.exports.findScoresByUsername = function(username, callback) {
     callback(err, result);
   })
 };
+
+module.exports.getTopScores = function(criteria, order, limit, callback) {
+  var query = {};
+  query[criteria] = order;
+  db.scores.find().sort(query).limit(limit).toArray(function(err, result) {
+    callback(err, result);
+  });
+};

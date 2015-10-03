@@ -30,3 +30,14 @@ exports.getScoresForUser = function(req, res) {
     }
   });
 };
+
+
+exports.getTopScores = function(req, res) {
+  scoresManager.getTopScores(req.params.criteria, req.params.sorting, req.params.limit, function (err, result) {
+    if (!err && result) {
+      res.send(result);
+    } else {
+      res.status(err.status).send(err);
+    }
+  });
+};
