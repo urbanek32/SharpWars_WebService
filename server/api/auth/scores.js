@@ -74,7 +74,26 @@ var getScoresForUser = function(username, callback) {
   })
 };
 
+var getTopScores = function(criteria, sorting, limit, callback) {
+  var order = sorting.toLowerCase() === 'asc' ? 1 : -1;
+  scoresEntities.getTopScores(criteria, order, parseInt(limit), function(err, scores) {
+    if(!err) {
+      if(scores.length) {
+        logger.info("Top scores sent.");
+        callback(null, scores);
+      } else {
+        logger.debug("Empty scores database");
+        callback(httpStatuses.Scores.EmptyScores, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null);
+    }
+  })
+};
+
 module.exports = {
   setScores: setScores,
-  getScoresForUser: getScoresForUser
+  getScoresForUser: getScoresForUser,
+  getTopScores: getTopScores
 };
