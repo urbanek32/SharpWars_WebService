@@ -153,7 +153,10 @@ var logInUser = function(options, callback) {
       if(user) {
         if(passwordHash.verify(options.password, user.password)) {
           if(user.activated) {
-            var token = jwt.sign(user, config.auth.key, { expiresInMinutes: config.auth.expirationTokenTime });
+            var tokenData = {
+              username: user.username
+            };
+            var token = jwt.sign(tokenData, config.auth.key, { expiresInMinutes: config.auth.expirationTokenTime });
             logger.debug('User authorized: Token send.');
             callback(null, {token: token});
           } else {
