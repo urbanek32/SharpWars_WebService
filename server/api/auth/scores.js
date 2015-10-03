@@ -56,6 +56,25 @@ var setScores = function(username, options, callback) {
  });
 };
 
+var getScoresForUser = function(username, callback) {
+  scoresEntities.findScoresByUsername(username, function(err, scores) {
+    if(!err) {
+      if(scores) {
+        logger.info("User " + username + " scores sent.");
+        delete scores._id;
+        callback(null, scores);
+      } else {
+        logger.debug("Cannot get user scores: User " + username + " has not any scores.");
+        callback(httpStatuses.Scores.EmptyScores, null);
+      }
+    } else {
+      logger.error("Internal Server Error: " + JSON.stringify(err));
+      callback(httpStatuses.Generic.InternalServerError, null);
+    }
+  })
+};
+
 module.exports = {
-  setScores: setScores
+  setScores: setScores,
+  getScoresForUser: getScoresForUser
 };

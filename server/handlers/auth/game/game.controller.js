@@ -20,3 +20,13 @@ exports.setScores = function(req, res) {
     res.status(400).send(errors);
   }
 };
+
+exports.getScoresForUser = function(req, res) {
+  scoresManager.getScoresForUser(req.user.username, function (err, result) {
+    if (!err && result) {
+      res.send(result);
+    } else {
+      res.status(err.status).send(err);
+    }
+  });
+};

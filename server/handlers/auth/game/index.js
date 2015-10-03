@@ -6,5 +6,6 @@ var controller = require('./game.controller.js');
 var router = express.Router();
 
 router.post('/scores', controller.setScores);
+router.get('/scores', controller.getScoresForUser);
 
 module.exports = router;
