@@ -11,3 +11,9 @@ module.exports.setScore = function(username, lastGameScore, lastGameTime, callba
     callback(err, result);
   });
 };
+
+module.exports.findScoresByUsername = function(username, callback) {
+  db.scores.findOne({username: username}, function(err, result) {
+    callback(err, result);
+  })
+};

@@ -68,7 +68,9 @@ var scripts = {
 
 var scores = {
   //success
-  Added: {status: 201, group: 'Scores', ID: 'Added'}
+  Added: {status: 201, group: 'Scores', ID: 'Added'},
+  //errors
+  EmptyScores: {status: 404, group: 'Scores', ID: 'EmptyScores'}
 };
 
 module.exports.httpStatuses = {
