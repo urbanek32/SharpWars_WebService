@@ -34,6 +34,7 @@ var lobby = {
   Created: {status: 201, group: 'Lobby', ID: 'Created'},
   UserAdded: {status: 201, group: 'Lobby', ID: 'UserAdded'},
   Started: {status: 204, group: 'Lobby', ID: 'Started'},
+  Restarted: {status: 204, group: 'Lobby', ID: 'Restarted'},
   Stopped: {status: 204, group: 'Lobby', ID: 'Stopped'},
   PlayerRemoved: {status: 204, group: 'Lobby', ID: 'PlayerRemoved'},
   PlayerUpdated: {status: 204, group: 'Lobby', ID: 'PlayerUpdated'},

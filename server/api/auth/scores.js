@@ -17,6 +17,15 @@ var findPlayerInLobbyByUsername = function(username, players) {
   }
 };
 
+var everybodyFinished = function(lobbyPlayers) {
+  for(var user in lobbyPlayers) {
+    if(lobbyPlayers[user].state !== lobbyStates.FINISHED) {
+      return false;
+    }
+  }
+  return true;
+};
+
 var setScores = function(username, options, callback) {
  lobbyEntities.getActiveLobby(username, function(err, activeLobby) {
    if(!err) {
@@ -30,7 +39,19 @@ var setScores = function(username, options, callback) {
              scoresEntities.setScore(username, options.score, options.gameTime, function(err, result) {
                if(!err) {
                  logger.info("User score added");
-                 callback(null, httpStatuses.Scores.Added);
+                 if(everybodyFinished(activeLobby[0].players)) {
+                   lobbyEntities.changeLobbyStatus(activeLobby[0].name, lobbyStates.FINISHED, activeLobby[0].players, function(err, result) {
+                     if(!err) {
+                       logger.info("Lobby stopped, everybody finished a game.");
+                       callback(null, httpStatuses.Lobby.Stopped);
+                     } else {
+                       logger.error("Internal Server Error: " + JSON.stringify(err));
+                       callback(httpStatuses.Generic.InternalServerError, null);
+                     }
+                   });
+                 } else {
+                   callback(null, httpStatuses.Scores.Added);
+                 }
                } else {
                  logger.error("Internal Server Error: " + JSON.stringify(err));
                  callback(httpStatuses.Generic.InternalServerError, null);

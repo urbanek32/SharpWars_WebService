@@ -224,7 +224,7 @@ var startLobby = function(username, lobbyName, callback) {
   lobbyEntities.findLobbyByName(lobbyName, function(err, lobby) {
     if(!err) {
       if(lobby) {
-        if(lobby.state !== lobbyStates.PLAY) {
+        if(lobby.state !== lobbyStates.PLAY && lobby.state !== lobbyStates.FINISHED) {
           if(username === lobby.master) {
             if(lobby.countOfMembers === lobby.players.length) {
               if(everybodyReady(lobby.players)) {
@@ -254,8 +254,20 @@ var startLobby = function(username, lobbyName, callback) {
             callback(httpStatuses.Auth.Unauthorized, null);
           }
         } else {
-          logger.debug("Lobby " + lobbyName + " has been already started.");
-          callback(httpStatuses.Lobby.AlreadyStarted, null);
+          if(lobby.state === lobbyStates.FINISHED) {
+            lobbyEntities.changeLobbyStatus(lobbyName, lobbyStates.WAITING, changeStatusOfPlayers(lobby.players, lobbyStates.WAITING), function(err, result) {
+              if(!err) {
+                logger.info("Lobby " + lobbyName + " status changed to 'waiting'.");
+                callback(null, httpStatuses.Lobby.Restarted);
+              } else {
+                logger.error("Internal Server Error: " + JSON.stringify(err));
+                callback(httpStatuses.Generic.InternalServerError, null);
+              }
+            });
+          } else {
+            logger.debug("Lobby " + lobbyName + " has been already started.");
+            callback(httpStatuses.Lobby.AlreadyStarted, null);
+          }
         }
       } else {
         logger.debug("Lobby " + lobbyName + " not exist");
@@ -331,8 +343,13 @@ var changePlayerStatus = function(username, lobbyName, callback) {
             }
           });
         } else {
-          logger.debug("Lobby " + lobbyName + " has been already started.");
-          callback(httpStatuses.Lobby.AlreadyStarted, null);
+          if(lobby.state === lobbyStates.PLAY) {
+            logger.debug("Lobby " + lobbyName + " has been already started.");
+            callback(httpStatuses.Lobby.AlreadyStarted, null);
+          } else {
+            logger.debug("Lobby " + lobbyName + " has been already finished.");
+            callback(httpStatuses.Lobby.AlreadyStopped, null);
+          }
         }
       } else {
         logger.debug("Lobby " + lobbyName + " not exist");
