@@ -14,7 +14,7 @@
   "YOUR_LOGIN": "login",
   "YOUR_PASSWORD": "hasło",
   "LOGOFF": "Wyloguj",
-  "WHATS_NEW": "Co nowego w projekcie?",
+  "WHATS_NEW": "Najnowsze zmiany:",
   "PROJECT_NAME": "SharpWars",
   "PROJECT_SUBTITLE": "Tutaj będzie piękne logo. Albo dewiza naszej gry. Albo coś...",
   "LOG_ME_BUTTON": "Zaloguj",
@@ -79,5 +79,15 @@
   "SCRIPT_EDIT": "Edycja skryptu",
   "BACK_TO_SCRIPTS": "Powrót do listy moich skryptów...",
   "EMPTY_LIST": "Lista jest pusta.",
-  "NAME_FORMAT": "Nazwa nie może zawierać spacji."
+  "NAME_FORMAT": "Nazwa nie może zawierać spacji.",
+  "GAME_VERSION": "Aktualna wersja gry",
+  "GAME_VERSION_TEXT": "Prototyp prototypu",
+  "VERSION_DATE": "Data wydania",
+  "VERSION_CHANGES": "Zmiany od ostatniej wersji",
+  "VERSION_CHANGES_1": "Czołgi poruszają się po mapie",
+  "VERSION_CHANGES_2": "Budynki produkują jednostki",
+  "VERSION_CHANGES_3": "Połączenie gry i WebService",
+  "GAME_DOWNLOAD": "Pobierz grę",
+  "NEWS_1_TEXT": "Witaj użytkowniku! SharpWars jest grą zaprojektowaną przez programistów, dla programistów. Celem, który przyświecał autorom jest rozwijanie umiejętności programowania graczy, poprzez współzawodnictwo i zabawę. Zbierz swoich znajomych, stwórzcie team na stronie internetowej i zmierzcie się w pojedynku na kod! Twórz skrypty dla jednostek, budynków i pojazdów, jednocześnie niszcząc zasoby przeciwników!",
+  "NEWS_1_TITLE": "sharp.start();"
 }
