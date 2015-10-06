@@ -132,12 +132,33 @@ angular.module('sharpWarsWebServiceApp')
       }
     };
 
+    var isMaster = function() {
+      return $scope.user.name === $scope.activeLobby.master;
+    };
+
+    var findMaster = function() {
+      for(var i in $scope.activeLobby.players) {
+        if($scope.activeLobby.players[i].username === $scope.activeLobby.master) {
+          return $scope.activeLobby.players[i];
+        }
+      }
+    };
+
+    var runGameApp = function() {
+      var masterPlayer = findMaster();
+      return 'sharpwars://master=' + isMaster() +
+        '&username=' + $scope.user.name +
+        '&token=' + $window.sessionStorage.token +
+        '&server_ip=' + masterPlayer.publicIP +
+        '&server_port=' + $scope.activeLobby.serverPort;
+    };
+
     $scope.gameStarted = false;
     $scope.$watch('activeLobby', function() {
       if($scope.activeLobby.state === 'play' && findMeInArray($scope.activeLobby.players).state !== 'finished') {
         if(!$scope.gameStarted) {
           $scope.gameStarted = true;
-          $window.alert('No to startuj grę');
+          window.location.href = runGameApp();
         }
       } else {
         $scope.gameStarted = false;
