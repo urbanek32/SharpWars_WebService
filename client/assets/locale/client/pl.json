@@ -23,6 +23,7 @@
   "LOG_TEXT": "Zaloguj się!",
   "LOBBY_CREATE_TITLE": "Tworzenie nowej gry",
   "LOBBY_CREATE_COUNT": "Ilość graczy",
+  "LOBBY_CREATE_PORT": "Port serwera",
   "LOBBY_CREATE_NAME": "Nazwa gry",
   "LOBBY_CREATE_BUTTON": "Utwórz grę!",
   "LOBBY_ENCRYPTED": "Prywatna",
