@@ -36,7 +36,7 @@ var setScores = function(username, options, callback) {
          lobbyEntities.updatePlayersInLobby(activeLobby[0].name, activeLobby[0].players, function(err, result) {
            if(!err) {
              logger.debug("Status of player " + username + " has been changed to FINISHED.");
-             scoresEntities.setScore(username, options.score, options.gameTime, function(err, result) {
+             scoresEntities.setScore(username, options.score, options.gameTime, options.winner, function(err, result) {
                if(!err) {
                  logger.info("User score added");
                  if(everybodyFinished(activeLobby[0].players)) {
