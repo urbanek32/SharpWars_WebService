@@ -68,7 +68,9 @@ angular.module('sharpWarsWebServiceApp')
       });
     };
 
+    $scope.getActiveLobby();
     var lobbyGetter = $interval($scope.getActiveLobby, 3000);
+
     $scope.$on('$destroy', function(){
       if (angular.isDefined(lobbyGetter)) {
         $interval.cancel(lobbyGetter);
@@ -133,7 +135,7 @@ angular.module('sharpWarsWebServiceApp')
     };
 
     var isMaster = function() {
-      return $scope.user.name === $scope.activeLobby.master;
+      return +($scope.user.name === $scope.activeLobby.master);
     };
 
     var findMaster = function() {
@@ -155,7 +157,7 @@ angular.module('sharpWarsWebServiceApp')
 
     $scope.gameStarted = false;
     $scope.$watch('activeLobby', function() {
-      if($scope.activeLobby.state === 'play' && findMeInArray($scope.activeLobby.players).state !== 'finished') {
+      if($scope.activeLobby && $scope.activeLobby.state === 'play' && findMeInArray($scope.activeLobby.players).state !== 'finished') {
         if(!$scope.gameStarted) {
           $scope.gameStarted = true;
           window.location.href = runGameApp();
