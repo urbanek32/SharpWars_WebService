@@ -4,9 +4,14 @@
     "type": "object",
     "properties": {
       "score": {"type": "number"},
-      "gameTime": {"type": "number"}
+      "gameTime": {"type": "number"},
+      "winner": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      }
     },
-    "required": ["score", "gameTime"],
-    "maxProperties": 2
+    "required": ["score", "gameTime", "winner"],
+    "maxProperties": 3
   }
 }
