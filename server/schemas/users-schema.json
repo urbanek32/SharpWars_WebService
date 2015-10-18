@@ -3,7 +3,10 @@
     "id": "AddUser",
     "type": "object",
     "properties": {
-      "username": {"type": "string"},
+      "username": {
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_\\.]+$"
+      },
       "password": {"type": "string"},
       "email": {"type": "string"},
       "name": {"type": "string"},
