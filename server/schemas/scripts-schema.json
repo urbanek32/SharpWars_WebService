@@ -3,7 +3,10 @@
     "id": "AddNewScript",
     "type": "object",
     "properties": {
-      "name": {"type": "string"},
+      "name": {
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_\\.]+$"
+      },
       "description": {"type": "string"},
       "code": {"type": "string"}
     },
@@ -15,7 +18,10 @@
     "id": "UpdateScript",
     "type": "object",
     "properties": {
-      "name": {"type": "string"},
+      "name": {
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_\\.]+$"
+      },
       "description": {"type": "string"},
       "code": {"type": "string"}
     },

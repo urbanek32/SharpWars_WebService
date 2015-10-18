@@ -13,7 +13,10 @@
           },
           "password": {"type": "string"},
           "encrypted": {"type": "boolean"},
-          "name": {"type": "string"}
+          "name": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_\\.]+$"
+          }
         }
       },
       "masterPublicIP": {"type": "string"}
