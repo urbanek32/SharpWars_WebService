@@ -54,6 +54,10 @@ angular.module('sharpWarsWebServiceApp')
         templateUrl: 'app/views/createScript.html',
         controller: 'scriptsCtrl',
         authentication: true
+      }).when('/scores', {
+        templateUrl: 'app/views/scores.html',
+        controller: 'scoresCtrl',
+        authentication: true
       });
   })
   .run(function($rootScope, $window, $location) {
