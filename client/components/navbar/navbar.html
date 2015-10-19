@@ -22,6 +22,9 @@
         <li ng-class="{active: isActive('/scripts')}" ng-if="userLoggedIn">
           <a ng-href="/scripts">{{ 'SUBPAGE_SCRIPTS' | translate }}</a>
         </li>
+        <li ng-class="{active: isActive('/scores')}" ng-if="userLoggedIn">
+          <a ng-href="/scores">{{ 'SUBPAGE_MY_SCORES' | translate }}</a>
+        </li>
       </ul>
     </div>
   </div>

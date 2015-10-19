@@ -3,6 +3,9 @@
 angular.module('sharpWarsWebServiceApp')
   .controller('ParentCtrl', function ($scope, $window, utilsService) {
     $scope.user = {
+      scoreCriteria: 'victories',
+      scoreSorting: 'asc',
+      scoreLimit: 10,
       name: $window.sessionStorage.sessionUsername || 'Guest'
     };
 
@@ -23,4 +26,5 @@ angular.module('sharpWarsWebServiceApp')
       $scope.errors = null;
       $scope.showBanner = false;
     };
+
   });
