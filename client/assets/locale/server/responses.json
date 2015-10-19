@@ -117,11 +117,13 @@
     "success": {
       "pl": {
         "Created": "Skrypt został pomyślnie utworzony.",
+        "NotChanged": "Skrypt pozostał niezmieniony.",
         "Updated": "Skrypt został zaktualizowany",
         "Deleted": "Skrypt został pomyślnie usunięty."
       },
       "en": {
         "Created": "Script has been created.",
+        "NotChanged": "Script has been not changed.",
         "Updated": "Script has been updated.",
         "Deleted": "Script has been successfully deleted."
       }

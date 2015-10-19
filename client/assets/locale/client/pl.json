@@ -77,6 +77,7 @@
   "SCRIPTS_ADDING_NEW_ONE": "Dodawanie nowego skryptu",
   "SCRIPTS_CREATE_NEW": "Utwórz nowy skrypt",
   "SCRIPTS_CODE": "Kod",
+  "SCRIPTS_NUMBER_OF_MODIFICATIONS": "Ilość modyfikacji",
   "SCRIPT_EDIT": "Edycja skryptu",
   "BACK_TO_SCRIPTS": "Powrót do listy moich skryptów...",
   "EMPTY_LIST": "Lista jest pusta.",
