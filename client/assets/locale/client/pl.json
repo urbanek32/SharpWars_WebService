@@ -4,6 +4,7 @@
   "SUBPAGE_DOWNLOAD": "POBIERZ GRĘ",
   "SUBPAGE_ACTIVE_GAMES": "AKTYWNE GRY",
   "SUBPAGE_SCRIPTS": "SKRYPTY",
+  "SUBPAGE_MY_SCORES": "WYNIKI",
   "FOOTER_TITLE" : "SharpWars the Game.",
   "AUTHORS": "Autorzy",
   "REDIRECTION_AFTER_MOMENT" : "Za chwilę nastąpi przekierowanie...",
@@ -90,5 +91,15 @@
   "VERSION_CHANGES_3": "Połączenie gry i WebService",
   "GAME_DOWNLOAD": "Pobierz grę",
   "NEWS_1_TEXT": "Witaj użytkowniku! SharpWars jest grą zaprojektowaną przez programistów, dla programistów. Celem, który przyświecał autorom jest rozwijanie umiejętności programowania graczy, poprzez współzawodnictwo i zabawę. Zbierz swoich znajomych, stwórzcie team na stronie internetowej i zmierzcie się w pojedynku na kod! Twórz skrypty dla jednostek, budynków i pojazdów, jednocześnie niszcząc zasoby przeciwników!",
-  "NEWS_1_TITLE": "sharp.start();"
+  "NEWS_1_TITLE": "sharp.start();",
+  "SCORES_USER_SCORE": "Wyniki moich gier",
+  "SCORES_TOP_SCORES": "Ostatnie wyniki graczy",
+  "SCORES_NO_RESULTS": "Niestety jeszcze brak wyników do pokazania",
+  "SCORES_LAST_GAME_SCORE": "Punkty z ostatniej gry",
+  "SCORES_LAST_GAME_TIME": "Czas ostatniej gry",
+  "SCORES_LOSTS": "Liczba porażek",
+  "SCORES_VICTORIES": "Liczba zwycięstw",
+  "SCORES_SUMMARY_SCORE": "Łączna liczba punktów",
+  "SCORES_SUMMARY_TIME": "Łączny czas spędzony na grze",
+  "SCORES_SHOW_MORE": "Pokaż więcej"
 }
