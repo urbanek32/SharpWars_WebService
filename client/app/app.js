@@ -5,7 +5,8 @@ angular.module('sharpWarsWebServiceApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'pascalprecht.translate'
+  'pascalprecht.translate',
+  'ui.codemirror'
 ])
   .config(function ($routeProvider, $locationProvider, $translateProvider) {
     $routeProvider

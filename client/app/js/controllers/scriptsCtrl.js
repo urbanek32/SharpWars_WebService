@@ -4,6 +4,13 @@ angular.module('sharpWarsWebServiceApp')
   .controller('scriptsCtrl', function ($scope, $routeParams, $location, $window, scriptsService,
                                        responseInterpreter, $translate) {
 
+    $scope.editorOptions = {
+      lineWrapping : true,
+      lineNumbers: true,
+      theme:'twilight',
+      mode: 'lua'
+    };
+
     $scope.saveScript = function() {
       if($scope.editMode === true) {
         scriptsService.editScript($scope.user.name, $routeParams.scriptName, $scope.script, function (err, result) {
