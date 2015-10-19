@@ -58,6 +58,7 @@ var lobby = {
 
 var scripts = {
   //success
+  NotChanged: {status: 200, group: 'Scripts', ID: 'NotChanged'},
   Created: {status: 201, group: 'Scripts', ID: 'Created'},
   Updated: {status: 204, group: 'Scripts', ID: 'Updated'},
   Deleted: {status: 204, group: 'Scripts', ID: 'Deleted'},
