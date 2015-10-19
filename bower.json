@@ -17,7 +17,14 @@
     "angular-translate-loader-static-files": "~2.7.2",
     "angular-translate-loader-url": "~2.7.2",
     "angular-translate-storage-cookie": "~2.7.2",
-    "angular-translate-storage-local": "~2.7.2"
+    "angular-translate-storage-local": "~2.7.2",
+    "codemirror": "5.7.0",
+    "angular-ui-codemirror": "0.3.0"
+  },
+  "overrides": {
+    "codemirror": {
+      "main": ["lib/codemirror.js", "lib/codemirror.css", "mode/lua/lua.js", "theme/twilight.css"]
+    }
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
