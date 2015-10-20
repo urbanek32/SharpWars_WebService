@@ -143,3 +143,15 @@
   color: red;
   font-weight: bold;
 }
+
+.row-name {
+  margin-top: 15px;
+}
+
+table td {
+  text-align: center;
+}
+
+table th {
+  text-align: center;
+}

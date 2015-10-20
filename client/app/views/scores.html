@@ -1,63 +1,94 @@
 <div class="panel" ng-init="getUserInfo($parent.user.name)">
-  <div class="panel-heading">
-    <h2>{{ "SCORES_USER_SCORE" | translate }}:</h2>
-  </div>
-  <div class="panel-body" ng-init="getGameScoresForUser()">
-    <p ng-show="playerScores">
-      <p><b>{{ "SCORES_LAST_GAME_SCORE" | translate }}:</b> {{ playerScores.lastGameScore }}</p>
-      <p><b>{{ "SCORES_LAST_GAME_TIME" | translate }}:</b> {{ playerScores.lastGameTime }}</p>
-      <p><b>{{ "SCORES_LOSTS" | translate }}:</b> {{ playerScores.losts }}</p>
-      <p><b>{{ "SCORES_VICTORIES" | translate }}:</b> {{ playerScores.victories }}</p>
-      <p><b>{{ "SCORES_SUMMARY_SCORE" | translate }}:</b> {{ playerScores.summaryGameScore }}</p>
-      <p><b>{{ "SCORES_SUMMARY_TIME" | translate }}:</b> {{ playerScores.summaryGameTime }}</p>
-
-    <div ng-show="!playerScores">
-      {{ "SCORES_NO_RESULTS" | translate }}
+  <div class="col-lg-4">
+    <div class="panel-heading">
+      <h2>{{ "SCORES_USER_SCORE" | translate }}:</h2>
+    </div>
+    <div class="panel-body" ng-init="getGameScoresForUser()">
+      <div ng-show="playerScores">
+        <p><b>{{ "SCORES_LAST_GAME_SCORE" | translate }}:</b> {{ playerScores.lastGameScore || '-' }}</p>
+        <p><b>{{ "SCORES_LAST_GAME_TIME" | translate }}:</b> {{ playerScores.lastGameTime || '-' }}</p>
+        <p><b>{{ "SCORES_LOSTS" | translate }}:</b> {{ playerScores.losts  || '-' }}</p>
+        <p><b>{{ "SCORES_VICTORIES" | translate }}:</b> {{ playerScores.victories  || '-' }}</p>
+        <p><b>{{ "SCORES_SUMMARY_SCORE" | translate }}:</b> {{ playerScores.summaryGameScore || '-' }}</p>
+        <p><b>{{ "SCORES_SUMMARY_TIME" | translate }}:</b> {{ playerScores.summaryGameTime || '-' }}</p>
+      </div>
+      <div ng-show="!playerScores">
+        {{ "EMPTY_STATS_PLAYER" | translate }}
+      </div>
     </div>
   </div>
-  <div class="panel-heading">
-    <h2>{{ "SCORES_TOP_SCORES" | translate }}:</h2>
+  <div class="col-lg-8">
+    <div class="panel-heading">
+      <h2>{{ "SCORES_TOP_SCORES" | translate }}:</h2>
+    </div>
+    <div class="panel-body" ng-init="getTopScores()">
+      <div ng-show="playerTopScores.length">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>
+              <div>
+                <div class="col-lg-8">{{ "REGISTRATION_LOGIN_NAME" | translate }}</div>
+                <div class="col-lg-4">
+                  <span ng-click="setScoreParams('username','asc')" class="glyphicon glyphicon-arrow-up btn btn-sm"></span>
+                  <span ng-click="setScoreParams('username','des')" class="glyphicon glyphicon-arrow-down btn btn-sm"></span>
+                </div>
+              </div>
+            </th>
+            <th>
+              <div>
+                <div class="col-lg-8 row-name">{{ "SCORES_LOSTS" | translate }}</div>
+                <div class="col-lg-4">
+                  <span ng-click="setScoreParams('losts','asc')" class="glyphicon glyphicon-arrow-up btn btn-sm"></span>
+                  <span ng-click="setScoreParams('losts','des')" class="glyphicon glyphicon-arrow-down btn btn-sm"></span>
+                </div>
+              </div>
+            </th>
+            <th>
+              <div>
+                <div class="col-lg-8 row-name">{{ "SCORES_VICTORIES" | translate }}</div>
+                <div class="col-lg-4">
+                  <span ng-click="setScoreParams('victories','asc')" class="glyphicon glyphicon-arrow-up btn btn-sm"></span>
+                  <span ng-click="setScoreParams('victories','des')" class="glyphicon glyphicon-arrow-down btn btn-sm"></span>
+                </div>
+              </div>
+            </th>
+            <th>
+              <div>
+                <div class="col-lg-8 row-name">{{ "SCORES_SUMMARY_SCORE" | translate }}</div>
+                <div class="col-lg-4">
+                  <span ng-click="setScoreParams('summaryGameScore','asc')" class="glyphicon glyphicon-arrow-up btn btn-sm"></span>
+                  <span ng-click="setScoreParams('summaryGameScore','des')" class="glyphicon glyphicon-arrow-down btn btn-sm"></span>
+                </div>
+              </div>
+            </th>
+            <th>
+              <div>
+                <div class="col-lg-8">{{ "SCORES_SUMMARY_TIME" | translate }}</div>
+                <div class="col-lg-4">
+                  <span ng-click="setScoreParams('summaryGameTime','asc')" class="glyphicon glyphicon-arrow-up btn btn-sm"></span>
+                  <span ng-click="setScoreParams('summaryGameTime','des')" class="glyphicon glyphicon-arrow-down btn btn-sm"></span>
+                </div>
+              </div>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="score in playerTopScores">
+            <td>{{ score.username }}</td>
+            <td>{{ score.losts }}</td>
+            <td>{{ score.victories }}</td>
+            <td>{{ score.summaryGameScore }}</td>
+            <td>{{ score.summaryGameTime }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <a ng-click="showMore()"><button class="btn btn-success btn-sm">{{ 'SCORES_SHOW_MORE' | translate }}</button></a>
+      </div>
+      <p ng-hide="playerTopScores.length">
+        {{ 'NOTHING_TO_SHOW_SCORES' | translate }}
+      </p>
+    </div>
   </div>
-  <div class="panel-body" ng-init="getTopScores()">
-    <table class="table" ng-show="playerTopScores.length">
-      <thead>
-      <tr>
-        <th>
-          <span ng-click="setScoreParams('victories','asc')" class="glyphicon glyphicon-arrow-up btn btn-sm"></span>
-          <span ng-click="setScoreParams('victories','des')" class="glyphicon glyphicon-arrow-down btn btn-sm"></span>
-          {{ "REGISTRATION_LOGIN_NAME" | translate }}
-        </th>
-        <th>
-          <span ng-click="setScoreParams('losts','asc')" class="glyphicon glyphicon-arrow-up btn btn-sm"></span>
-          <span ng-click="setScoreParams('losts','des')" class="glyphicon glyphicon-arrow-down btn btn-sm"></span>
-          {{ "SCORES_LOSTS" | translate }}
-        </th>
-        <th>
-          <span ng-click="setScoreParams('victories','asc')" class="glyphicon glyphicon-arrow-up btn btn-sm"></span>
-          <span ng-click="setScoreParams('victories','des')" class="glyphicon glyphicon-arrow-down btn btn-sm"></span>
-          {{ "SCORES_VICTORIES" | translate }}
-        </th>
-        <th>
-          <span ng-click="setScoreParams('summaryGameScore','asc')" class="glyphicon glyphicon-arrow-up btn btn-sm"></span>
-          <span ng-click="setScoreParams('summaryGameScore','des')" class="glyphicon glyphicon-arrow-down btn btn-sm"></span>
-          {{ "SCORES_SUMMARY_SCORE" | translate }}
-        </th>
-        <th>
-          <span ng-click="setScoreParams('summaryGameTime','asc')" class="glyphicon glyphicon-arrow-up btn btn-sm"></span>
-          <span ng-click="setScoreParams('summaryGameTime','des')" class="glyphicon glyphicon-arrow-down btn btn-sm"></span>
-          {{ "SCORES_SUMMARY_TIME" | translate }}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="score in playerTopScores">
-        <td>{{ score.username }}</td>
-        <td>{{ score.losts }}</td>
-        <td>{{ score.victories }}</td>
-        <td>{{ score.summaryGameScore }}</td>
-        <td>{{ score.summaryGameTime }}</td>
-      </tr>
-      </tbody>
-    </table>
-    <a ng-click="showMore()"><button class="btn btn-success btn-sm">{{ 'SCORES_SHOW_MORE' | translate }}</button></a>
-  </div>
+
 </div>
