@@ -15,6 +15,10 @@ angular.module('sharpWarsWebServiceApp')
         templateUrl: 'app/views/register.html',
         controller: 'userCtrl',
         authentication: false
+      }).when('/gettingStarted', {
+        templateUrl: 'app/views/gettingStarted.html',
+        controller: 'userCtrl',
+        authentication: false
       }).when('/passwordRecovery', {
         templateUrl: 'app/views/passwordRecovery.html',
         controller: 'userCtrl',
