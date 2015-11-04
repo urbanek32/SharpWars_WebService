@@ -1,0 +1,176 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>{{ 'SUBPAGE_GETTING_STARTED' | translate }}</h2>
+  </div>
+  <div class="panel-body">
+    <div class="panel-heading">
+      <h2>Witaj użytkowniku!</h2>
+    </div>
+    <div class="panel-body">
+      <p>Witaj nieznajomy, zapewne trafiłeś tutaj nie przypadkowo chąc poznać podstawy. Jeśli znasz już jakiś język programowania to możesz podejść luźno do niniejszego samouczka programowania jednostek. Niezależnie od tego na jakim są twoje umiejętności programowania, nie wachaj się pytać o pomoc przy pisaniu skryptu jeśli masz jakieś wątpliwości. Pytania zadawaj w odpowiednim dziale na forum, jednakże pamiętaj aby nad to nie udostępniać całych swoich algorytmów, gdyż inni też będą mogli wtedy je wykorzystać. ;)</p>
+      <p>W grze będziesz mógł programować zarówno budynki jak i jednostki. Zwycięstwo można osiągnąć na dwojaki sposób, który wybierzesz to już zależy wyłącznie od Ciebie.</p>
+      <ul>
+        <li>Rush do bazy przeciwnika zanim się uzbroi we własne jednostki, ręcznie nim sterując (albo i skryptem :) )</li>
+        <li>Produkując jednostki i mądrze je programując aby atakowały przeciwnika odnosząc jak najmniejsze straty.</li>
+      </ul>
+      <p>Nie zwlekając, zacznijmy od pierwszego programu. Zaprogramujmy w poniższy sposób początkową jednostkę Harvestera.</p>
+      <p><code>GoNorth(1)</code></p>
+      <p>Gdy to zrobimy, nasza jednostka powinno poruszyć się sama o 1 jednostkę długości na północ(o ile nie będzie żadnych przeszkód na terenie). Funkcji GoNorth możemy używać na dowolnej jednostce mobilnej(np. Harvestery, Czołgi). Funkcje przyjmują zazwyczaj jakieś argumenty tak jak w matematyce, jednakże w tym wypadku nie służą do liczenia dziwnych wartości i rysowania ich wykresów. W tym wypadku argumentem jest liczba "kroków" do pokonania.</p>
+    </div>
+    <div class="panel-heading">
+      <h2>Język</h2>
+    </div>
+    <div class="panel-body">
+      <p>Wszystkie jednostki w grze są spięte ze sobą wspólną świadomością tak więc rzeczy które zdefiniujemy w jednej jednostce, mogą być dostępne także dla innej.</p>
+    </div>
+    <div class="panel-heading">
+      <h2>Pogoda zmienną jest</h2>
+    </div>
+    <div class="panel-body">
+      <p>W świecie gry, tak jak w internecie nie warto wszystkiego trzymać w pamięci. Dlatego też posłużymy się "zmiennymi".</p>
+      <p>Zmienną jest bytem o dowolnej nazwie (ale różnej od istniejących funkcji w grze) posiadającym jakąś wartość. Może nią być jakiś tekst, bądź liczba, tudzież inne wymyślne cuda. Jednak do podboju świata najbardziej przydadzą się liczby. Z zasady wartości tekstowe trzymamy między cudzysłowami lub apostrofami, ale pamiętaj! Muszą występować parami. Nazwy zmiennych tak jak i obiekty w naszym świecie nie zaczynają się od cyfr(któż to nazywa swojego psa "1358"?), co więcej nie mogą składać się z polskich znaków diakrytycznych. Część dziesiętną ułamków oddzielamy kropką od części całkowitej.</p>
+      <p>Przykłady zmiennych:</p>
+      <p><code>liczba = 1234<br />pi = 3.14<br />tekst = "Jan Lucjan - Fabryka Czołgów Sp. z o.o."</code></p>
+    </div>
+    <div class="panel-heading">
+      <h2>Zaraz, zaraz... Jak to szło?</h2>
+    </div>
+    <div class="panel-body">
+      <p>No właśnie, "Jak to szło?". Zapewne opanowanie dostępnych funkcji i metod w grze zajmie Ci trochę czasu więc przydałoby się jakoś proces pisania kodu wspomagać. W tym momencie mogą Ci pomóc komentarze zamieszczane w kodzie. Aby to zrobić używaj znaków "--", a następnie zamieszczaj swój komentarz. Komentarz obejmuje cały tekst pomiędzy znakami --, a końcem danej linii. Nie krępuj się ich używać, na pewno przydadzą się w zrozumieniu Twojego kodu gdy zarzucisz grę na jakiś czas i będziesz chciał do niej powrócić.</p>
+      <p><code>
+        -- w taki sposób oznaczamy komentarze, informacje przydatne do późniejszej anazliy kodu<br/>
+        x = 5 * 20<br/>
+        -- x = x * 2<br/>
+        DebugPrint(x)<br/>
+        --W okienku skryptów powinna się pojawić liczba 100<br/>
+      </code></p>
+    </div>
+    <div class="panel-heading">
+      <h2>Chcę grać i programować, a nie zajmować się zadaniem domowym z matematyki!</h2>
+    </div>
+    <div class="panel-body">
+      <p>Tak więc wiesz już definiować zmienne oraz je komentować. Teraz nadszedł czas zrobić coś z nimi...</p>
+      <p>Jak już zapewne zauważyłeś symbol równości(=) powoduje przypisanie wartości z prawej strony do zmiennej po lewej stronie. Jeśli poczujesz nagły przypływ chęci do rozwiązywania zagadek matematycznych to możesz swojej jednostce rozkazać liczyć! Oczywiście tak długo jak będą to operacje dodawania, odejmowania, mnożenia, dzielenia i potęgowania(pamiętajcie że ujemny wykładnik daje nam pierwiastek odpowiedniego stopnia). Powinno to pomóc Tobie o ile jesteś uczniem szkoły podstawowej, gimnazjalnej czy technikum... Niestety będę musiał zawieść studentów gdyż język skryptowy gry nie posiada mechanizmów wspierających liczenie całek, pochodnych. Aby uzyskać wynik szeregów sami będziecie musieli napisać odpowiednie pętle!</p>
+      <p>Wracając do meritum, do dyspozycji masz pięć operatorów matematycznych są nimi: <b>+ - * / % ^</b>. Są to odpowiednio dodawanie, odejmowanie, mnożenie, dzielenie, reszta z dzielenia oraz potęgowanie.</p>
+      <p>Przykład użycia:</p>
+      <p><code>
+        -- Obliczenie wartości funkcji Y w punkcie X dla wzoru y(x) = 2*x*x*x - 15/6*x + 7<br/>
+        y = 2*x^3 - 15/6*x + 7
+      </code></p>
+      <p>Zanim przejdziemy dalej chciałbym nadmienić Tobie jak można sklejać ze sobą dwa teksty. Zapewne nie będą Ci one do niczego potrzebne, tym niemniej może spożytkujesz jakoś tą wiedzę. Do sklejania dwóch tekstów możesz użyć ...</p>
+      <p>Przykład użycia:</p>
+      <p><code>
+        zdanie = "Jak to " .. "jest zrobione?"<br />
+        DebugPrint(zdanie)<br />
+        --Powinniśmy uzyskać w oknie skryptów tekst "Jak to jest zrobione?"
+      </code></p>
+    </div>
+    <div class="panel-heading">
+      <h2>Życie na krawędzi, podejmowanie decyzji w zależności od warunków</h2>
+    </div>
+    <div class="panel-body">
+      <p>W programowaniu tak jak w życiu, trzeba postępować w zależności od rozmaitych okoliczności. Jadąc samochodem w zależności od stanu zbiornika paliwa możemy stosować tzw. "eco driving" albo ścigać się od świateł do świateł na wysokich obrotach. W przypadku gry możemy np. liczyć ile razy już jechaliśmy na północ czy południe albo w przypadku niskiego stanu życia uciekać na północ.</p>
+      <p>Do porównywania liczb, tekstów czy obiektów mamy dostępnych sześć różnych operatorów. Są nimi <b>< > <= >= == ~=</b>. Jest to odpowiednio X mniejsze, większe, mniejsze lub równe, większe lub równe, równe, różne od Y. Wszystkie te operacje zwracają wartości logiczne prawdę(true) lub fałsz(false).</p>
+      <p>Przykłady:</p>
+      <p><code>
+        prawda = 2 < 3<br />
+        nieprawda = 3 < 3<br />
+        -- nieprawda gdzyż "3" jest typem tekstowym a 3 typem liczbowym<br />
+        nieprawda2 = "3" == 3<br />
+        prawda2 = "3" ~= 3
+      </code></p>
+      <p>Korzystając z powyższych wiadomości chcielibyśmy żeby DebugPrint dał nam odpowiedź na pytanie o sens istnienia wszechświata i wszechrzeczy wtedy i tylko wtedy gdy zmienna x podniesiona do kwadratu była mniejsza od 36. Do tego celu posłużymy się instrukcją warunkową if warunek then. W przypadku gdy wartość ta będzie większa od 36 nie uzyskamy odpowiedzi na pytanie o sens istnienia.</p>
+      <p><code>
+        if x^2 < 36 then<br />
+        DebugPrint(42)<br />
+        --słówko "else" wskazuje co wykonać w przypadku gdy warunek nie zostanie spełniony, jest opcjonalne<br />
+        else<br />
+        DebugPrint("Nie jesteś godzien poznania odpowiedzi")<br />
+        --słówko "end" kończy część warunkową<br />
+        end
+      </code></p>
+      <p>Powyższy kod powinien dać odpowiedź 42 dla X mniejszego od 6, w przeciwnym wypadku dostaniemy odmowę.</p>
+      <p>W przypadku gdy chcemy sprawdzić wiele różnych przypadków, możemy oprócz instrukcji if i else używać także elseif. To słowo kluczowe pozwala nam uniknąć zagnieżdżania ifów w ifach i elseach.</p>
+      <p>Przykład:</p>
+      <p><code>
+        --Obliczyliśmy deltę dla równania kwadratowego i chcemy wypisać ile rzeczywistych pierwiastków posiada równanie kwadratowe<br />
+        if delta < 0 then<br />
+        DebugPrint("0")<br />
+        elseif delta == 0 then<br />
+        DebugPrint("1")<br />
+        else<br />
+        DebugPrint("2")<br />
+        end
+      </code></p>
+      <p>Tak więc, do tej pory powinieneś umieć obsługiwać już zdarzenia o różnych warunkach. Wiedz że możesz też używać słów kluczowych and i or m.in. do tworzenia złożonych warunków. Pierwsze słowo kluczowe odpowiada wyrażeniu logicznemu koniunkcji. Następne jest alternatywą logiczną.</p>
+      <p>Przykład:</p>
+      <p><code>
+        --X = 0, Y = 5<br />
+        if X == 0 and Y == 5 then<br />
+        --wykona się wnętrze ifa<br />
+        if X == 0 and Y == 4 then<br />
+        -- nie wykona się wnętrze warunku, program przejdzie do wyrażenia elseif lub else jeśli elseif nie występuje.<br />
+        if X == 0 or Y == 4 then<br />
+        -- wykona się wnętrze ifa
+      </code></p>
+    </div>
+    <div class="panel-heading">
+      <h2>Po każdej niedzieli przychodzi poniedziałek...</h2>
+    </div>
+    <div class="panel-body">
+      <p>Tak więc potrafisz już podejmować decyzje w zależności od warunków jak i rachować zmiennymi. Nadszedł ten czas... Czas żeby poznać pętle warunkowe. Nie obawiaj się ich. Wszak dobrze skonstruowana pętla warta więcej niż 1000 kliknięć ręcznych programowań.</p>
+      <p>Podczas przemieszczania naszego czołgu zapewne będziesz wolał pozostawić maszynie wyszukiwanie wrogów i ich atakowanie aniżeli co chwilę programować jednostki tym samym kodem celem ataku.</p>
+      <p>Konstrukcja pętli warunkowej:</p>
+      <p><code>
+        while warunek do<br/>
+        --kod<br/>
+        --...<br/>
+        --koniec kodu w pętli<br/>
+        end
+      </code></p>
+      <p>Kod między słówkami <b>while do</b> i <b>end</b> będzie powtarzany tak długo jak warunek pętli będzie spełniony. Pozwoli to nam np. bronić się skutecznie przed nacierającym masowo wrogiem.</p>
+      <p>Przykład:</p>
+      <p><code>
+        enemies = ScanForEnemies()<br/>
+        while enemies.Length > 0 do<br/>
+        Attack(enemies[0])<br/>
+        enemies = ScanForEnemies()<br/>
+        end
+      </code></p>
+      <p>Powyższy kod będzie atakował wszystkich znajdujących się w polu widzenia jednostki.</p>
+      <p>Tak oto przebrnęliśmy dzielnie przez podstawowe elementy języka. Powinieneś być już gotów do rozpoczęcia programowania swoich jednostek. W dalszej części artykułu opiszę garść dobrych praktyk, które warto rozsądnie stosować.</p>
+    </div>
+    <div class="panel-heading">
+      <h2>Dobre praktyki</h2>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <li>Stosuj wcięcia dla zwiększenia czytelności kodu.</li>
+        <li>Unikaj współdzielenia zmiennych! Pamiętaj że wszystkie jednostki łączy wspólna świadomość i każda jednostka ma dostęp do zmiennej zdefiniowanej w innej jednostce.</li>
+      </ul>
+    </div>
+    <div class="panel-heading">
+      <h2>Na początku był chaos, potem był nawias...</h2>
+    </div>
+    <div class="panel-body">
+      <p>Tak, tak... a w siódmej linii zaczęła się główna funkcja... Przechodząc do meritum, różne operatory matematyczne, logiczne są przetwarzane z różnymi priorytetami. Oto lista operatorów pogrupowana od tych z najwyższym priorytetem do najniższego.</p>
+      <ul>
+        <li>() - wyrażenie w nawiasie</li>
+        <li>^</li>
+        <li>not - (jako negacja)</li>
+        <li>* /</li>
+        <li>+ -</li>
+        <li>..</li>
+        <li>< > <= >= ~= ==</li>
+        <li>and</li>
+        <li>or</li>
+      </ul>
+    </div>
+    <div class="panel-heading">
+      <h2>Kodź i zwyciężaj!</h2>
+    </div>
+    <div class="panel-body">
+      <a href="https://github.com/urbanek32/SharpWars_GameCore/wiki/Skrypty"><p>Dostępne funkcje i metody</p></a>
+    </div>
+  </div>
+</div>
