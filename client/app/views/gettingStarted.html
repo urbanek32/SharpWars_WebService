@@ -7,7 +7,7 @@
       <h2>Witaj użytkowniku!</h2>
     </div>
     <div class="panel-body">
-      <p>Witaj nieznajomy, zapewne trafiłeś tutaj nie przypadkowo chąc poznać podstawy. Jeśli znasz już jakiś język programowania to możesz podejść luźno do niniejszego samouczka programowania jednostek. Niezależnie od tego na jakim są twoje umiejętności programowania, nie wachaj się pytać o pomoc przy pisaniu skryptu jeśli masz jakieś wątpliwości. Pytania zadawaj w odpowiednim dziale na forum, jednakże pamiętaj aby nad to nie udostępniać całych swoich algorytmów, gdyż inni też będą mogli wtedy je wykorzystać. ;)</p>
+      <p>Witaj nieznajomy, zapewne trafiłeś tutaj nie przypadkowo chąc poznać podstawy. Jeśli znasz już jakiś język programowania to możesz podejść luźno do niniejszego samouczka programowania jednostek. Niezależnie od tego na jakim poziomie są twoje umiejętności programowania, nie wachaj się pytać o pomoc przy pisaniu skryptu jeśli masz jakieś wątpliwości. Pytania zadawaj w odpowiednim dziale na forum, jednakże pamiętaj aby nad to nie udostępniać całych swoich algorytmów, gdyż inni też będą mogli wtedy je wykorzystać. ;)</p>
       <p>W grze będziesz mógł programować zarówno budynki jak i jednostki. Zwycięstwo można osiągnąć na dwojaki sposób, który wybierzesz to już zależy wyłącznie od Ciebie.</p>
       <ul>
         <li>Rush do bazy przeciwnika zanim się uzbroi we własne jednostki, ręcznie nim sterując (albo i skryptem :) )</li>
@@ -28,7 +28,7 @@
     </div>
     <div class="panel-body">
       <p>W świecie gry, tak jak w internecie nie warto wszystkiego trzymać w pamięci. Dlatego też posłużymy się "zmiennymi".</p>
-      <p>Zmienną jest bytem o dowolnej nazwie (ale różnej od istniejących funkcji w grze) posiadającym jakąś wartość. Może nią być jakiś tekst, bądź liczba, tudzież inne wymyślne cuda. Jednak do podboju świata najbardziej przydadzą się liczby. Z zasady wartości tekstowe trzymamy między cudzysłowami lub apostrofami, ale pamiętaj! Muszą występować parami. Nazwy zmiennych tak jak i obiekty w naszym świecie nie zaczynają się od cyfr(któż to nazywa swojego psa "1358"?), co więcej nie mogą składać się z polskich znaków diakrytycznych. Część dziesiętną ułamków oddzielamy kropką od części całkowitej.</p>
+      <p>Zmienna jest bytem o dowolnej nazwie (ale różnej od istniejących funkcji w grze) posiadającym jakąś wartość. Może nią być jakiś tekst, bądź liczba, tudzież inne wymyślne cuda. Jednak do podboju świata najbardziej przydadzą się liczby. Z zasady wartości tekstowe trzymamy między cudzysłowami lub apostrofami, ale pamiętaj! Muszą występować parami. Nazwy zmiennych tak jak i obiekty w naszym świecie nie zaczynają się od cyfr(któż to nazywa swojego psa "1358"?), co więcej nie mogą składać się z polskich znaków diakrytycznych. Część dziesiętną ułamków oddzielamy kropką od części całkowitej.</p>
       <p>Przykłady zmiennych:</p>
       <p><code>liczba = 1234<br />pi = 3.14<br />tekst = "Jan Lucjan - Fabryka Czołgów Sp. z o.o."</code></p>
     </div>
@@ -144,10 +144,8 @@
       <h2>Dobre praktyki</h2>
     </div>
     <div class="panel-body">
-      <ul>
-        <li>Stosuj wcięcia dla zwiększenia czytelności kodu.</li>
-        <li>Unikaj współdzielenia zmiennych! Pamiętaj że wszystkie jednostki łączy wspólna świadomość i każda jednostka ma dostęp do zmiennej zdefiniowanej w innej jednostce.</li>
-      </ul>
+      <p>Stosuj wcięcia dla zwiększenia czytelności kodu.</p>
+      <p>Unikaj współdzielenia zmiennych! Pamiętaj że wszystkie jednostki łączy wspólna świadomość i każda jednostka ma dostęp do zmiennej zdefiniowanej w innej jednostce.</p>
     </div>
     <div class="panel-heading">
       <h2>Na początku był chaos, potem był nawias...</h2>
@@ -169,8 +167,112 @@
     <div class="panel-heading">
       <h2>Kodź i zwyciężaj!</h2>
     </div>
+  </div>
+
+  <div class="panel-heading">
+    <h2>Dostępne funkcje i metody</h2>
+  </div>
+  <div class="panel-body">
+    <h1><a id="user-content-poruszanie-się" class="anchor" href="#poruszanie-si%C4%99" aria-hidden="true"><span class="octicon octicon-link"></span></a>Poruszanie się</h1>
+    <div class="panel-heading">
+      <h2><a id="user-content-pomoc-przy-naprawie-niedziałającego-kodu" class="anchor" href="#pomoc-przy-naprawie-niedzia%C5%82aj%C4%85cego-kodu" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pomoc przy naprawie niedziałającego kodu</h2>
+    </div>
     <div class="panel-body">
-      <a href="https://github.com/urbanek32/SharpWars_GameCore/wiki/Skrypty"><p>Dostępne funkcje i metody</p></a>
+      <p><strong>DebugPrint(<em>zmienna</em>)</strong></p>
+      <p><em>zmienna</em> - czyli rzecz która ma zostać wypisana w okienku skryptów.</p>
+      <p>Wypisuje argument w okienku skryptowym. Może okazać się pomocne, kiedy nasz program nie działa tak jak powinien.</p>
+    </div>
+    <div class="panel-heading">
+      <h2><a id="user-content-wyznaczanie-nowej-pozycji" class="anchor" href="#wyznaczanie-nowej-pozycji" aria-hidden="true"><span class="octicon octicon-link"></span></a>Wyznaczanie nowej pozycji</h2>
+    </div>
+    <div class="panel-body">
+      <p><strong>GoNorth(<em>kroki</em>)</strong></p>
+      <p><em>kroki</em> - liczba kroków do pokonania na północ, liczba całkowita dodatnia lub ułamek o wartości dodatniej.</p>
+      <p>Funkcja zwraca pozycję (obiekt typu Vector3) który można użyć np. jako argument do funkcji PanzerVor.</p>
+      <p><strong>UWAGA</strong> Pozycja jest zwracana względem obecnego położenia jednostki!</p>
+      <p><strong>GoEast(<em>kroki</em>)</strong></p>
+      <p><em>kroki</em> - liczba kroków do pokonania na wschód, liczba całkowita dodatnia lub ułamek o wartości dodatniej.</p>
+      <p>Funkcja zwraca pozycję (obiekt typu Vector3) który można użyć np. jako argument do funkcji PanzerVor.</p>
+      <p><strong>UWAGA</strong> Pozycja jest zwracana względem obecnego położenia jednostki!</p>
+      <p><strong>GoWest(<em>kroki</em>)</strong></p>
+      <p><em>kroki</em> - liczba kroków do pokonania na zachód, liczba całkowita dodatnia lub ułamek o wartości dodatniej.</p>
+      <p>Funkcja zwraca pozycję (obiekt typu Vector3) który można użyć np. jako argument do funkcji PanzerVor.</p>
+      <p><strong>UWAGA</strong> Pozycja jest zwracana względem obecnego położenia jednostki!</p>
+      <p><strong>GoSouth(<em>kroki</em>)</strong></p>
+      <p><em>kroki</em> - liczba kroków do pokonania na południe, liczba całkowita dodatnia lub ułamek o wartości dodatniej.</p>
+      <p>Funkcja zwraca pozycję (obiekt typu Vector3) który można użyć np. jako argument do funkcji PanzerVor.</p>
+      <p><strong>UWAGA</strong> Pozycja jest zwracana względem obecnego położenia jednostki!</p>
+    </div>
+    <div class="panel-heading">
+      <h2><a id="user-content-przemieszczanie-się" class="anchor" href="#przemieszczanie-si%C4%99" aria-hidden="true"><span class="octicon octicon-link"></span></a>Przemieszczanie się</h2>
+    </div>
+    <div class="panel-body">
+      <p><strong>PanzerVor(<em>pozycja</em>)</strong></p>
+      <p><em>pozycja</em> - obiekt typu Vector3 określający docelową pozycję w postaci współrzędnych [x,y,z]</p>
+      <p>Funkcja nic nie zwraca, blokuje wykonanie następnych instrukcji aż do dotarcia do punktu docelowego.</p>
+      <p>Przykład:</p>
+      <p><code>
+        -- zrób 3 kroki na zachód<br />
+        steps_to_the_east = 0<br />
+        <br />
+        while steps_to_east < 3 do<br />
+        east = GoEast()<br />
+        PanzerVor(east)<br />
+        steps_to_the_east = steps_to_the_east + 1<br />
+        end<br />
+      </code></p>
+    </div>
+      <h1><a id="user-content-zwiadprzeszukiwanie" class="anchor" href="#zwiadprzeszukiwanie" aria-hidden="true"><span class="octicon octicon-link"></span></a>Zwiad(przeszukiwanie)</h1>
+    <div class="panel-heading">
+      <h2><a id="user-content-szukanie-przeciwników" class="anchor" href="#szukanie-przeciwnik%C3%B3w" aria-hidden="true"><span class="octicon octicon-link"></span></a>Szukanie przeciwników</h2>
+    </div>
+    <div class="panel-body">
+      <p><strong>ScanForEnemies()</strong></p>
+      <p>Funkcja zwraca tablicę wszystkich wykrytych wrogów w promieniu działania sensorów jednostki. Dla czołgów jest to 20 kroków. W przypadku pozostałych jednostek: 2 kroki.</p>
+    </div>
+    <div class="panel-heading">
+      <h2><a id="user-content-szukanie-zasobów" class="anchor" href="#szukanie-zasob%C3%B3w" aria-hidden="true"><span class="octicon octicon-link"></span></a>Szukanie Zasobów</h2>
+    </div>
+    <div class="panel-body">
+      <p><strong>ScanForResources()</strong></p>
+      <p>Funkcja zwraca tablicę wszystkich wykrytych złóż surowców. Zasięg sensorów wynosi 14 kroków dla jednostek zbieraczy(Harvesterów). Pozostałe jednostki nie wykrywają złóż.</p>
+    </div>
+    <div class="panel-heading">
+      <h2><a id="user-content-odróżnianie-wrogów" class="anchor" href="#odr%C3%B3%C5%BCnianie-wrog%C3%B3w" aria-hidden="true"><span class="octicon octicon-link"></span></a>Odróżnianie wrogów</h2>
+    </div>
+    <div class="panel-body">
+      <p>Czasem chcemy najpierw usiec budynki, albo zredukować liczbę przeciwników przed decydującym natarciem.</p>
+      <p><strong>:isUnit()</strong></p>
+      <p>Metoda zwraca true jeśli dany obiekt jest jednostką, inaczej false.</p>
+      <p><strong>:isBuilding()</strong></p>
+      <p>Metoda zwraca true jeśli dany obiekt jest budynkiem, inaczej false.</p>
+      <p><strong>:isTank()</strong></p>
+      <p>Metoda zwraca true jeśli dany obiekt jest czołgiem, inaczej false.</p>
+      <p><strong>:isWorker()</strong></p>
+      <p>Metoda zwraca true jeśli dany obiekt jest robotnikiem, inaczej false.</p>
+      <p><strong>:isHarvester()</strong></p>
+      <p>Metoda zwraca true jeśli dany obiekt jest zbieraczem surowców, inaczej false.</p>
+      <p><strong>:isRafinery()</strong></p>
+      <p>Metoda zwraca true jeśli dany obiekt jest rafinerią, inaczej false.</p>
+      <p><strong>:isWarFactory()</strong></p>
+      <p>Metoda zwraca true jeśli dany obiekt jest fabryką jednostek wojennych, inaczej false.</p>
+      <p><strong>:isWonder()</strong></p>
+      <p>Metoda zwraca true jeśli dany obiekt jest cudem, inaczej false.</p>
+    </div>
+      <h1><a id="user-content-akcje-specyficzne-dla-danych-typów-jednostek" class="anchor" href="#akcje-specyficzne-dla-danych-typ%C3%B3w-jednostek" aria-hidden="true"><span class="octicon octicon-link"></span></a>Akcje specyficzne dla danych typów jednostek</h1>
+    <div class="panel-heading">
+      <h2><a id="user-content-atakowanie" class="anchor" href="#atakowanie" aria-hidden="true"><span class="octicon octicon-link"></span></a>Atakowanie</h2>
+    </div>
+    <div class="panel-body">
+      <p><strong>Attack(<em>przeciwnik</em>)</strong></p>
+      <p><em>przeciwnik</em> - obiekt przeciwnika, zwrócony przez skaner jednostek. Funkcja sprawia że zaprogramowana jednostka zaczyna atakować wskazanego przeciwnika.</p>
+    </div>
+    <div class="panel-heading">
+      <h2><a id="user-content-zbieranie-zasobów" class="anchor" href="#zbieranie-zasob%C3%B3w" aria-hidden="true"><span class="octicon octicon-link"></span></a>Zbieranie zasobów</h2>
+    </div>
+    <div class="panel-body">
+      <p><strong>Harvest(<em>złoże</em>)</strong></p>
+      <p><em>złoże</em> - obiekt złoża surowca, zwrócony przez skaner jednostek. Funkcja sprawia że zaprogramowany zbieracz zaczyna zbierać zasoby z wskazanego złoża.</p>
     </div>
   </div>
 </div>
