@@ -105,5 +105,6 @@
   "SCORES_SUMMARY_TIME": "Czas gry",
   "SCORES_SHOW_MORE": "Pokaż więcej",
   "NOTHING_TO_SHOW_SCORES": "Lista wyników jest aktualnie pusta",
-  "EMPTY_STATS_PLAYER": "Nie rozegrałeś jeszcze żadnej gry"
+  "EMPTY_STATS_PLAYER": "Nie rozegrałeś jeszcze żadnej gry",
+  "DESCRIPTION": "Opis"
 }
