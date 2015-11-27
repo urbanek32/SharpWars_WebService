@@ -10,14 +10,23 @@ angular.module('sharpWarsWebServiceApp')
       }
       utilsService.getMyPublicIp(function(ip) {
         if (ip) {
-          lobbyService.createLobby($scope.user.name, ip, $scope.lobby, function (err, result) {
+          lobbyService.createLobby($scope.user.name, ip, $scope.lobby)
+            .then(function(result) {
+              $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
+              $location.path('/lobbyList');
+            }, function(err) {
+              $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
+            });
+
+
+          /*lobbyService.createLobby($scope.user.name, ip, $scope.lobby, function (err, result) {
             if (!err && result) {
               $scope.$parent.setMessage(false, responseInterpreter.responseBuilder(result, $scope.$parent.serverResponsesTemplates, $translate));
               $location.path('/lobbyList');
             } else {
               $scope.$parent.setMessage(true, responseInterpreter.responseBuilder(err, $scope.$parent.serverResponsesTemplates, $translate));
             }
-          });
+          });*/
         }
       });
     };

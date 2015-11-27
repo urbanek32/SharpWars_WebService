@@ -1,20 +1,22 @@
 'use strict';
 
 angular.module('sharpWarsWebServiceApp')
-  .service('lobbyService', function ($http) {
+  .service('lobbyService', function ($http, $q) {
 
-    this.createLobby = function(username, ip, lobby, callback) {
+    this.createLobby = function(username, ip, lobby) {
       var body = {
         lobby: lobby,
         masterPublicIP: ip
       };
-      $http.post('/auth/api/users/' + username + '/lobby/add', body)
-        .success(function(data) {
-          callback(null, data);
-        })
-        .error(function(err) {
-          callback(err, null);
-        });
+      return $q(function(resolve, reject) {
+        $http.post('/auth/api/users/' + username + '/lobby/add', body)
+          .success(function(data) {
+            resolve(data);
+          })
+          .error(function(err) {
+            reject(err);
+          });
+      });
     };
 
     this.getLobbyList = function (username, callback){
