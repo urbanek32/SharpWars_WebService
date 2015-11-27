@@ -22,7 +22,8 @@
     "nodemailer": "1.4.0",
     "log4js": "0.6.26",
     "express-jwt": "3.0.1",
-    "jsonwebtoken": "5.0.2"
+    "jsonwebtoken": "5.0.2",
+    "node-uuid": "1.4.7"
   },
   "devDependencies": {
     "grunt": "~0.4.4",

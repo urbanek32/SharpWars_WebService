@@ -7,7 +7,7 @@ var lobbyEntities = require('../../entities/lobby-entities'),
   logger = require('../../lib/logger/logger').init();
 
 
-var addNewLobby = function(username, options, callback) {
+var addNewLobby = function(reqId, username, options, callback) {
   lobbyEntities.getActiveLobby(username, function(err, lobbies) {
     if(!err && lobbies) {
       if(lobbies.length === 0) {
@@ -26,7 +26,7 @@ var addNewLobby = function(username, options, callback) {
           if(newLobby.password) {
             newLobby.password = passwordHash.generate(newLobby.password);
           } else {
-            logger.debug("Password cannot be empty. Lobby not created.");
+            logger.debug(reqId + ": Password cannot be empty. Lobby not created.");
             return callback(null, httpStatuses.Auth.PasswordEmpty);
           }
         }
@@ -35,28 +35,28 @@ var addNewLobby = function(username, options, callback) {
             if(!lobby) {
               lobbyEntities.addNewLobby(newLobby, function(err, result) {
                 if(!err) {
-                  logger.debug("Lobby " + newLobby.name + " has been created.");
+                  logger.debug(reqId + ": Lobby " + newLobby.name + " has been created.");
                   callback(null, httpStatuses.Lobby.Created);
                 } else {
-                  logger.error("Internal Server Error: " + JSON.stringify(err));
+                  logger.error(reqId + ": Internal Server Error: " + JSON.stringify(err));
                   callback(httpStatuses.Generic.InternalServerError, null)
                 }
               });
             } else {
-              logger.debug("Cannot add lobby: name " + newLobby.name + " already exists.");
+              logger.debug(reqId + ": Cannot add lobby: name " + newLobby.name + " already exists.");
               callback(httpStatuses.Lobby.AlreadyExists, null);
             }
           } else {
-            logger.error("Internal Server Error: " + JSON.stringify(err));
+            logger.error(reqId + ": Internal Server Error: " + JSON.stringify(err));
             callback(httpStatuses.Generic.InternalServerError, null)
           }
         });
       } else {
-        logger.debug("User " + username + " has already active lobby.");
+        logger.debug(reqId + ": User " + username + " has already active lobby.");
         callback(httpStatuses.Lobby.AlreadyCreated, null);
       }
     } else {
-      logger.error("Internal Server Error: " + JSON.stringify(err));
+      logger.error(reqId + ": Internal Server Error: " + JSON.stringify(err));
       callback(httpStatuses.Generic.InternalServerError, null)
     }
   });

@@ -4,19 +4,24 @@ var _ = require('lodash'),
   lobbyManager = require('../../../api/auth/lobby'),
   schemaValidator = require('../../../lib/schema-validator/schemaValidator'),
   lobbySchemas = require('../../../schemas/lobby-schema.json'),
-  httpStatuses = require('../../../components/httpStatuses/index').httpStatuses;
+  httpStatuses = require('../../../components/httpStatuses/index').httpStatuses,
+  uuid = require('node-uuid');
 
 exports.addNewLobby = function(req, res) {
+  var reqId = uuid.v1();
   var errors = schemaValidator.validate(req.body, lobbySchemas.addNewLobby).errors;
   if(errors.length === 0) {
-    lobbyManager.addNewLobby(req.user.username, req.body, function(err, result) {
+    lobbyManager.addNewLobby(reqId, req.user.username, req.body, function(err, result) {
       if(!err && result) {
+        result.reqId = reqId;
         res.send(result);
       } else {
+        err.reqId = reqId;
         res.status(err.status).send(err);
       }
     });
   } else {
+    errors.push({"reqId": reqId});
     res.status(400).send(errors);
   }
 };
